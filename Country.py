@@ -2,8 +2,8 @@ from collections import namedtuple
 from read_file import country_list
 
 
-nameDict = {"亞特蘭提斯": "Atlantis", "阿斯嘉": "Asgard", "奧林匹斯": "Olympus", "瓦干達": "Wakanda", "香格里拉": "Shangri-La",
-            "瓦拉納西": "Varanasi", "瑪雅": "Maya", "黃金之都": "El Dorado", "游牧": "Mongolia", "澳洲": "Australia"}
+nameDict = {"亞特蘭提斯": "Atlantis", "阿斯嘉": "Asgard", "奧林匹斯": "Olympus", "瓦干達": "Wakanda", "香格里拉": "ShangriLa",
+            "瓦拉納西": "Varanasi", "瑪雅": "Maya", "黃金之都": "ElDorado", "游牧": "Mongolia", "澳洲": "Australia"}
 
 
 class Country:
@@ -40,6 +40,69 @@ class Atlantis(Country):
 
     def __init__(self, *arg, **kwargs):
         super(Atlantis, self).__init__(*arg, **kwargs)
+
+
+class Asgard(Country):
+    """docstring for Asgard"""
+
+    def __init__(self, *arg, **kwargs):
+        super(Asgard, self).__init__(*arg, **kwargs)
+
+
+class Olympus(Country):
+    """docstring for Olympus"""
+
+    def __init__(self, *arg, **kwargs):
+        super(Olympus, self).__init__(*arg, **kwargs)
+
+
+class Wakanda(Country):
+    """docstring for Wakanda"""
+
+    def __init__(self, *arg, **kwargs):
+        super(Wakanda, self).__init__(*arg, **kwargs)
+
+
+class ShangriLa(Country):
+    """docstring for ShangriLa"""
+
+    def __init__(self, *arg, **kwargs):
+        super(ShangriLa, self).__init__(*arg, **kwargs)
+
+
+class Varanasi(Country):
+    """docstring for Varanasi"""
+
+    def __init__(self, *arg, **kwargs):
+        super(Varanasi, self).__init__(*arg, **kwargs)
+
+
+class Maya(Country):
+    """docstring for Maya"""
+
+    def __init__(self, *arg, **kwargs):
+        super(Maya, self).__init__(*arg, **kwargs)
+
+
+class ElDorado(Country):
+    """docstring for ElDorado"""
+
+    def __init__(self, *arg, **kwargs):
+        super(ElDorado, self).__init__(*arg, **kwargs)
+
+
+class Mongolia(Country):
+    """docstring for Mongolia"""
+
+    def __init__(self, *arg, **kwargs):
+        super(Mongolia, self).__init__(*arg, **kwargs)
+
+
+class Australia(Country):
+    """docstring for Australia"""
+
+    def __init__(self, *arg, **kwargs):
+        super(Australia, self).__init__(*arg, **kwargs)
 
 
 a = Atlantis.from_tuple(country_list[0])
