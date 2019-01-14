@@ -2,8 +2,15 @@ from read_file import country_list, nameDict
 
 
 class Country:
-    """This class contains basic country attributes"""
+    """
+    This class contains basic country attributes:
+    --> ID, name, asset, gold, population, solider, weapon,
+        food_speed, wood_speed, mineral_speed, oil_speed, food, wood, mineral, oil
 
+    Don't try to set above attributes be negative, or it will raise error.
+    """
+
+    # constructor of Country object
     def __init__(self, ID, name, asset, gold, population, solider, weapon,
                  food_speed, wood_speed, mineral_speed, oil_speed, food, wood, mineral, oil):
         self.ID = int(ID)
@@ -22,9 +29,11 @@ class Country:
         self._oil = int(oil)
 
     def __str__(self):
+        """When you try to print Country object, it will return its name, food, wood, mineral, and oil."""
         return f"This country is {self._name}, food:{self.food}, wood:{self.wood}, mineral:{self.mineral}, oil:{self.oil}"
 
     def __lt__(self, other):
+        """When you try to sort Country object, it will compare their value of asset."""
         return self.asset < other.asset
 
     # set the value of Country.asset and avoid it becomes negtive
@@ -277,3 +286,6 @@ class Australia(Country):
         pass
 
 a = Atlantis.from_tuple(country_list[0])
+
+
+help(Country)
