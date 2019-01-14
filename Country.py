@@ -1,4 +1,3 @@
-from collections import namedtuple
 from read_file import country_list, nameDict
 
 
@@ -7,26 +6,36 @@ class Country:
 
     def __init__(self, ID, name, asset, gold, population, solider, weapon,
                  food_speed, wood_speed, mineral_speed, oil_speed, food, wood, mineral, oil):
-        self.id = int(ID)
-        self.name = nameDict[name]
-        self.asset = float(asset)
-        self.gold = int(gold)
-        self.population = int(population)
-        self.solider = int(solider)
-        self.food_speed = float(food_speed)
-        self.wood_speed = float(wood_speed)
-        self.mineral_speed = float(mineral_speed)
-        self.oil_speed = float(oil_speed)
-        self.food = int(food)
-        self.wood = int(wood)
-        self.mineral = int(mineral)
-        self.oil = int(oil)
+        self._id = int(ID)
+        self._name = nameDict[name]
+        self._asset = float(asset)
+        self._gold = int(gold)
+        self._population = int(population)
+        self._solider = int(solider)
+        self._food_speed = float(food_speed)
+        self._wood_speed = float(wood_speed)
+        self._mineral_speed = float(mineral_speed)
+        self._oil_speed = float(oil_speed)
+        self._food = int(food)
+        self._wood = int(wood)
+        self._mineral = int(mineral)
+        self._oil = int(oil)
 
     def __str__(self):
         return f"This country is {self.name}, food:{self.food}, wood:{self.wood}, mineral:{self.mineral}, oil:{self.oil}"
 
     def __lt__(self, other):
         return self.asset < other.asset
+
+    @property
+    def id(self):
+        return self._id
+
+    @id.setter
+    def id(self, value):
+        if not 1 <= value <= 10:
+            raise ValueError("name must between 1 to 10")
+        self._id = value
 
     @classmethod
     def from_tuple(cls, data):
@@ -106,4 +115,3 @@ class Australia(Country):
 
 
 a = Atlantis.from_tuple(country_list[0])
-print(a.wood_speed)
