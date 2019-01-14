@@ -286,6 +286,3 @@ class Australia(Country):
         pass
 
 a = Atlantis.from_tuple(country_list[0])
-
-
-help(Country)
