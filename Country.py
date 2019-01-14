@@ -4,14 +4,14 @@ from read_file import country_list, nameDict
 class Country:
     """This class contains basic country attributes"""
 
-    def __init__(self, ID, name, asset, gold, population, solider, weapon,
+    def __init__(self, ID, name, asset, gold, population, solIDer, weapon,
                  food_speed, wood_speed, mineral_speed, oil_speed, food, wood, mineral, oil):
-        self._id = int(ID)
+        self._ID = int(ID)
         self._name = nameDict[name]
         self._asset = float(asset)
         self._gold = int(gold)
         self._population = int(population)
-        self._solider = int(solider)
+        self._solIDer = int(solIDer)
         self._food_speed = float(food_speed)
         self._wood_speed = float(wood_speed)
         self._mineral_speed = float(mineral_speed)
@@ -28,18 +28,18 @@ class Country:
         return self.asset < other.asset
 
     @property
-    def id(self):
-        return self._id
+    def ID(self):
+        return self._ID
 
-    @id.setter
-    def id(self, value):
+    @ID.setter
+    def ID(self, value):
         if not 1 <= value <= 10:
-            raise ValueError("name must between 1 to 10")
-        self._id = value
+            raise ValueError("ID must between 1 to 10")
+        self._ID = value
 
     @classmethod
     def from_tuple(cls, data):
-        return cls(data.id, data.name, float(data.asset), int(data.gold), int(data.population), int(data.solider), float(data.weapon),
+        return cls(data.id, data.name, float(data.asset), int(data.gold), int(data.population), int(data.solIDer), float(data.weapon),
                    float(data.food_speed), float(data.wood_speed), float(data.mineral_speed), float(data.oil_speed),
                    int(data.food), int(data.wood), int(data.mineral), int(data.oil))
 
