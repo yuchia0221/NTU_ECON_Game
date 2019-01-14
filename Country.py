@@ -27,6 +27,7 @@ class Country:
     def __lt__(self, other):
         return self.asset < other.asset
 
+    # set the value of Country.asset and avoid it becomes negtive
     @property
     def asset(self):
         return self._asset
@@ -37,6 +38,7 @@ class Country:
             raise ValueError("asset must be positive")
         self._asset = value
 
+    # set the value of Country.gold and avoid it becomes negtive
     @property
     def gold(self):
         return self._gold
@@ -47,6 +49,7 @@ class Country:
             raise ValueError("gold must be positive")
         self._gold = value
 
+    # set the value of Country.population and avoid it becomes negtive
     @property
     def population(self):
         return self._population
@@ -57,6 +60,7 @@ class Country:
             raise ValueError("population must be positive")
         self._population = value
 
+    # set the value of Country.solider and avoid it becomes negtive
     @property
     def solider(self):
         return self._solider
@@ -67,6 +71,7 @@ class Country:
             raise ValueError("solider must be positive")
         self._solider = value
 
+    # set the value of Country.food_speed and avoid it becomes negtive
     @property
     def food_speed(self):
         return self._food_speed
@@ -77,6 +82,7 @@ class Country:
             raise ValueError("food_speed must be positive")
         self._food_speed = value
 
+    # set the value of Country.wood_speed and avoid it becomes negtive
     @property
     def wood_speed(self):
         return self._wood_speed
@@ -87,6 +93,7 @@ class Country:
             raise ValueError("wood_speed must be positive")
         self._wood_speed = value
 
+    # set the value of Country.mineral_speed and avoid it becomes negtive
     @property
     def mineral_speed(self):
         return self._mineral_speed
@@ -97,6 +104,7 @@ class Country:
             raise ValueError("mineral_speed must be positive")
         self._mineral_speed = value
 
+    # set the value of Country.oil_speed and avoid it becomes negtive
     @property
     def oil_speed(self):
         return self._oil_speed
@@ -107,6 +115,7 @@ class Country:
             raise ValueError("oil_speed must be positive")
         self._oil_speed = value
 
+    # set the value of Country.food and avoid it becomes negtive
     @property
     def food(self):
         return self._food
@@ -117,6 +126,7 @@ class Country:
             raise ValueError("food must be positive")
         self._food = value
 
+    # set the value of Country.wood and avoid it becomes negtive
     @property
     def wood(self):
         return self._wood
@@ -127,6 +137,7 @@ class Country:
             raise ValueError("wood must be positive")
         self._wood = value
 
+    # set the value of Country.mineral and avoid it becomes negtive
     @property
     def mineral(self):
         return self._mineral
@@ -137,6 +148,7 @@ class Country:
             raise ValueError("mineral must be positive")
         self._mineral = value
 
+    # set the value of Country.oil and avoid it becomes negtive
     @property
     def oil(self):
         return self._oil
@@ -147,6 +159,7 @@ class Country:
             raise ValueError("oil must be positive")
         self._oil = value
 
+    # construct Country with namedtuple
     @classmethod
     def from_tuple(cls, data):
         return cls(data.id, data.name, float(data.asset), int(data.gold), int(data.population), int(data.solider), float(data.weapon),
