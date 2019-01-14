@@ -1,9 +1,5 @@
 from collections import namedtuple
-from read_file import country_list
-
-
-nameDict = {"亞特蘭提斯": "Atlantis", "阿斯嘉": "Asgard", "奧林匹斯": "Olympus", "瓦干達": "Wakanda", "香格里拉": "ShangriLa",
-            "瓦拉納西": "Varanasi", "瑪雅": "Maya", "黃金之都": "ElDorado", "游牧": "Mongolia", "澳洲": "Australia"}
+from read_file import country_list, nameDict
 
 
 class Country:
