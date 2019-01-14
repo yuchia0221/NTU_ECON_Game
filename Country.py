@@ -173,12 +173,20 @@ class Atlantis(Country):
     def __init__(self, *arg, **kwargs):
         super(Atlantis, self).__init__(*arg, **kwargs)
 
+    @staticmethod
+    def skill():
+        pass
+
 
 class Asgard(Country):
     """docstring for Asgard"""
 
     def __init__(self, *arg, **kwargs):
         super(Asgard, self).__init__(*arg, **kwargs)
+
+    @staticmethod
+    def skill():
+        pass
 
 
 class Olympus(Country):
@@ -187,12 +195,20 @@ class Olympus(Country):
     def __init__(self, *arg, **kwargs):
         super(Olympus, self).__init__(*arg, **kwargs)
 
+    @staticmethod
+    def skill():
+        pass
+
 
 class Wakanda(Country):
     """docstring for Wakanda"""
 
     def __init__(self, *arg, **kwargs):
         super(Wakanda, self).__init__(*arg, **kwargs)
+
+    @staticmethod
+    def skill():
+        pass
 
 
 class ShangriLa(Country):
@@ -201,12 +217,20 @@ class ShangriLa(Country):
     def __init__(self, *arg, **kwargs):
         super(ShangriLa, self).__init__(*arg, **kwargs)
 
+    @staticmethod
+    def skill():
+        pass
+
 
 class Varanasi(Country):
     """docstring for Varanasi"""
 
     def __init__(self, *arg, **kwargs):
         super(Varanasi, self).__init__(*arg, **kwargs)
+
+    @staticmethod
+    def skill():
+        pass
 
 
 class Maya(Country):
@@ -215,12 +239,20 @@ class Maya(Country):
     def __init__(self, *arg, **kwargs):
         super(Maya, self).__init__(*arg, **kwargs)
 
+    @staticmethod
+    def skill():
+        pass
+
 
 class ElDorado(Country):
     """docstring for ElDorado"""
 
     def __init__(self, *arg, **kwargs):
         super(ElDorado, self).__init__(*arg, **kwargs)
+
+    @staticmethod
+    def skill():
+        pass
 
 
 class Mongolia(Country):
@@ -229,6 +261,10 @@ class Mongolia(Country):
     def __init__(self, *arg, **kwargs):
         super(Mongolia, self).__init__(*arg, **kwargs)
 
+    @staticmethod
+    def skill():
+        pass
+
 
 class Australia(Country):
     """docstring for Australia"""
@@ -236,5 +272,8 @@ class Australia(Country):
     def __init__(self, *arg, **kwargs):
         super(Australia, self).__init__(*arg, **kwargs)
 
+    @staticmethod
+    def skill():
+        pass
 
 a = Atlantis.from_tuple(country_list[0])
