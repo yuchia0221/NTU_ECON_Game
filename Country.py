@@ -9,8 +9,9 @@ nameDict = {"亞特蘭提斯": "Atlantis", "阿斯嘉": "Asgard", "奧林匹斯"
 class Country:
     """This class contains basic country attributes"""
 
-    def __init__(self, name, asset, gold, population, solider, weapon,
+    def __init__(self, ID, name, asset, gold, population, solider, weapon,
                  food_speed, wood_speed, mineral_speed, oil_speed, food, wood, mineral, oil):
+        self.id = int(ID)
         self.name = nameDict[name]
         self.asset = float(asset)
         self.gold = int(gold)
@@ -28,9 +29,12 @@ class Country:
     def __str__(self):
         return f"This country is {self.name}, food:{self.food}, wood:{self.wood}, mineral:{self.mineral}, oil:{self.oil}"
 
+    def __lt__(self, other):
+        return self.asset < other.asset
+
     @classmethod
     def from_tuple(cls, data):
-        return cls(data.name, float(data.asset), int(data.gold), int(data.population), int(data.solider), float(data.weapon),
+        return cls(data.id, data.name, float(data.asset), int(data.gold), int(data.population), int(data.solider), float(data.weapon),
                    float(data.food_speed), float(data.wood_speed), float(data.mineral_speed), float(data.oil_speed),
                    int(data.food), int(data.wood), int(data.mineral), int(data.oil))
 
