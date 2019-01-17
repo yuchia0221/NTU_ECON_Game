@@ -36,6 +36,13 @@ class Country:
         """When you try to sort Country object, it will compare their value of asset."""
         return self.asset < other.asset
 
+    # construct Country with namedtuple
+    @classmethod
+    def from_tuple(cls, data):
+        return cls(data.id, data.name, float(data.asset), int(data.gold), int(data.population), int(data.solider), float(data.weapon),
+                   float(data.food_speed), float(data.wood_speed), float(data.mineral_speed), float(data.oil_speed),
+                   int(data.food), int(data.wood), int(data.mineral), int(data.oil))
+
     @property
     def ID(self):
         return self._ID
@@ -183,13 +190,6 @@ class Country:
         if value < 0:
             raise ValueError("oil must be positive")
         self._oil = value
-
-    # construct Country with namedtuple
-    @classmethod
-    def from_tuple(cls, data):
-        return cls(data.id, data.name, float(data.asset), int(data.gold), int(data.population), int(data.solider), float(data.weapon),
-                   float(data.food_speed), float(data.wood_speed), float(data.mineral_speed), float(data.oil_speed),
-                   int(data.food), int(data.wood), int(data.mineral), int(data.oil))
 
 
 class Atlantis(Country):
