@@ -13,7 +13,7 @@ class Country:
     # constructor of Country object
     def __init__(self, ID, name, asset, gold, population, solider, weapon,
                  food_speed, wood_speed, mineral_speed, oil_speed, food, wood, mineral, oil):
-        self.ID = int(ID)
+        self._ID = int(ID)
         self._name = nameDict[name]
         self._asset = float(asset)
         self._gold = int(gold)
@@ -35,6 +35,22 @@ class Country:
     def __lt__(self, other):
         """When you try to sort Country object, it will compare their value of asset."""
         return self.asset < other.asset
+
+    @property
+    def ID(self):
+        return self._ID
+
+    @ID.setter
+    def ID(self, value):
+        raise TypeError("ID is not mutable")
+
+    @property
+    def name(self):
+        return self._name
+
+    @ID.setter
+    def name(self, value):
+        raise TypeError("name is not mutable")
 
     # set the value of Country.asset and avoid it becomes negtive
     @property
