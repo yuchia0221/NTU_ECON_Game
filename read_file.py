@@ -8,6 +8,7 @@ nameDict = {"亞特蘭提斯": "Atlantis", "阿斯嘉": "Asgard", "奧林匹斯"
             "瓦拉納西": "Varanasi", "瑪雅": "Maya", "黃金之都": "ElDorado", "游牧": "Mongolia", "澳洲": "Australia"}
 
 with open("國家資訊.csv", "r") as csv_file:
+
     csv_reader = csv.reader(csv_file)
     next(csv_reader)
     country_list = [country_info(*i) for i in csv_reader]
