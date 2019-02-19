@@ -2,7 +2,6 @@ from read_file import country_list, nameDict
 
 
 class Country:
-	我
     """
     This class contains basic country attributes:
     --> ID, name, asset, gold, population, solider, weapon,
@@ -41,7 +40,8 @@ class Country:
     @classmethod
     def from_tuple(cls, data):
         return cls(data.id, data.name, float(data.asset), int(data.gold), int(data.population), int(data.solider), float(data.weapon),
-                   float(data.food_speed), float(data.wood_speed), float(data.mineral_speed), float(data.oil_speed),
+                   float(data.food_speed), float(data.wood_speed), float(
+                       data.mineral_speed), float(data.oil_speed),
                    int(data.food), int(data.wood), int(data.mineral), int(data.oil))
 
     @property
