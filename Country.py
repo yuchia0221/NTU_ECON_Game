@@ -2,6 +2,7 @@ from read_file import country_list, nameDict
 
 
 class Country:
+	我
     """
     This class contains basic country attributes:
     --> ID, name, asset, gold, population, solider, weapon,
