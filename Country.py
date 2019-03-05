@@ -197,7 +197,7 @@ class Atlantis(Country):
     """docstring for Atlantis"""
 
     def __init__(self, *arg, **kwargs):
-        super(Atlantis, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -208,7 +208,7 @@ class Asgard(Country):
     """docstring for Asgard"""
 
     def __init__(self, *arg, **kwargs):
-        super(Asgard, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -219,7 +219,7 @@ class Olympus(Country):
     """docstring for Olympus"""
 
     def __init__(self, *arg, **kwargs):
-        super(Olympus, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -230,7 +230,7 @@ class Wakanda(Country):
     """docstring for Wakanda"""
 
     def __init__(self, *arg, **kwargs):
-        super(Wakanda, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -241,7 +241,7 @@ class ShangriLa(Country):
     """docstring for ShangriLa"""
 
     def __init__(self, *arg, **kwargs):
-        super(ShangriLa, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -252,7 +252,7 @@ class Varanasi(Country):
     """docstring for Varanasi"""
 
     def __init__(self, *arg, **kwargs):
-        super(Varanasi, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -263,7 +263,7 @@ class Maya(Country):
     """docstring for Maya"""
 
     def __init__(self, *arg, **kwargs):
-        super(Maya, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -274,7 +274,7 @@ class ElDorado(Country):
     """docstring for ElDorado"""
 
     def __init__(self, *arg, **kwargs):
-        super(ElDorado, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -285,7 +285,7 @@ class Mongolia(Country):
     """docstring for Mongolia"""
 
     def __init__(self, *arg, **kwargs):
-        super(Mongolia, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
@@ -296,7 +296,7 @@ class Australia(Country):
     """docstring for Australia"""
 
     def __init__(self, *arg, **kwargs):
-        super(Australia, self).__init__(*arg, **kwargs)
+        super().__init__(*arg, **kwargs)
 
     @staticmethod
     def skill():
