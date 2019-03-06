@@ -39,10 +39,9 @@ class Country:
     # construct Country with namedtuple
     @classmethod
     def from_tuple(cls, data):
-        return cls(data.id, data.name, float(data.asset), int(data.gold), int(data.population), int(data.solider), float(data.weapon),
-                   float(data.food_speed), float(data.wood_speed), float(
-                       data.mineral_speed), float(data.oil_speed),
-                   int(data.food), int(data.wood), int(data.mineral), int(data.oil))
+        return cls(data.id, data.name, data.asset, data.gold, data.population,
+                   data.solider, data.weapon, data.food_speed, data.wood_speed, data.mineral_speed, data.oil_speed,
+                   data.food, data.wood, data.mineral, data.oil)
 
     @property
     def ID(self):
