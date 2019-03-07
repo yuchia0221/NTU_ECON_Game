@@ -36,13 +36,14 @@ class Country:
         """When you try to sort Country object, it will compare their value of asset."""
         return self.asset < other.asset
 
-    # construct Country with namedtuple
     @classmethod
     def from_tuple(cls, data):
+        """construct Country with namedtuple"""
         return cls(data.id, data.name, data.asset, data.gold, data.population, data.solider,
                    data.weapon, data.food_speed, data.wood_speed, data.mineral_speed,
                    data.oil_speed, data.food, data.wood, data.mineral, data.oil)
 
+    # set the "ID" and "name" are immutable
     @property
     def ID(self):
         return self._ID
