@@ -30,7 +30,7 @@ class Country:
 
     def __str__(self):
         """When you try to print Country object, it will return its name, food, wood, mineral, and oil."""
-        return f"This country is {self._name}, food:{self.food}, wood:{self.wood}, mineral:{self.mineral}, oil:{self.oil}"
+        return f"{self._name} has food: {self.food} & wood: {self.wood} & mineral: {self.mineral} & oil: {self.oil}"
 
     def __lt__(self, other):
         """When you try to sort Country object, it will compare their value of asset."""
@@ -55,7 +55,7 @@ class Country:
     def name(self):
         return self._name
 
-    @ID.setter
+    @name.setter
     def name(self, value):
         raise TypeError("name is not mutable")
 
@@ -86,7 +86,7 @@ class Country:
     def population(self):
         return self._population
 
-    @gold.setter
+    @population.setter
     def population(self, value):
         if value < 0:
             raise ValueError("population must be positive")
@@ -97,7 +97,7 @@ class Country:
     def solider(self):
         return self._solider
 
-    @gold.setter
+    @solider.setter
     def solider(self, value):
         if value < 0:
             raise ValueError("solider must be positive")
@@ -130,7 +130,7 @@ class Country:
     def mineral_speed(self):
         return self._mineral_speed
 
-    @wood_speed.setter
+    @mineral_speed.setter
     def mineral_speed(self, value):
         if value < 0:
             raise ValueError("mineral_speed must be positive")
@@ -262,4 +262,5 @@ class Australia(Country):
         super().__init__(*arg, **kwargs)
 
 
-a = Atlantis.from_tuple(country_list[0])
+# a = Atlantis.from_tuple(country_list[0])
+help(Country)
