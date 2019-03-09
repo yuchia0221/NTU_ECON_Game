@@ -32,8 +32,11 @@ class Country:
                 "wood_speed": self.wood_speed, "mineral_speed": self.wood_speed, "oil_speed": self.oil_speed,
                 "food": self.food, "wood": self.wood, "oil": self.oil}
 
+    def __iter__(self):
+        for attr, value in self.__dict__().items():
+            yield attr, value
+
     def __str__(self):
-        """When you try to print Country object, it will return its name, food, wood, mineral, and oil."""
         return f"{self._name} has food: {self.food} & wood: {self.wood} & mineral: {self.mineral} & oil: {self.oil}"
 
     def __lt__(self, other):
@@ -270,4 +273,4 @@ class Australia(Country):
 from read_file import country_list, nameDict
 
 a = Atlantis.from_tuple(country_list[0])
-# print(vars(a)())
+print(dict(a))
