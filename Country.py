@@ -1,6 +1,3 @@
-from read_file import country_list, nameDict
-
-
 class Country:
     """
     This class contains basic country attributes:
@@ -27,6 +24,13 @@ class Country:
         self._wood = int(wood)
         self._mineral = int(mineral)
         self._oil = int(oil)
+
+    def __dict__(self):
+        """return all of the variables in dictionary that Country has"""
+        return {"ID": self.ID, "name": self.name, "asset": self.asset, "gold": self.gold,
+                "population": self.population, "solider": self.solider, "food_speed": self.food_speed,
+                "wood_speed": self.wood_speed, "mineral_speed": self.wood_speed, "oil_speed": self.oil_speed,
+                "food": self.food, "wood": self.wood, "oil": self.oil}
 
     def __str__(self):
         """When you try to print Country object, it will return its name, food, wood, mineral, and oil."""
@@ -263,5 +267,7 @@ class Australia(Country):
         super().__init__(*arg, **kwargs)
 
 
-# a = Atlantis.from_tuple(country_list[0])
-help(Country)
+from read_file import country_list, nameDict
+
+a = Atlantis.from_tuple(country_list[0])
+# print(vars(a)())
