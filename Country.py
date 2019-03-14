@@ -273,4 +273,8 @@ class Australia(Country):
 from read_file import country_list, nameDict
 
 a = Atlantis.from_tuple(country_list[0])
+<< << << < Updated upstream
+# print(dict(a))
+== == == =
 print(dict(a))
+>>>>>> > Stashed changes
