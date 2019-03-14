@@ -1,3 +1,6 @@
+from read_file import country_list, nameDict
+
+
 class Country:
     """
     This class contains basic country attributes:
@@ -269,8 +272,6 @@ class Australia(Country):
     def __init__(self, *arg, **kwargs):
         super().__init__(*arg, **kwargs)
 
-
-from read_file import country_list, nameDict
 
 a = Atlantis.from_tuple(country_list[0])
 print(dict(a))
