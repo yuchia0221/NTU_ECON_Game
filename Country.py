@@ -5,42 +5,44 @@ class Country:
     """
     This class contains basic country attributes:
     --> ID, name, asset, gold, population, solider, weapon,
-        food_speed, wood_speed, mineral_speed, oil_speed, food, wood, mineral, oil
+        food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone
 
     Don't try to set above attributes be negative, or it will raise error.
     """
 
     # constructor of Country object
-    def __init__(self, ID, name, asset, gold, population, solider, weapon,
-                 food_speed, wood_speed, mineral_speed, oil_speed, food, wood, mineral, oil):
+    def __init__(self, ID, name, asset, gold, population, solider, weapon, air,
+                 food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone):
         self._ID = int(ID)
         self._name = nameDict[name]
-        self._asset = float(asset)
+        self._asset = int(asset)
         self._gold = int(gold)
         self._population = int(population)
         self._solider = int(solider)
+        self._weapon = float(weapon)
+        self._air = float(air)
         self._food_speed = float(food_speed)
         self._wood_speed = float(wood_speed)
-        self._mineral_speed = float(mineral_speed)
-        self._oil_speed = float(oil_speed)
+        self._steel_speed = float(steel_speed)
+        self._stone_speed = float(stone_speed)
         self._food = int(food)
         self._wood = int(wood)
-        self._mineral = int(mineral)
-        self._oil = int(oil)
+        self._steel = int(steel)
+        self._stone = int(stone)
 
     def __dict__(self):
         """return all of the variables in dictionary that Country has"""
         return {"ID": self.ID, "name": self.name, "asset": self.asset, "gold": self.gold,
                 "population": self.population, "solider": self.solider, "food_speed": self.food_speed,
-                "wood_speed": self.wood_speed, "mineral_speed": self.wood_speed, "oil_speed": self.oil_speed,
-                "food": self.food, "wood": self.wood, "oil": self.oil}
+                "wood_speed": self.wood_speed, "steel_speed": self.wood_speed, "stone_speed": self.stone_speed,
+                "food": self.food, "wood": self.wood, "stone": self.stone}
 
     def __iter__(self):
         for attr, value in self.__dict__().items():
             yield attr, value
 
     def __str__(self):
-        return f"{self._name} has food: {self.food} & wood: {self.wood} & mineral: {self.mineral} & oil: {self.oil}"
+        return f"{self._name} has food: {self.food} & wood: {self.wood} & steel: {self.steel} & stone: {self.stone}"
 
     def __lt__(self, other):
         """When you try to sort Country object, it will compare their value of asset."""
@@ -50,8 +52,8 @@ class Country:
     def from_tuple(cls, data):
         """construct Country with namedtuple"""
         return cls(data.id, data.name, data.asset, data.gold, data.population, data.solider,
-                   data.weapon, data.food_speed, data.wood_speed, data.mineral_speed,
-                   data.oil_speed, data.food, data.wood, data.mineral, data.oil)
+                   data.weapon, data.food_speed, data.wood_speed, data.steel_speed,
+                   data.stone_speed, data.food, data.wood, data.steel, data.stone)
 
     # set the "ID" and "name" are immutable
     @property
@@ -114,6 +116,28 @@ class Country:
             raise ValueError("solider must be positive")
         self._solider = value
 
+    # set the value of Country.weapon and avoid it becomes negtive
+    @property
+    def weapon(self):
+        return self._weapon
+
+    @weapon.setter
+    def weapon(self, value):
+        if value < 0:
+            raise ValueError("weapon must be positive")
+        self._weapon = value
+
+    # set the value of Country.air and avoid it becomes negtive
+    @property
+    def air(self):
+        return self._air
+
+    @air.setter
+    def air(self, value):
+        if value < 0:
+            raise ValueError("air must be positive")
+        self._air = value
+
     # set the value of Country.food_speed and avoid it becomes negtive
     @property
     def food_speed(self):
@@ -131,32 +155,32 @@ class Country:
         return self._wood_speed
 
     @wood_speed.setter
-    def food_speed(self, value):
+    def wood_speed(self, value):
         if value < 0:
             raise ValueError("wood_speed must be positive")
         self._wood_speed = value
 
-    # set the value of Country.mineral_speed and avoid it becomes negtive
+    # set the value of Country.steel_speed and avoid it becomes negtive
     @property
-    def mineral_speed(self):
-        return self._mineral_speed
+    def steel_speed(self):
+        return self._steel_speed
 
-    @mineral_speed.setter
-    def mineral_speed(self, value):
+    @steel_speed.setter
+    def steel_speed(self, value):
         if value < 0:
-            raise ValueError("mineral_speed must be positive")
-        self._mineral_speed = value
+            raise ValueError("steel_speed must be positive")
+        self._steel_speed = value
 
-    # set the value of Country.oil_speed and avoid it becomes negtive
+    # set the value of Country.stone_speed and avoid it becomes negtive
     @property
-    def oil_speed(self):
-        return self._oil_speed
+    def stone_speed(self):
+        return self._stone_speed
 
-    @oil_speed.setter
-    def oil_speed(self, value):
+    @stone_speed.setter
+    def stone_speed(self, value):
         if value < 0:
-            raise ValueError("oil_speed must be positive")
-        self._oil_speed = value
+            raise ValueError("stone_speed must be positive")
+        self._stone_speed = value
 
     # set the value of Country.food and avoid it becomes negtive
     @property
@@ -180,27 +204,27 @@ class Country:
             raise ValueError("wood must be positive")
         self._wood = value
 
-    # set the value of Country.mineral and avoid it becomes negtive
+    # set the value of Country.steel and avoid it becomes negtive
     @property
-    def mineral(self):
-        return self._mineral
+    def steel(self):
+        return self._steel
 
-    @mineral.setter
-    def mineral(self, value):
+    @steel.setter
+    def steel(self, value):
         if value < 0:
-            raise ValueError("mineral must be positive")
-        self._mineral = value
+            raise ValueError("steel must be positive")
+        self._steel = value
 
-    # set the value of Country.oil and avoid it becomes negtive
+    # set the value of Country.stone and avoid it becomes negtive
     @property
-    def oil(self):
-        return self._oil
+    def stone(self):
+        return self._stone
 
-    @oil.setter
-    def oil(self, value):
+    @stone.setter
+    def stone(self, value):
         if value < 0:
-            raise ValueError("oil must be positive")
-        self._oil = value
+            raise ValueError("stone must be positive")
+        self._stone = value
 
 
 class Atlantis(Country):
