@@ -32,10 +32,10 @@ class Country:
 
     def __dict__(self):
         """return all of the variables in dictionary that Country has"""
-        return {"ID": self.ID, "name": self.name, "asset": self.asset, "gold": self.gold,
-                "population": self.population, "solider": self.solider, "food_speed": self.food_speed,
-                "wood_speed": self.wood_speed, "steel_speed": self.wood_speed, "stone_speed": self.stone_speed,
-                "food": self.food, "wood": self.wood, "stone": self.stone}
+        return {"ID": self.ID, "name": self.name, "asset": self.asset, "gold": self.gold, "population": self.population,
+                "solider": self.solider, "weapon": self.weapon, "air": self.air, "food_speed": self.food_speed,
+                "wood_speed": self.wood_speed, "steel_speed": self.steel_speed, "stone_speed": self.stone_speed,
+                "food": self.food, "wood": self.wood, "steel": self.steel, "stone": self.stone}
 
     def __iter__(self):
         for attr, value in self.__dict__().items():
@@ -52,7 +52,7 @@ class Country:
     def from_tuple(cls, data):
         """construct Country with namedtuple"""
         return cls(data.id, data.name, data.asset, data.gold, data.population, data.solider,
-                   data.weapon, data.food_speed, data.wood_speed, data.steel_speed,
+                   data.weapon, data.air, data.food_speed, data.wood_speed, data.steel_speed,
                    data.stone_speed, data.food, data.wood, data.steel, data.stone)
 
     # set the "ID" and "name" are immutable
@@ -276,22 +276,22 @@ class Maya(Country):
         super().__init__(*arg, **kwargs)
 
 
-class ElDorado(Country):
-    """docstring for ElDorado"""
+class Tartarus(Country):
+    """docstring for Tartarus"""
 
     def __init__(self, *arg, **kwargs):
         super().__init__(*arg, **kwargs)
 
 
-class Mongolia(Country):
-    """docstring for Mongolia"""
+class Teotihuacan(Country):
+    """docstring for Teotihuacan"""
 
     def __init__(self, *arg, **kwargs):
         super().__init__(*arg, **kwargs)
 
 
-class Australia(Country):
-    """docstring for Australia"""
+class EasterIsland(Country):
+    """docstring for EasterIsland"""
 
     def __init__(self, *arg, **kwargs):
         super().__init__(*arg, **kwargs)
