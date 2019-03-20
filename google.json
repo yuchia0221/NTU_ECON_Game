@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "econcamp",
+  "private_key_id": "acf7c421e9e1a3f84b8092e551e2f3061daa8d8b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDdmweFt1PQiysI\nAhauwD6352Y72So+HMIiA80/QMouKGcynsDNcenjUVEXVbKD/vSy2lx0bSIL4U4/\nolJyBYpKqbv0KwkweKiEEhZfzHRgU/J2OdK22hGeTJgMhfPKZmclRwJseLbfN5hd\nJOa0nA4RyZV5p8CB4GoCMQmSQniDolwiUcykOtMUiv0TNwiUrxPzz3KGk/THx0/e\nF98boiIXUD4l0tOkT0GpWyzzIpe3wWYob73UH+KJc6Q6qM5heRw/nyD/FjCqHV+T\n0m/lZbtO6ZvAy9+xjp8QWG8D3l9RIfPU0aG3vIIt8vVbKX9T44oFgbEV9nrizUt9\n2F/SRJB7AgMBAAECggEAIQn2LvqRoukUwyQN6K4zIOz9d3/IRgFjSiSh9ZkTFkWi\nI9BlCLGVQCBartgb04UaoLhgigp5RdHTU4u/r03h0Sw0IFJIPkicQIXdKG7i4jex\n0ZbhB6+Zv9hF37FwPY/94cy6m5x1u0WJJZ3qTX6/XuncgLTrb7xFtx+Y1eGrdl23\n9CGMXYHwnAF+OZreYyI2lnH06WLEBBxdqDQQUEejt0dRrg2Np3RWOTniosnujpS0\niRKhAZ3xMDmoRtlY0u0H2Y2hsgopnUrk8kyCvraauI3Mep53ZXohYQVGFIPA1JXG\nZgKWkGkWy2k2J0PHhAf3G2sYVllUI5ZCCn0C5sVf5QKBgQDu0xvun2kIV0vpj/V7\nbXubGzcSodinCgqwSVrNraCouvLHDsqAnFnkS1Z1CxQCvpL2IUhNzs9BqklSkqdy\nNu/TV8VieruKQZQac503NqtxdKby9JxXyf8NQ3VFPw95FGYndQt9qX+7s+LyCZpC\nXYXnrfCmWPYksADgY2YHWqixtQKBgQDtiuh1THKlerLxCgP3rN5fI6mivCJBpyRc\nfjWJhgGvDDDdSt5KAB7SfYEOXiCdwSmR7IwuNkI6RnSvOOG2z/7q399+OJYQbxTr\nt1ZiuVakKUsgJ+Jcijm4CBMRaG4LeOeLdIDUfUQ02/S2/RdTFJsdO9zxN1cA8Kmg\nDoCUZK9XbwKBgHj/1IMNmPV05S0slr82NQ3cuAZkoZPf7pJqV+slMOTL8v0PbWHD\n1XdpBCDAwB6z11mEe1GQmkk2sXd4fgXL964oJgVDEYl2uEa+lMTImgwdgghODngc\nC3D44I146an6v9b14iCEpAbBmRXv74v4PkOnSOm+4NatpYQKWEMZl6aRAoGABgJv\noxgOBnW2NTblpsxuy8VhM0bDLxoFZ3mh7RrAzCbozZBpU0Hxha27KBvlg1gxrwlm\n+nxQ7Jx/szcjLrbQYizLwKu50CyfQN9ghhreQETzK5sWtPSiRS+fG9+ieRPT98k4\nwSdyJEw0QrTgdC+fRPwQuOGHh/SOtgfn5NkvPm0CgYEAyoyovezHowUKTND3MDmr\n7IIzm++NfRdBIBg5v5usuWvWsy6M/uAVxMl/DfMiUBk5r92AlDys+vnMQOv5bdok\nQ5IJq4RGYkY37mSRussttWHBqih+xCqczAcZ4jHBR6hcZC65KrJnYwqrhOOZ81fs\nfzCPs/H8GuNbouQLyIzZ8AY=\n-----END PRIVATE KEY-----\n",
+  "client_email": "id-771@econcamp.iam.gserviceaccount.com",
+  "client_id": "102013144196387662135",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/id-771%40econcamp.iam.gserviceaccount.com"
+}
