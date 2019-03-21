@@ -297,5 +297,5 @@ class EasterIsland(Country):
         super().__init__(*arg, **kwargs)
 
 
-a = Atlantis.from_tuple(country_list[0])
-print(dict(a))
+# a = Atlantis.from_tuple(country_list[0])
+# print(dict(a))
