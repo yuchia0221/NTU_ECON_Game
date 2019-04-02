@@ -1,12 +1,14 @@
 import gspread
+import csv
 from collections import namedtuple
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
                      Varanasi, Maya, Tartarus, Teotihuacan, EasterIsland)
+# from main import country_list
 
 
 def read_file():
-    """讀取位於Google雲端的試算表，回傳list"""
+    """讀取位於Google雲端的試算表，用list回傳資料"""
 
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon air food_speed wood_speed steel_speed stone_speed food wood steel stone")
@@ -23,7 +25,7 @@ def read_file():
 
 
 def createCountry():
-    """透過read_file函數建立Class，回傳儲存國家Class的dictionary"""
+    """透過read_file函數建立Class，回傳儲存各國Class的dictionary"""
 
     class_list = {"亞特蘭提斯": Atlantis, "阿斯嘉": Asgard, "奧林帕斯": Olympus, "瓦干達": Wakanda,
                   "香格里拉": ShangriLa, "瓦拉納西": Varanasi, "瑪雅": Maya, "塔爾塔洛斯": Tartarus,
@@ -32,5 +34,42 @@ def createCountry():
     return {i.name: class_list[i.name](*i) for i in read_file()}
 
 
-def card(password, country_name):
-    pass
+def card(password, name):
+    """發動卡片效果"""
+
+    """.................卡片函數區............................."""
+    def f():
+        print("test")
+    """.................卡片函數區............................."""
+
+    password = password.upper()
+
+    with open("卡片.csv", "r") as csv_file:
+        csv_reader = csv.reader(csv_file)
+        next(csv_reader)
+        useCard, soldCard = dict(), dict()
+        for i in csv_reader:
+            useCard[i[1]] = (i[4], i[3])
+            soldCard[i[2]] = (i[4], i[5])
+
+        if password in useCard:
+            if useCard[password][0] == "N":
+                locals()[useCard[password][1]]()
+                useCard[password][0] == "Y"
+            else:
+                print(f"這張卡片已經用過了，驗證碼:{password}")
+            return
+
+        elif password in soldCard:
+            if soldCard[password][0] == "N":
+                country_list[name].gold += int(soldCard[password][1])
+                soldCard[password][0] == "Y"
+            else:
+                print(f"這張卡片已經用過了，驗證碼:{password}")
+            return
+
+        else:
+            raise NameError(f"驗證碼無效:{password.upper()}")
+
+
+country_list = createCountry()
