@@ -1,4 +1,4 @@
-from read_file import nameDict
+from spread_read import country_list
 
 
 class Country:
@@ -31,7 +31,7 @@ class Country:
 
     def __dict__(self):
         """return all of the variables in dictionary that Country has"""
-        return {"ID": self.ID, "name": self.name, "wonders": self.wonder, "gold": self.gold,
+        return {"ID": self.ID, "name": self.name, "wonders": self.wonders, "gold": self.gold,
                 "population": self.population, "weapon": self.weapon, "air": self.air, "food_speed": self.food_speed,
                 "wood_speed": self.wood_speed, "steel_speed": self.steel_speed, "stone_speed": self.stone_speed,
                 "food": self.food, "wood": self.wood, "steel": self.steel, "stone": self.stone}
@@ -285,5 +285,8 @@ class EasterIsland(Country):
         super().__init__(*arg, **kwargs)
 
 
-# a = Atlantis.from_tuple(country_list[0])
-# print(dict(a))
+nameDict = {"亞特蘭提斯": "Atlantis", "阿斯嘉": "Asgard", "奧林帕斯": "Olympus", "瓦干達": "Wakanda", "香格里拉": "ShangriLa",
+            "瓦拉納西": "Varanasi", "瑪雅": "Maya", "塔爾塔洛斯": "Tartarus", "特奧蒂瓦坎": "Teotihuacan", "復活節島": "EasterIsland"}
+
+a = Atlantis.from_tuple(country_list[0])
+print(dict(a))
