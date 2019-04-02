@@ -6,13 +6,13 @@ scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/au
 
 creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
 client = gspread.authorize(creds)
-sheet = client.open("亞特蘭提斯").sheet1
+sheet = client.open("香格里拉").sheet1
 data = sheet.get_all_records()
-# print(data)
+print(data)
 
 
 # print(data)
 # sheet.clear()
-# sheet.append_row(list)
-# sheet.insert_row(list, index=2)
+# sheet.append_row(["二"], index=2)
+# sheet.insert_row(["二"], index=2)
 # help(sheet)
