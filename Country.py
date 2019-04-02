@@ -1,4 +1,4 @@
-from spread_read import country_list
+from read_file import country_list
 
 
 class Country:
