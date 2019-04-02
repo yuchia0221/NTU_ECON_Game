@@ -1,4 +1,5 @@
-from function import createCountry
+from function import country_list, card
 
-country_list = createCountry()
+
+card("00JJICIA", "亞特蘭提斯")
 print(country_list)
