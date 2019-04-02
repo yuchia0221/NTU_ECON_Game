@@ -1,4 +1,4 @@
-from read_file import country_list, nameDict
+from read_file import nameDict
 
 
 class Country:
@@ -11,14 +11,13 @@ class Country:
     """
 
     # constructor of Country object
-    def __init__(self, ID, name, asset, gold, population, solider, weapon, air,
+    def __init__(self, ID, name, wonders, gold, population, weapon, air,
                  food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone):
         self._ID = int(ID)
         self._name = nameDict[name]
-        self._asset = int(asset)
+        self._wonders = int(wonders)
         self._gold = int(gold)
         self._population = int(population)
-        self._solider = int(solider)
         self._weapon = float(weapon)
         self._air = float(air)
         self._food_speed = float(food_speed)
@@ -32,8 +31,8 @@ class Country:
 
     def __dict__(self):
         """return all of the variables in dictionary that Country has"""
-        return {"ID": self.ID, "name": self.name, "asset": self.asset, "gold": self.gold, "population": self.population,
-                "solider": self.solider, "weapon": self.weapon, "air": self.air, "food_speed": self.food_speed,
+        return {"ID": self.ID, "name": self.name, "wonders": self.wonder, "gold": self.gold,
+                "population": self.population, "weapon": self.weapon, "air": self.air, "food_speed": self.food_speed,
                 "wood_speed": self.wood_speed, "steel_speed": self.steel_speed, "stone_speed": self.stone_speed,
                 "food": self.food, "wood": self.wood, "steel": self.steel, "stone": self.stone}
 
@@ -51,8 +50,8 @@ class Country:
     @classmethod
     def from_tuple(cls, data):
         """construct Country with namedtuple"""
-        return cls(data.id, data.name, data.asset, data.gold, data.population, data.solider,
-                   data.weapon, data.air, data.food_speed, data.wood_speed, data.steel_speed,
+        return cls(data.id, data.name, data.wonders, data.gold, data.population, data.weapon,
+                   data.air, data.food_speed, data.wood_speed, data.steel_speed,
                    data.stone_speed, data.food, data.wood, data.steel, data.stone)
 
     # set the "ID" and "name" are immutable
@@ -72,16 +71,16 @@ class Country:
     def name(self, value):
         raise TypeError("name is not mutable")
 
-    # set the value of Country.asset and avoid it becomes negtive
+    # set the value of Country.wonders and avoid it becomes negtive
     @property
-    def asset(self):
-        return self._asset
+    def wonders(self):
+        return self._wonders
 
-    @asset.setter
-    def asset(self, value):
-        if value < 0:
-            raise ValueError("asset must be positive")
-        self._asset = value
+    @wonders.setter
+    def wonders(self, value):
+        if not str(value).isdigit():
+            raise ValueError("wonders must be positive")
+        self._wonders = value
 
     # set the value of Country.gold and avoid it becomes negtive
     @property
@@ -104,17 +103,6 @@ class Country:
         if value < 0:
             raise ValueError("population must be positive")
         self._population = value
-
-    # set the value of Country.solider and avoid it becomes negtive
-    @property
-    def solider(self):
-        return self._solider
-
-    @solider.setter
-    def solider(self, value):
-        if value < 0:
-            raise ValueError("solider must be positive")
-        self._solider = value
 
     # set the value of Country.weapon and avoid it becomes negtive
     @property
