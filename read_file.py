@@ -12,3 +12,4 @@ with open("國家資訊.csv", "r") as csv_file:
     csv_reader = csv.reader(csv_file)
     next(csv_reader)
     country_list = [country_info(*i) for i in csv_reader]
+    print(country_list)
