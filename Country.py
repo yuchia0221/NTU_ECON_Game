@@ -1,6 +1,3 @@
-from read_file import country_list
-
-
 class Country:
     """
     This class contains basic country attributes:
@@ -14,7 +11,7 @@ class Country:
     def __init__(self, ID, name, wonders, gold, population, weapon, air,
                  food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone):
         self._ID = int(ID)
-        self._name = nameDict[name]
+        self._name = name
         self._wonders = int(wonders)
         self._gold = int(gold)
         self._population = int(population)
@@ -41,7 +38,7 @@ class Country:
             yield attr, value
 
     def __str__(self):
-        return f"{self._name} has food: {self.food} & wood: {self.wood} & steel: {self.steel} & stone: {self.stone}"
+        return f"{self._name} has {self.food} food & {self.wood} wood & {self.steel} steel & {self.stone} stone"
 
     def __lt__(self, other):
         """When you try to sort Country object, it will compare their value of asset."""
@@ -283,10 +280,3 @@ class EasterIsland(Country):
 
     def __init__(self, *arg, **kwargs):
         super().__init__(*arg, **kwargs)
-
-
-nameDict = {"亞特蘭提斯": "Atlantis", "阿斯嘉": "Asgard", "奧林帕斯": "Olympus", "瓦干達": "Wakanda", "香格里拉": "ShangriLa",
-            "瓦拉納西": "Varanasi", "瑪雅": "Maya", "塔爾塔洛斯": "Tartarus", "特奧蒂瓦坎": "Teotihuacan", "復活節島": "EasterIsland"}
-
-a = Atlantis.from_tuple(country_list[0])
-print(dict(a))
