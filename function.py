@@ -23,10 +23,14 @@ def read_file():
 
 
 def createCountry():
-    """透過read_file函數建立Class"""
+    """透過read_file函數建立Class，回傳儲存國家Class的dictionary"""
 
     class_list = {"亞特蘭提斯": Atlantis, "阿斯嘉": Asgard, "奧林帕斯": Olympus, "瓦干達": Wakanda,
                   "香格里拉": ShangriLa, "瓦拉納西": Varanasi, "瑪雅": Maya, "塔爾塔洛斯": Tartarus,
                   "特奧蒂瓦坎": Teotihuacan, "復活節島": EasterIsland}
 
-    return [class_list[i.name](*i) for i in read_file()]
+    return {i.name: class_list[i.name](*i) for i in read_file()}
+
+
+def card(password, country_name):
+    pass
