@@ -34,7 +34,7 @@ def createCountry():
     return {i.name: class_list[i.name](*i) for i in read_file()}
 
 
-def card(password, name):
+def card(country_list, password, name):
     """發動卡片效果"""
 
     """.................卡片函數區............................."""
@@ -70,6 +70,3 @@ def card(password, name):
 
         else:
             raise NameError(f"驗證碼無效:{password.upper()}")
-
-
-country_list = createCountry()
