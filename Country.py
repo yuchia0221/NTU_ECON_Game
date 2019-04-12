@@ -29,8 +29,9 @@ class Country:
     def __dict__(self):
         """return all of the variables in dictionary that Country has"""
         return {"ID": self.ID, "name": self.name, "wonders": self.wonders, "gold": self.gold,
-                "population": self.population, "weapon": self.weapon, "air": self.air, "food_speed": self.food_speed,
-                "wood_speed": self.wood_speed, "steel_speed": self.steel_speed, "stone_speed": self.stone_speed,
+                "population": self.population, "weapon": self.weapon, "air": self.air,
+                "food_speed": self.food_speed, "wood_speed": self.wood_speed,
+                "steel_speed": self.steel_speed, "stone_speed": self.stone_speed,
                 "food": self.food, "wood": self.wood, "steel": self.steel, "stone": self.stone}
 
     def __iter__(self):
