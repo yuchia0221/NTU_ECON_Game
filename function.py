@@ -85,7 +85,7 @@ def production(countryDict, name, produce_num, warrior):
 
 
 def read_card():
-    with open("D:\\大二經濟營\\NTU_ECON_Game\\卡片.csv", "r") as csv_file:
+    with open("卡片.csv", "r") as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)
         return {i[1]: (i[2], i[3], i[4]) for i in csv_reader}
@@ -95,13 +95,27 @@ def card(countryDict, name, cardDict, useCard, soldCard):
     """ 發動卡片效果 """
 
     """.................卡片函數區............................."""
-    def f():
-        print("test")
+    def food1():
+        countryDict[name].food -= 200
+        countryDict[name].wood -= 100
+        countryDict[name].steel -= 100
+        countryDict[name].stone -= 100
+        countryDict[name].gold -= 100
+
+        countryDict[name].food_speed += 0.2
+
+    def food2():
+        countryDict[name].food -= 200
+        countryDict[name].wood -= 100
+        countryDict[name].steel -= 100
+        countryDict[name].stone -= 100
+
+        countryDict[name].food_speed += 0.2
     """.................卡片函數區............................."""
 
     for card in useCard:
         try:
-            if cardDict[card] == "Y":
+            if cardDict[card][1] == "Y":
                 print(f"這張卡片已經使用過了")
             else:
                 locals()[cardDict[card][0]]()
@@ -111,7 +125,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
     for card in soldCard:
         try:
-            if cardDict[card] == "Y":
+            if cardDict[card][1] == "Y":
                 print(f"這張卡片已經使用過了")
             else:
                 countryDict[name].gold += cardDict[card][2]
@@ -121,4 +135,5 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
 
 if __name__ == "__main__":
+    print(createCountry()["瑪雅"].food_speed)
     card(createCountry(), "瑪雅", read_card(), ["22V9EX"], [])
