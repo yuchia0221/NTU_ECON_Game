@@ -1,5 +1,6 @@
 import csv
 import gspread
+from math import sqrt
 from collections import namedtuple
 from recordclass import recordclass
 from oauth2client.service_account import ServiceAccountCredentials
@@ -55,6 +56,16 @@ def handle_action():
         returnList.append(tempt)
 
     return returnList
+
+
+def production(countryDict, name, produce_num, warrior):  # 順序:糧食、木頭、鐵礦、石頭
+    if countryDict[name].population - warrior < sum(produce_num) * 100:
+        raise ValueError("人民不夠來生產")
+
+    countryDict[name].food += round(sqrt(produce_num[0]) * countryDict[name].food_speed ** (2 / 3), 0)
+    countryDict[name].wood += round(sqrt(produce_num[1]) * countryDict[name].wood_speed ** (2 / 3), 0)
+    countryDict[name].steel += round(sqrt(produce_num[2]) * countryDict[name].steel_speed ** (2 / 3), 0)
+    countryDict[name].stone += round(sqrt(produce_num[3]) * countryDict[name].stone_speed ** (2 / 3), 0)
 
 
 def card(countryDict, password, name):
