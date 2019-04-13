@@ -1,6 +1,7 @@
 import csv
 import gspread
 from collections import namedtuple
+from recordclass import recordclass
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
                      Varanasi, Maya, Tartarus, Teotihuacan, EasterIsland)
@@ -11,7 +12,7 @@ def read_file(file_name):
 
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon air food_speed wood_speed steel_speed stone_speed food wood steel stone")
-    action = namedtuple("action", "time name Pfood Pwood Psteel Ptone useCard soldCard Pwonders war solider resource speed")
+    action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
 
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
@@ -34,6 +35,26 @@ def createCountry(file_name):
                   "特奧蒂瓦坎": Teotihuacan, "復活節島": EasterIsland}
 
     return {i.name: class_list[i.name](*i) for i in read_file(file_name)}
+
+
+def handle_action():
+    info = recordclass("info", "name produceList useCard soldCard Pwonders war solider occupyMan resource Rspeed")
+
+    returnList = []
+    for i in read_file("伊康攻略(回覆)"):
+        if "不戰爭" in i.war.split():
+            occupyMan, solider, resource, Rspeed = 0, [], [], []
+        else:
+            occupyMan = sum([int(j) for j in i.solider.split()])
+            solider = [int(j) for j in i.solider.split()]
+            resource = i.resource.split()
+            Rspeed = i.Rspeed.split()
+
+        tempt = info(i.name, [i.Pfood, i.Pwood, i.Psteel, i.Pstone], i.useCard.split(),
+                     i.soldCard.split(), i.Pwonders, i.war.split(), solider, occupyMan, resource, Rspeed)
+        returnList.append(tempt)
+
+    return returnList
 
 
 def card(countryDict, password, name):
@@ -75,4 +96,9 @@ def card(countryDict, password, name):
 
 
 if __name__ == "__main__":
-    print(read_file("伊康攻略(回覆)"))
+    a = handle_action()
+    print(a)
+    try:
+        card()
+    except Exception as e:
+        pass
