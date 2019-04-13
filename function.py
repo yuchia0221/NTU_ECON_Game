@@ -23,8 +23,6 @@ def read_file(file_name):
     return [country_info(*i.values()) for i in data]
 
 
-read_file("伊康攻略(回覆)")
-
 def createCountry():
     """透過read_file函數建立Class，回傳儲存各國Class的dictionary"""
 
