@@ -273,4 +273,4 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
 
 if __name__ == "__main__":
-    # card(createCountry(), "瑪雅", read_card(), ["22V9EX"], [])
+    card(createCountry(), "瑪雅", read_card(), ["22V9EX"], [])
