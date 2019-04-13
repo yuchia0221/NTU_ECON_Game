@@ -20,7 +20,11 @@ def read_file(file_name):
     sheet = client.open(file_name).sheet1
     data = sheet.get_all_records()
     print(data)
-    return [country_info(*i.values()) for i in data]
+
+    if file_name == "國家資訊表":
+        return [country_info(*i.values()) for i in data]
+    else:
+        return [i for i in data]
 
 
 def createCountry():
