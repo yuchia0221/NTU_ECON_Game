@@ -4,7 +4,6 @@ from collections import namedtuple
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
                      Varanasi, Maya, Tartarus, Teotihuacan, EasterIsland)
-# from main import country_list
 
 
 def read_file():
@@ -34,7 +33,7 @@ def createCountry():
     return {i.name: class_list[i.name](*i) for i in read_file()}
 
 
-def card(country_list, password, name):
+def card(info, password, name):
     """發動卡片效果"""
 
     """.................卡片函數區............................."""
@@ -62,7 +61,7 @@ def card(country_list, password, name):
 
         elif password in soldCard:
             if soldCard[password][0] == "N":
-                country_list[name].gold += int(soldCard[password][1])
+                info[name].gold += int(soldCard[password][1])
                 soldCard[password][0] == "Y"
             else:
                 print(f"這張卡片已經用過了，驗證碼:{password}")
