@@ -112,12 +112,127 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].food_speed += 0.2
 
     def food2():
-        countryDict[name].food -= 200
-        countryDict[name].wood -= 100
+        countryDict[name].food -= 500
+        countryDict[name].wood -= 200
+        countryDict[name].steel -= 200
+        countryDict[name].stone -= 200
+        countryDict[name].gold -= 500
+
+        countryDict[name].food_speed += 0.4
+
+    def food3():
+        countryDict[name].food -= 1000
+        countryDict[name].wood -= 400
+        countryDict[name].steel -= 400
+        countryDict[name].stone -= 400
+        countryDict[name].gold -= 1000
+
+        countryDict[name].food_speed += 0.6
+
+    def wood1():
+        countryDict[name].food -= 100
+        countryDict[name].wood -= 200
         countryDict[name].steel -= 100
         countryDict[name].stone -= 100
+        countryDict[name].gold -= 100
 
-        countryDict[name].food_speed += 0.2
+        countryDict[name].wood_speed += 0.2
+
+    def wood2():
+        countryDict[name].food -= 200
+        countryDict[name].wood -= 500
+        countryDict[name].steel -= 200
+        countryDict[name].stone -= 200
+        countryDict[name].gold -= 500
+
+        countryDict[name].wood_speed += 0.4
+
+    def wood3():
+        countryDict[name].food -= 4000
+        countryDict[name].wood -= 1000
+        countryDict[name].steel -= 400
+        countryDict[name].stone -= 400
+        countryDict[name].gold -= 1000
+
+        countryDict[name].wood_speed += 0.6
+
+    def steel1():
+        countryDict[name].food -= 100
+        countryDict[name].wood -= 100
+        countryDict[name].steel -= 200
+        countryDict[name].stone -= 100
+        countryDict[name].gold -= 100
+
+        countryDict[name].steel_speed += 0.2
+
+    def steel2():
+        countryDict[name].food -= 200
+        countryDict[name].wood -= 200
+        countryDict[name].steel -= 500
+        countryDict[name].stone -= 200
+        countryDict[name].gold -= 500
+
+        countryDict[name].steel_speed += 0.4
+
+    def steel3():
+        countryDict[name].food -= 400
+        countryDict[name].wood -= 400
+        countryDict[name].steel -= 1000
+        countryDict[name].stone -= 400
+        countryDict[name].gold -= 1000
+
+        countryDict[name].steel_speed += 0.6
+
+    def stone1():
+        countryDict[name].food -= 100
+        countryDict[name].wood -= 100
+        countryDict[name].steel -= 100
+        countryDict[name].stone -= 200
+        countryDict[name].gold -= 100
+
+        countryDict[name].steel_speed += 0.2
+
+    def stone2():
+        countryDict[name].food -= 200
+        countryDict[name].wood -= 200
+        countryDict[name].steel -= 200
+        countryDict[name].stone -= 500
+        countryDict[name].gold -= 500
+
+        countryDict[name].steel_speed += 0.4
+
+    def stone3():
+        countryDict[name].food -= 400
+        countryDict[name].wood -= 400
+        countryDict[name].steel -= 400
+        countryDict[name].stone -= 1000
+        countryDict[name].gold -= 1000
+
+        countryDict[name].steel_speed += 0.6
+
+    def weapon1():
+        countryDict[name].wood -= 300
+        countryDict[name].steel -= 500
+        countryDict[name].stone -= 300
+        countryDict[name].gold -= 300
+
+        countryDict[name].weapon += 0.2
+
+    def weapon2():
+        countryDict[name].wood -= 800
+        countryDict[name].steel -= 1500
+        countryDict[name].stone -= 800
+        countryDict[name].gold -= 1500
+
+        countryDict[name].weapon += 0.4
+
+    def weapon3():
+        countryDict[name].wood -= 1400
+        countryDict[name].steel -= 2500
+        countryDict[name].stone -= 1400
+        countryDict[name].gold -= 2500
+
+        countryDict[name].weapon += 0.6
     """.................卡片函數區............................."""
 
     for card in useCard:
