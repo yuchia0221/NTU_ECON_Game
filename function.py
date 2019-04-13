@@ -17,7 +17,7 @@ def read_file(file_name):
 
     # 建立namedtuple object
     country_info = namedtuple("country_info",
-                              "id name wonders gold population weapon air food_speed wood_speed steel_speed stone_speed food wood steel stone")
+                              "id name wonders gold population weapon food_speed wood_speed steel_speed stone_speed food wood steel stone")
     action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
 
     # 抓取google雲端上的試算表
@@ -35,7 +35,7 @@ def read_file(file_name):
         return [action(*i.values()) for i in data]
 
 
-def write_file(file_name):
+def write_country_file():
     pass
 
 
@@ -123,7 +123,7 @@ def card(countryDict, password, name):
 
 
 if __name__ == "__main__":
-    a = handle_action()
+    a = createCountry()
     print(a)
     try:
         card()
