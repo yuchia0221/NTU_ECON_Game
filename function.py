@@ -17,7 +17,7 @@ def read_file(file_name):
 
     # 建立namedtuple object
     country_info = namedtuple("country_info",
-                              "id name wonders gold population weapon food_speed wood_speed steel_speed stone_speed food wood steel stone")
+                              "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
     action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
 
     # 抓取google雲端上的試算表
@@ -47,7 +47,7 @@ def write_country_file(countryDict):
     sheet.clear()
 
     # 更新成現在的國家資訊
-    sheet.append_row(['編號', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '糧食倍率',
+    sheet.append_row(['編號', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '防禦力', '糧食倍率',
                       '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
     for i in countryDict.values():
         sheet.append_row(i.to_list())
@@ -62,9 +62,9 @@ def write_individual(countryDict, name, roundnow):
     sheet = client.open(name).sheet1
 
     # 更新成現在的國家資訊
-    # sheet.clear()
-    # sheet.append_row(['回合', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '糧食倍率',
-    #                   '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
+    sheet.clear()
+    sheet.append_row(['回合', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '防禦力', '糧食倍率',
+                      '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
     sheet.insert_row(list(roundnow) + countryDict[name].to_list()[1:], 2)
 
 
@@ -84,16 +84,17 @@ def handle_action():
 
     returnList = []
     for i in read_file("伊康攻略(回覆)"):
-        if "不戰爭" in i.war.split():
-            occupyMan, solider, resource, Rspeed = 0, [], [], []
+        if "不戰爭" in i.war.replace(",", "").split():
+            war, occupyMan, solider, resource, Rspeed = ["不戰爭"], 0, [], [], []
         else:
+            war = i.war.replace(",", "").split()
             occupyMan = sum([int(j) for j in i.solider.split()])
             solider = [int(j) for j in i.solider.split()]
             resource = i.resource.split()
             Rspeed = i.Rspeed.split()
 
         tempt = info(i.name, [i.Pfood, i.Pwood, i.Psteel, i.Pstone], i.useCard.split(),
-                     i.soldCard.split(), i.Pwonders, i.war.split(), solider, occupyMan, resource, Rspeed)
+                     i.soldCard.split(), i.Pwonders, war, solider, occupyMan, resource, Rspeed)
         returnList.append(tempt)
 
     return returnList
@@ -292,6 +293,59 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             raise KeyError(f"卡片驗證碼:{card}不存在")
 
 
+def war(countryDict, Acounrty, Bcountry, soilder, resource, speed, defeated):
+    rubrate = 0.001
+    diff = countryDict[Acounrty].weapon * soilder - countryDict[Bcountry].defense
+    if diff >= 0 and not defeated:
+        countryDict[Acounrty].population -= soilder * 0.3
+        countryDict[Bcountry].population *= 0.9
+        if resource == "糧食":
+            countryDict[Acounrty].food += countryDict[Bcountry].food * (0.5 + rubrate * diff)
+            countryDict[Bcounrty].food -= countryDict[Bcountry].food * (0.5 + rubrate * diff)
+        elif resource == "木頭":
+            countryDict[Acounrty].wood += countryDict[Bcountry].wood * (0.5 + rubrate * diff)
+            countryDict[Bcounrty].wood -= countryDict[Bcountry].wood * (0.5 + rubrate * diff)
+        elif resource == "鐵礦":
+            countryDict[Acounrty].steel += countryDict[Bcountry].steel * (0.5 + rubrate * diff)
+            countryDict[Bcounrty].steel -= countryDict[Bcountry].steel * (0.5 + rubrate * diff)
+        elif resource == "石頭":
+            countryDict[Acounrty].stone += countryDict[Bcountry].stone * (0.5 + rubrate * diff)
+            countryDict[Bcounrty].stone -= countryDict[Bcountry].stone * (0.5 + rubrate * diff)
+
+        if speed == "糧食":
+            countryDict[Acounrty].food.speed += 0.2
+            countryDict[Bcounrty].food.speed -= 0.2
+        elif speed == "木頭":
+            countryDict[Acounrty].wood.speed += 0.2
+            countryDict[Bcounrty].wood.speed -= 0.2
+        elif speed == "鐵礦":
+            countryDict[Acounrty].steel.speed += 0.2
+            countryDict[Bcounrty].steel.speed -= 0.2
+        elif speed == "石頭":
+            countryDict[Acounrty].stone.speed += 0.2
+            countryDict[Bcounrty].stone.speed -= 0.2
+
+    elif diff >= 0 and defeated:
+        countryDict[Acounrty].population -= soilder * 0.1
+        if resource == "糧食":
+            countryDict[Acounrty].food += 0.5 * countryDict[Bcountry].food * (0.5 + rubrate * diff)
+            countryDict[Bcounrty].food -= 0.5 * countryDict[Bcountry].food * (0.5 + rubrate * diff)
+        elif resource == "木頭":
+            countryDict[Acounrty].wood += 0.5 * countryDict[Bcountry].wood * (0.5 + rubrate * diff)
+            countryDict[Bcounrty].wood -= 0.5 * countryDict[Bcountry].wood * (0.5 + rubrate * diff)
+        elif resource == "鐵礦":
+            countryDict[Acounrty].steel += 0.5 * countryDict[Bcountry].steel * (0.5 + rubrate * diff)
+            countryDict[Bcounrty].steel -= 0.5 * countryDict[Bcountry].steel * (0.5 + rubrate * diff)
+        elif resource == "石頭":
+            countryDict[Acounrty].stone += 0.5 * countryDict[Bcountry].stone * (0.5 + rubrate * diff)
+            countryDict[Bcounrty].stone -= 0.5 * countryDict[Bcountry].stone * (0.5 + rubrate * diff)
+
+    elif diff < 0:
+        countryDict[Acounrty].population -= soilder * 0.4
+
+
 if __name__ == "__main__":
-    # card(createCountry(), "瑪雅", read_card(), ["22V9EX"], [])
-    pass
+    a = createCountry()
+    # print(handle_action())
+    # for i in ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉', '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']:
+    #     write_individual(a, i, "一")

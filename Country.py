@@ -8,7 +8,7 @@ class Country:
     """
 
     # Constructor of Country object
-    def __init__(self, ID, name, wonders, gold, population, weapon,
+    def __init__(self, ID, name, wonders, gold, population, weapon, defense,
                  food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone):
         self._ID = int(ID)
         self._name = name
@@ -16,6 +16,7 @@ class Country:
         self._gold = int(gold)
         self._population = int(population)
         self._weapon = float(weapon)
+        self._defense = float(defense)
         self._food_speed = float(food_speed)
         self._wood_speed = float(wood_speed)
         self._steel_speed = float(steel_speed)
@@ -28,7 +29,7 @@ class Country:
     def __dict__(self):
         """ Return all of the variables in dictionary that Country has """
         return {"ID": self.ID, "name": self.name, "wonders": self.wonders, "gold": self.gold,
-                "population": self.population, "weapon": self.weapon,
+                "population": self.population, "weapon": self.weapon, "defense": self.defense,
                 "food_speed": self.food_speed, "wood_speed": self.wood_speed,
                 "steel_speed": self.steel_speed, "stone_speed": self.stone_speed,
                 "food": self.food, "wood": self.wood, "steel": self.steel, "stone": self.stone}
@@ -48,7 +49,7 @@ class Country:
     def from_tuple(cls, data):
         """ construct Country with namedtuple """
         return cls(data.id, data.name, data.wonders, data.gold, data.population, data.weapon,
-                   data.food_speed, data.wood_speed, data.steel_speed,
+                   data.defense, data.food_speed, data.wood_speed, data.steel_speed,
                    data.stone_speed, data.food, data.wood, data.steel, data.stone)
 
     def to_list(self):
@@ -115,6 +116,17 @@ class Country:
         if value < 0:
             raise ValueError("weapon must be positive")
         self._weapon = value
+
+    # set the value of Country.defense and avoid it becomes negtive
+    @property
+    def defense(self):
+        return self._defense
+
+    @defense.setter
+    def defense(self, value):
+        if value < 0:
+            raise ValueError("defense must be positive")
+        self._defense = value
 
     # set the value of Country.food_speed and avoid it becomes negtive
     @property
