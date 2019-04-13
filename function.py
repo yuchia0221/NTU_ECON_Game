@@ -38,7 +38,7 @@ def read_file(file_name):
 
 
 def write_country_file():
-     # 抓取google雲端上的試算表
+    # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
