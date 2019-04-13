@@ -6,7 +6,7 @@ from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
                      Varanasi, Maya, Tartarus, Teotihuacan, EasterIsland)
 
 
-def read_file():
+def read_file(file_name):
     """讀取位於Google雲端的試算表，用list回傳資料"""
 
     country_info = namedtuple("country_info",
@@ -17,11 +17,13 @@ def read_file():
 
     creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
     client = gspread.authorize(creds)
-    sheet = client.open("國家資訊表").sheet1
+    sheet = client.open(file_name).sheet1
     data = sheet.get_all_records()
-
+    print(data)
     return [country_info(*i.values()) for i in data]
 
+
+read_file("伊康攻略(回覆)")
 
 def createCountry():
     """透過read_file函數建立Class，回傳儲存各國Class的dictionary"""
