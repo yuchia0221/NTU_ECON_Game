@@ -98,15 +98,16 @@ def card(countryDict, name, cardDict, useCard, soldCard):
     def f():
         print("test")
     """.................卡片函數區............................."""
+
     for card in useCard:
         try:
             if cardDict[card] == "Y":
                 print(f"這張卡片已經使用過了")
             else:
-                locals()[cardDict[card][1]]()
+                locals()[cardDict[card][0]]()
 
-        except KeyError as e:
-            raise e(f"驗證碼:{card}不存在")
+        except KeyError:
+            raise KeyError(f"卡片驗證碼:{card}不存在")
 
     for card in soldCard:
         try:
@@ -115,14 +116,11 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             else:
                 countryDict[name].gold += cardDict[card][2]
 
-        except KeyError as e:
-            raise e(f"驗證碼:{card}不存在")
+        except KeyError:
+            raise KeyError(f"卡片驗證碼:{card}不存在")
 
 
 if __name__ == "__main__":
     a = createCountry()
     print(a)
-    try:
-        card()
-    except Exception as e:
-        pass
+    card(createCountry(), "瑪雅", read_card(), ["22V9EX"], [])
