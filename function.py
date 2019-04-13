@@ -53,6 +53,21 @@ def write_country_file(countryDict):
         sheet.append_row(i.to_list())
 
 
+def write_individual(countryDict, name, roundnow):
+    # 抓取google雲端上的試算表
+    scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
+             "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
+    client = gspread.authorize(creds)
+    sheet = client.open(name).sheet1
+
+    # 更新成現在的國家資訊
+    # sheet.clear()
+    # sheet.append_row(['回合', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '糧食倍率',
+    #                   '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
+    sheet.insert_row(list(roundnow) + countryDict[name].to_list()[1:], 2)
+
+
 def createCountry():
     """透過read_file函數建立Class，回傳儲存各國Class的dictionary"""
 
@@ -279,5 +294,4 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
 if __name__ == "__main__":
     # card(createCountry(), "瑪雅", read_card(), ["22V9EX"], [])
-    a = createCountry()
-    write_country_file(a)
+    pass
