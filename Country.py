@@ -1,13 +1,13 @@
 class Country:
     """
-    This class contains basic country attributes:
-    --> ID, name, asset, gold, population, solider, weapon,
-        food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone
+        This class contains basic country attributes:
+        --> ID, name, asset, gold, population, solider, weapon,
+            food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone
 
-    Don't try to set above attributes be negative, or it will raise error.
+        Don't try to set above attributes be negative, or it will raise error.
     """
 
-    # constructor of Country object
+    # Constructor of Country object
     def __init__(self, ID, name, wonders, gold, population, weapon,
                  food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone):
         self._ID = int(ID)
@@ -26,7 +26,7 @@ class Country:
         self._stone = int(stone)
 
     def __dict__(self):
-        """return all of the variables in dictionary that Country has"""
+        """ Return all of the variables in dictionary that Country has """
         return {"ID": self.ID, "name": self.name, "wonders": self.wonders, "gold": self.gold,
                 "population": self.population, "weapon": self.weapon,
                 "food_speed": self.food_speed, "wood_speed": self.wood_speed,
@@ -41,15 +41,19 @@ class Country:
         return f"{self._name} has {self.food} food & {self.wood} wood & {self.steel} steel & {self.stone} stone"
 
     def __lt__(self, other):
-        """When you try to sort Country object, it will compare their value of asset."""
+        """ When you try to sort Country object, it will compare their value of asset. """
         return self.asset < other.asset
 
     @classmethod
     def from_tuple(cls, data):
-        """construct Country with namedtuple"""
+        """ construct Country with namedtuple """
         return cls(data.id, data.name, data.wonders, data.gold, data.population, data.weapon,
                    data.food_speed, data.wood_speed, data.steel_speed,
                    data.stone_speed, data.food, data.wood, data.steel, data.stone)
+
+    def to_list(self):
+        """ Return all of the information in list """
+        return list(self.__dict__().values())
 
     # set the "ID" and "name" are immutable
     @property
