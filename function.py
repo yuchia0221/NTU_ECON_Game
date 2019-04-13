@@ -67,10 +67,7 @@ def handle_action():
 
 
 def production(countryDict, name, produce_num, warrior):
-    """
-        生產函式
-        生產順序:糧食、木頭、鐵礦、石頭
-    """
+    """ 生產順序:糧食、木頭、鐵礦、石頭 """
 
     if countryDict[name].population - warrior < sum(produce_num) * 100:
         raise ValueError("人民不夠來生產")
