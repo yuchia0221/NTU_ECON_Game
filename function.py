@@ -100,7 +100,7 @@ def read_card():
 
 def card(countryDict, name, cardDict, useCard, soldCard):
     """ 發動卡片效果 """
-    """.................卡片函數區............................."""
+
     def food1():
         countryDict[name].food -= 200
         countryDict[name].wood -= 100
@@ -248,8 +248,6 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].steel_speed += 0.3
         countryDict[name].stone_speed += 0.3
-
-    """.................卡片函數區............................."""
 
     for card in useCard:
         try:
