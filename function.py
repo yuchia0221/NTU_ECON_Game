@@ -35,6 +35,10 @@ def read_file(file_name):
         return [action(*i.values()) for i in data]
 
 
+def write_file(file_name):
+    pass
+
+
 def createCountry():
     """透過read_file函數建立Class，回傳儲存各國Class的dictionary"""
 
