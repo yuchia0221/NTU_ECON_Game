@@ -10,9 +10,9 @@ from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
 
 def read_file(file_name):
     """
-    函式作用:讀取位於Google雲端的試算表
-    如果讀取的檔案為國家資訊表，則回回傳內層為各個國家的class外層為list的物件，
-    如果讀取的檔案為伊康攻略回覆表單，則會回傳內層為各國行動資料的namedtuple，外層為list的物件。
+        函式作用:讀取位於Google雲端的試算表
+        如果讀取的檔案為國家資訊表，則回回傳內層為各個國家的class外層為list的物件，
+        如果讀取的檔案為伊康攻略回覆表單，則會回傳內層為各國行動資料的namedtuple，外層為list的物件。
     """
 
     # 建立namedtuple object
@@ -66,7 +66,12 @@ def handle_action():
     return returnList
 
 
-def production(countryDict, name, produce_num, warrior):  # 順序:糧食、木頭、鐵礦、石頭
+def production(countryDict, name, produce_num, warrior):
+    """
+        生產函式
+        生產順序:糧食、木頭、鐵礦、石頭
+    """
+
     if countryDict[name].population - warrior < sum(produce_num) * 100:
         raise ValueError("人民不夠來生產")
 
