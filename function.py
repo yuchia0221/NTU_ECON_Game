@@ -1,5 +1,5 @@
-import gspread
 import csv
+import gspread
 from collections import namedtuple
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
@@ -11,20 +11,19 @@ def read_file(file_name):
 
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon air food_speed wood_speed steel_speed stone_speed food wood steel stone")
+    action = namedtuple("action", "time name Pfood Pwood Psteel Ptone useCard soldCard Pwonders war solider resource speed")
 
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
-
     creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
     client = gspread.authorize(creds)
     sheet = client.open(file_name).sheet1
     data = sheet.get_all_records()
-    print(data)
 
     if file_name == "國家資訊表":
         return [country_info(*i.values()) for i in data]
     else:
-        return [i for i in data]
+        return [action(*i.values()) for i in data]
 
 
 def createCountry(file_name):
@@ -37,7 +36,7 @@ def createCountry(file_name):
     return {i.name: class_list[i.name](*i) for i in read_file(file_name)}
 
 
-def card(info, password, name):
+def card(countryDict, password, name):
     """發動卡片效果"""
 
     """.................卡片函數區............................."""
@@ -65,7 +64,7 @@ def card(info, password, name):
 
         elif password in soldCard:
             if soldCard[password][0] == "N":
-                info[name].gold += int(soldCard[password][1])
+                countryDict[name].gold += int(soldCard[password][1])
                 soldCard[password][0] == "Y"
             else:
                 print(f"這張卡片已經用過了，驗證碼:{password}")
@@ -73,3 +72,7 @@ def card(info, password, name):
 
         else:
             raise NameError(f"驗證碼無效:{password.upper()}")
+
+
+if __name__ == "__main__":
+    print(read_file("伊康攻略(回覆)"))
