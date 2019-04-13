@@ -92,12 +92,31 @@ def read_card():
 
 
 def card(countryDict, name, cardDict, useCard, soldCard):
-    """發動卡片效果"""
+    """ 發動卡片效果 """
 
     """.................卡片函數區............................."""
     def f():
         print("test")
     """.................卡片函數區............................."""
+    for card in useCard:
+        try:
+            if cardDict[card] == "Y":
+                print(f"這張卡片已經使用過了")
+            else:
+                locals()[cardDict[card][1]]()
+
+        except KeyError as e:
+            raise e(f"驗證碼:{card}不存在")
+
+    for card in soldCard:
+        try:
+            if cardDict[card] == "Y":
+                print(f"這張卡片已經使用過了")
+            else:
+                countryDict[name].gold += cardDict[card][2]
+
+        except KeyError as e:
+            raise e(f"驗證碼:{card}不存在")
 
 
 if __name__ == "__main__":
