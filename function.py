@@ -37,15 +37,20 @@ def read_file(file_name):
         return [i.values() for i in data]
 
 
-def write_country_file():
+def write_country_file(countryDict):
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
     client = gspread.authorize(creds)
     sheet = client.open("國家資訊表").sheet1
-    data = sheet.get_all_records()
-    help(data)
+    sheet.clear()
+
+    # 更新成現在的國家資訊
+    sheet.append_row(['編號', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '糧食倍率',
+                      '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
+    for i in countryDict.values():
+        sheet.append_row(i.to_list())
 
 
 def createCountry():
@@ -273,4 +278,6 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
 
 if __name__ == "__main__":
-    card(createCountry(), "瑪雅", read_card(), ["22V9EX"], [])
+    # card(createCountry(), "瑪雅", read_card(), ["22V9EX"], [])
+    a = createCountry()
+    write_country_file(a)
