@@ -38,7 +38,14 @@ def read_file(file_name):
 
 
 def write_country_file():
-    pass
+     # 抓取google雲端上的試算表
+    scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
+             "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
+    client = gspread.authorize(creds)
+    sheet = client.open("國家資訊表").sheet1
+    data = sheet.get_all_records()
+    help(data)
 
 
 def createCountry():
