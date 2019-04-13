@@ -31,8 +31,10 @@ def read_file(file_name):
     # 根據抓取檔案的不同，回傳不同的物件
     if file_name == "國家資訊表":
         return [country_info(*i.values()) for i in data]
-    else:
+    elif file_name == "伊康攻略(回覆)":
         return [action(*i.values()) for i in data]
+    else:
+        return [i.values() for i in data]
 
 
 def write_country_file():
