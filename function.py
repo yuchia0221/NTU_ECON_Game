@@ -9,12 +9,18 @@ from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
 
 
 def read_file(file_name):
-    """讀取位於Google雲端的試算表，用list回傳資料"""
+    """
+    函式作用:讀取位於Google雲端的試算表
+    如果讀取的檔案為國家資訊表，則回回傳內層為各個國家的class外層為list的物件，
+    如果讀取的檔案為伊康攻略回覆表單，則會回傳內層為各國行動資料的namedtuple，外層為list的物件。
+    """
 
+    # 建立namedtuple object
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon air food_speed wood_speed steel_speed stone_speed food wood steel stone")
     action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
 
+    # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
     creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
@@ -22,6 +28,7 @@ def read_file(file_name):
     sheet = client.open(file_name).sheet1
     data = sheet.get_all_records()
 
+    # 根據抓取檔案的不同，回傳不同的物件
     if file_name == "國家資訊表":
         return [country_info(*i.values()) for i in data]
     else:
@@ -39,6 +46,7 @@ def createCountry():
 
 
 def handle_action():
+    """將各國的行動單做處理，讓接下來資料處理起來比較方便"""
     info = recordclass("info", "name produceList useCard soldCard Pwonders war solider occupyMan resource Rspeed")
 
     returnList = []
