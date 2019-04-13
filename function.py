@@ -84,42 +84,20 @@ def production(countryDict, name, produce_num, warrior):
     return
 
 
-def card(countryDict, password, name):
+def read_card():
+    with open("D:\\大二經濟營\\NTU_ECON_Game\\卡片.csv", "r") as csv_file:
+        csv_reader = csv.reader(csv_file)
+        next(csv_reader)
+        return {i[1]: (i[2], i[3], i[4]) for i in csv_reader}
+
+
+def card(countryDict, name, cardDict, useCard, soldCard):
     """發動卡片效果"""
 
     """.................卡片函數區............................."""
     def f():
         print("test")
     """.................卡片函數區............................."""
-
-    password = password.upper()
-
-    with open("卡片.csv", "r") as csv_file:
-        csv_reader = csv.reader(csv_file)
-        next(csv_reader)
-        useCard, soldCard = dict(), dict()
-        for i in csv_reader:
-            useCard[i[1]] = (i[4], i[3])
-            soldCard[i[2]] = (i[4], i[5])
-
-        if password in useCard:
-            if useCard[password][0] == "N":
-                locals()[useCard[password][1]]()
-                useCard[password][0] == "Y"
-            else:
-                print(f"這張卡片已經用過了，驗證碼:{password}")
-            return
-
-        elif password in soldCard:
-            if soldCard[password][0] == "N":
-                countryDict[name].gold += int(soldCard[password][1])
-                soldCard[password][0] == "Y"
-            else:
-                print(f"這張卡片已經用過了，驗證碼:{password}")
-            return
-
-        else:
-            raise NameError(f"驗證碼無效:{password.upper()}")
 
 
 if __name__ == "__main__":
