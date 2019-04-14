@@ -18,8 +18,8 @@ if __name__ == "__main__":
                 '瓦拉納西': False, '瑪雅': False, '塔爾塔洛斯': False, '特奧蒂瓦坎': False, '復活節島': False}
     for i in actionList:
         if i.war[0] != "不戰爭":
-            for j in range(len(war)):
-                war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated[i.name])
+            for j in range(len(i.war)):
+                war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated)
         else:
             continue
 
