@@ -54,6 +54,11 @@ def write_country_file(countryDict):
 
 
 def write_individual(countryDict, name, roundnow):
+    def clear_sheet(sheet):
+        sheet.clear()
+        sheet.append_row(['回合', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '防禦力', '糧食倍率',
+                          '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
+
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
              "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
@@ -62,9 +67,7 @@ def write_individual(countryDict, name, roundnow):
     sheet = client.open(name).sheet1
 
     # 更新成現在的國家資訊
-    sheet.clear()
-    sheet.append_row(['回合', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '防禦力', '糧食倍率',
-                      '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
+    clear_sheet(sheet)
     sheet.insert_row(list(roundnow) + countryDict[name].to_list()[1:], 2)
 
 
@@ -299,53 +302,55 @@ def war(countryDict, Acounrty, Bcountry, soilder, resource, speed, defeated):
     if diff >= 0 and not defeated:
         countryDict[Acounrty].population -= soilder * 0.3
         countryDict[Bcountry].population *= 0.9
+        defeated[Acounrty] = True
         if resource == "糧食":
             countryDict[Acounrty].food += countryDict[Bcountry].food * (0.5 + rubrate * diff)
-            countryDict[Bcounrty].food -= countryDict[Bcountry].food * (0.5 + rubrate * diff)
+            countryDict[Bcountry].food -= countryDict[Bcountry].food * (0.5 + rubrate * diff)
         elif resource == "木頭":
             countryDict[Acounrty].wood += countryDict[Bcountry].wood * (0.5 + rubrate * diff)
-            countryDict[Bcounrty].wood -= countryDict[Bcountry].wood * (0.5 + rubrate * diff)
+            countryDict[Bcountry].wood -= countryDict[Bcountry].wood * (0.5 + rubrate * diff)
         elif resource == "鐵礦":
             countryDict[Acounrty].steel += countryDict[Bcountry].steel * (0.5 + rubrate * diff)
-            countryDict[Bcounrty].steel -= countryDict[Bcountry].steel * (0.5 + rubrate * diff)
+            countryDict[Bcountry].steel -= countryDict[Bcountry].steel * (0.5 + rubrate * diff)
         elif resource == "石頭":
             countryDict[Acounrty].stone += countryDict[Bcountry].stone * (0.5 + rubrate * diff)
-            countryDict[Bcounrty].stone -= countryDict[Bcountry].stone * (0.5 + rubrate * diff)
+            countryDict[Bcountry].stone -= countryDict[Bcountry].stone * (0.5 + rubrate * diff)
 
         if speed == "糧食":
             countryDict[Acounrty].food.speed += 0.2
-            countryDict[Bcounrty].food.speed -= 0.2
+            countryDict[Bcountry].food.speed -= 0.2
         elif speed == "木頭":
             countryDict[Acounrty].wood.speed += 0.2
-            countryDict[Bcounrty].wood.speed -= 0.2
+            countryDict[Bcountry].wood.speed -= 0.2
         elif speed == "鐵礦":
             countryDict[Acounrty].steel.speed += 0.2
-            countryDict[Bcounrty].steel.speed -= 0.2
+            countryDict[Bcountry].steel.speed -= 0.2
         elif speed == "石頭":
             countryDict[Acounrty].stone.speed += 0.2
-            countryDict[Bcounrty].stone.speed -= 0.2
+            countryDict[Bcountry].stone.speed -= 0.2
 
     elif diff >= 0 and defeated:
         countryDict[Acounrty].population -= soilder * 0.1
         if resource == "糧食":
             countryDict[Acounrty].food += 0.5 * countryDict[Bcountry].food * (0.5 + rubrate * diff)
-            countryDict[Bcounrty].food -= 0.5 * countryDict[Bcountry].food * (0.5 + rubrate * diff)
+            countryDict[Bcountry].food -= 0.5 * countryDict[Bcountry].food * (0.5 + rubrate * diff)
         elif resource == "木頭":
             countryDict[Acounrty].wood += 0.5 * countryDict[Bcountry].wood * (0.5 + rubrate * diff)
-            countryDict[Bcounrty].wood -= 0.5 * countryDict[Bcountry].wood * (0.5 + rubrate * diff)
+            countryDict[Bcountry].wood -= 0.5 * countryDict[Bcountry].wood * (0.5 + rubrate * diff)
         elif resource == "鐵礦":
             countryDict[Acounrty].steel += 0.5 * countryDict[Bcountry].steel * (0.5 + rubrate * diff)
-            countryDict[Bcounrty].steel -= 0.5 * countryDict[Bcountry].steel * (0.5 + rubrate * diff)
+            countryDict[Bcountry].steel -= 0.5 * countryDict[Bcountry].steel * (0.5 + rubrate * diff)
         elif resource == "石頭":
             countryDict[Acounrty].stone += 0.5 * countryDict[Bcountry].stone * (0.5 + rubrate * diff)
-            countryDict[Bcounrty].stone -= 0.5 * countryDict[Bcountry].stone * (0.5 + rubrate * diff)
+            countryDict[Bcountry].stone -= 0.5 * countryDict[Bcountry].stone * (0.5 + rubrate * diff)
 
     elif diff < 0:
         countryDict[Acounrty].population -= soilder * 0.4
 
 
+def wonder(countryDict, name, percentWonders):
+    pass
+
+
 if __name__ == "__main__":
-    a = createCountry()
-    # print(handle_action())
-    # for i in ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉', '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']:
-    #     write_individual(a, i, "一")
+    pass
