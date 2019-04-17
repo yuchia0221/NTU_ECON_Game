@@ -37,6 +37,16 @@ def read_file(file_name):
         return [i.values() for i in data]
 
 
+def initialize():
+    # 建立namedtuple object
+    country_info = namedtuple("country_info",
+                              "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
+    with open("國家資訊表.csv", "r") as csv_file:
+        csv_reader = csv.reader(csv_file)
+        next(csv_reader)
+        return [country_info(*i) for i in csv_reader]
+
+
 def write_country_file(countryDict):
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -405,5 +415,4 @@ def wonder(countryDict, name, percentWonders):
 
 
 if __name__ == "__main__":
-    # print(read_file("卡片"))
-    print(read_card())
+    initialize()
