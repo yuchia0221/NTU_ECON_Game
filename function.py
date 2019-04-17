@@ -41,7 +41,7 @@ def initialize():
     # 建立namedtuple object
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
-    with open("國家資訊表.csv", "r") as csv_file:
+    with open("初始國家資訊.csv", "r") as csv_file:
         csv_reader = csv.reader(csv_file)
         next(csv_reader)
         return [country_info(*i) for i in csv_reader]
