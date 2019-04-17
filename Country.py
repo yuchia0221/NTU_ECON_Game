@@ -80,8 +80,8 @@ class Country:
 
     @wonders.setter
     def wonders(self, value):
-        if not str(value).isdigit():
-            raise ValueError("wonders must be positive")
+        if isinstance(value, int):
+            raise TypeError("wonders must be int")
         self._wonders = value
 
     # set the value of Country.gold and avoid it becomes negtive

@@ -18,7 +18,7 @@ def read_file(file_name):
     # 建立namedtuple object
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
-    action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
+    action = namedtuple("action", "name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
 
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -391,4 +391,5 @@ def wonder(countryDict, name, percentWonders):
 
 
 if __name__ == "__main__":
-    pass
+    # print(read_file("卡片"))
+    print(read_card())
