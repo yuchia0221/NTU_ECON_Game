@@ -275,6 +275,20 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].steel_speed += 0.3
         countryDict[name].stone_speed += 0.3
 
+    def defense1():
+        countryDict[name].wood -= 500
+        countryDict[name].steel -= 500
+        countryDict[name].gold -= 500
+
+        countryDict[name].defense += 200
+
+    def defense2():
+        countryDict[name].wood -= 1500
+        countryDict[name].steel -= 1500
+        countryDict[name].gold -= 1500
+
+        countryDict[name].defense += 500
+
     for card in useCard:
         try:
             if cardDict[card][1] == "Y":
