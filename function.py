@@ -34,7 +34,7 @@ def read_file(file_name):
     elif file_name == "伊康攻略(回覆)":
         return [action(*i.values()) for i in data]
     else:
-        return [i.values() for i in data]
+        return [list(i.values()) for i in data]
 
 
 def write_country_file(countryDict):
@@ -67,7 +67,7 @@ def write_individual(countryDict, name, roundnow):
     sheet = client.open(name).sheet1
 
     # 更新成現在的國家資訊
-    clear_sheet(sheet)
+    # clear_sheet(sheet)
     sheet.insert_row(list(roundnow) + countryDict[name].to_list()[1:], 2)
 
 
@@ -400,18 +400,63 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
         countryDict[attackingCountry].population -= soilder * 0.4
 
 
-def wonder(countryDict, name, percentWonders, totalWonders):
-    # 收集表單上的建造進度
+def buildwonder(countryDict, name, percentWonders, state, Update):
 
-    # 總和每個國家的建造進度
-    # 如果原本的建造進度 + 總和建造進度超過門檻
-        # 計算權重
-        # 依權重分配建造進度到門檻
-        # 使國家獲得世界奇觀效果
+    if state == 0:
+        countryDict[name].wood -= 300 * percentWonders
+        countryDict[name].stone -= 200 * percentWonders
+        countryDict[name].gold -= 500 * percentWonders
+        if Update:
+            countryDict[name].weapon += 2
+            countryDict[name].defense += 200
 
-    # 否則，依建造比例投入資源
-    pass
+    elif state == 1:
+        countryDict[name].wood -= 800 * percentWonders
+        countryDict[name].stone -= 400 * percentWonders
+        countryDict[name].gold -= 1500 * percentWonders
+        if Update:
+            countryDict[name].food_speed += 2
+            countryDict[name].wood_speed += 2
+            countryDict[name].steel_speed += 2
+            countryDict[name].stone_speed += 2
+            countryDict[name].population += 400
+
+    elif state == 2:
+        countryDict[name].wood -= 1500 * percentWonders
+        countryDict[name].stone -= 800 * percentWonders
+        countryDict[name].gold -= 3000 * percentWonders
+        if Update:
+            countryDict[name].weapon += 4
+            countryDict[name].defense += 1000
+            countryDict[name].food_speed += 1
+            countryDict[name].wood_speed += 1
+            countryDict[name].steel_speed += 1
+            countryDict[name].stone_speed += 1
+            countryDict[name].population += 200
+
+    elif state == 3:
+        countryDict[name].wood -= 3000 * percentWonders
+        countryDict[name].stone -= 1500 * percentWonders
+        countryDict[name].gold -= 6000 * percentWonders
+        if Update:
+            createCountry[name].population += 3000
+
+
+def wonder(countryDict, wonderlist, actionlist):  # 這邊把actionlist傳進去的寫法很糟，但目前我沒想到好辦法
+    totalstate = {}
+    currstate = {}
+    totalwonder = {}
+    currwonder = {}
+    wonderdict = {}
+    for i in actionlist:
+        wonderdict[i.name] = i.Pwonders
+
+    for i in wonderlist:
+        temp = list(i)
+        for j in temp[1].split():
+            currstate[j] = temp[3]
+            currwonder
 
 
 if __name__ == "__main__":
-    print(read_file("世界奇觀"))
+    pass

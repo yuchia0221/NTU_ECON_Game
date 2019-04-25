@@ -7,6 +7,7 @@ if __name__ == "__main__":
     countryDict = createCountry()
     actionList = handle_action()
     cardDict = read_card()
+    wonderlist = read_file("世界奇觀")
 
     for i in actionList:
         production(countryDict, i.name, i.produceList, i.occupyMan)
@@ -24,17 +25,7 @@ if __name__ == "__main__":
         else:
             continue
 
-    wonderlist = read_file("世界奇觀")
-    for i in wonderlist:
-        temp = list(i)
-        countrylist = i[1].split()
-        totalwonders = 0
-        for j in countrylist:
-            totalwonders += countryDict[j].wonder
-
-        wonder()
-
-    roundnow = "一"
+    roundnow = input()
     write_country_file(countryDict)
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
                    '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
