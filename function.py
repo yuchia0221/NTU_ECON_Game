@@ -400,9 +400,18 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
         countryDict[attackingCountry].population -= soilder * 0.4
 
 
-def wonder(countryDict, name, percentWonders):
+def wonder(countryDict, name, percentWonders, totalWonders):
+    # 收集表單上的建造進度
+
+    # 總和每個國家的建造進度
+    # 如果原本的建造進度 + 總和建造進度超過門檻
+        # 計算權重
+        # 依權重分配建造進度到門檻
+        # 使國家獲得世界奇觀效果
+
+    # 否則，依建造比例投入資源
     pass
 
 
 if __name__ == "__main__":
-    pass
+    print(read_file("世界奇觀"))
