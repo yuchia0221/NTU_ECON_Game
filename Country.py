@@ -80,8 +80,9 @@ class Country:
 
     @wonders.setter
     def wonders(self, value):
-        if not isinstance(value, int):
-            raise TypeError("wonders must be int")
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的世界奇觀應該是正整數而不是{value}")
+            raise TypeError("wonders must be positive integer")
         self._wonders = value
 
     # set the value of Country.gold and avoid it becomes negtive
@@ -91,8 +92,9 @@ class Country:
 
     @gold.setter
     def gold(self, value):
-        if value < 0:
-            raise ValueError("gold must be positive")
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的黃金應該是正整數而不是{value}")
+            raise ValueError("gold must be positive integer")
         self._gold = value
 
     # set the value of Country.population and avoid it becomes negtive
@@ -102,8 +104,9 @@ class Country:
 
     @population.setter
     def population(self, value):
-        if value < 0:
-            raise ValueError("population must be positive")
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的黃金應該是正整數而不是{value}")
+            raise ValueError("population must be positive integer")
         self._population = value
 
     # set the value of Country.weapon and avoid it becomes negtive
@@ -114,6 +117,7 @@ class Country:
     @weapon.setter
     def weapon(self, value):
         if value < 0:
+            print(f"{self.name}的武器倍率應該大於0而不是{value}")
             raise ValueError("weapon must be positive")
         self._weapon = value
 
@@ -124,7 +128,8 @@ class Country:
 
     @defense.setter
     def defense(self, value):
-        if value < 0:
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的防禦力應該是正整數而不是{value}")
             raise ValueError("defense must be positive")
         self._defense = value
 
@@ -136,6 +141,7 @@ class Country:
     @food_speed.setter
     def food_speed(self, value):
         if value < 0:
+            print(f"{self.name}的糧食生產速度應該是正數而不是{value}")
             raise ValueError("food_speed must be positive")
         self._food_speed = value
 
@@ -147,6 +153,7 @@ class Country:
     @wood_speed.setter
     def wood_speed(self, value):
         if value < 0:
+            print(f"{self.name}的木頭生產速度應該是正數而不是{value}")
             raise ValueError("wood_speed must be positive")
         self._wood_speed = value
 
@@ -158,6 +165,7 @@ class Country:
     @steel_speed.setter
     def steel_speed(self, value):
         if value < 0:
+            print(f"{self.name}的鐵礦生產速度應該是正數而不是{value}")
             raise ValueError("steel_speed must be positive")
         self._steel_speed = value
 
@@ -169,6 +177,7 @@ class Country:
     @stone_speed.setter
     def stone_speed(self, value):
         if value < 0:
+            print(f"{self.name}的石頭生產速度應該是正數而不是{value}")
             raise ValueError("stone_speed must be positive")
         self._stone_speed = value
 
@@ -179,7 +188,8 @@ class Country:
 
     @food.setter
     def food(self, value):
-        if value < 0:
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的糧食應該是正整數而不是{value}")
             raise ValueError("food must be positive")
         self._food = value
 
@@ -190,7 +200,8 @@ class Country:
 
     @wood.setter
     def wood(self, value):
-        if value < 0:
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的木頭應該是正整數而不是{value}")
             raise ValueError("wood must be positive")
         self._wood = value
 
@@ -201,7 +212,8 @@ class Country:
 
     @steel.setter
     def steel(self, value):
-        if value < 0:
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的鐵礦應該是正整數而不是{value}")
             raise ValueError("steel must be positive")
         self._steel = value
 
@@ -212,7 +224,8 @@ class Country:
 
     @stone.setter
     def stone(self, value):
-        if value < 0:
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的石頭應該是正整數而不是{value}")
             raise ValueError("stone must be positive")
         self._stone = value
 
