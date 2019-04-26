@@ -388,7 +388,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
             countryDict[attackingCountry].stone_speed += 0.2
             countryDict[attackedCountry].stone_speed -= 0.2
 
-    elif diff >= 0 and defeated:
+    elif diff >= 0 and defeated[attackedCountry]:
         countryDict[attackingCountry].population -= soilder * 0.1
         countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5
         countryDict[attackedCountry].gold *= 0.5

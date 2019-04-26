@@ -15,15 +15,19 @@ if __name__ == "__main__":
     trade_info = [list(i) for i in read_file("系統貿易(回應)")]
     countryDict = createCountry()
 
+    print(trade_info)
     # 定價
     price_list = []
     for i in range(4):
         for j in trade_info:
             demand = 0
             supply = 0
-            demand += j[6 + i]
-            supply += j[2 + i]
-            price_list.append(trade_function(demand, supply))
+            try:
+                demand += j[6 + i]
+                supply += j[2 + i]
+                price_list.append(trade_function(demand, supply))
+            except TypeError as e:
+                pass
 
     # 買賣
     for i in trade_info:
