@@ -1,5 +1,5 @@
-from function import createCountry, read_file
-from math import atan, pi, pow
+from function import createCountry, read_file, write_country_file
+from math import atan, pi
 
 
 def trade_function(d, s):
@@ -14,6 +14,7 @@ def trade_function(d, s):
 if __name__ == "__main__":
     trade_info = [list(i) for i in read_file("系統貿易(回應)")]
     countryDict = createCountry()
+
     # 定價
     price_list = []
     for i in range(4):
@@ -39,3 +40,5 @@ if __name__ == "__main__":
         countryDict[i[1]].wood += int(price_list[1] * i[7])
         countryDict[i[1]].stone += int(price_list[2] * i[8])
         countryDict[i[1]].steel += int(price_list[3] * i[9])
+
+    write_country_file(countryDict)

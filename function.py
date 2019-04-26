@@ -495,7 +495,7 @@ def wonder(countryDict, wonderlist, actionlist):  # 這邊把actionlist傳進去
 
         if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 > 25:
             Update[Wname] = True
-            weight = (25 - (currwonder[Wname] % 25)) / (totalwonder[Wname] - currwonder[Wname])
+            weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]
             for name in temp[1].split():
                 wonderdict[name] = round(wonderdict[name] * weight, 0)
 

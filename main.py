@@ -1,4 +1,4 @@
-from function import (read_file, write_country_file, write_individual, createCountry,
+from function import (read_file, write_country_file, createCountry,
                       handle_action, production, read_card, card, war, wonder, write_wonders)
 
 if __name__ == "__main__":
@@ -31,7 +31,3 @@ if __name__ == "__main__":
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
                    '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
     write_wonders(countryDict)
-
-    # for i in countryName:
-    #     sleep(1)
-    #     write_individual(countryDict, i, roundnow)
