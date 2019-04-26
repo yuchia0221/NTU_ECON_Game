@@ -80,7 +80,7 @@ class Country:
 
     @wonders.setter
     def wonders(self, value):
-        if isinstance(value, int):
+        if not isinstance(value, int):
             raise TypeError("wonders must be int")
         self._wonders = value
 

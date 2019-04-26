@@ -2,7 +2,6 @@ import csv
 import gspread
 from math import sqrt
 from collections import namedtuple
-from recordclass import recordclass
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
                      Varanasi, Maya, Tartarus, Teotihuacan, EasterIsland)
@@ -18,7 +17,7 @@ def read_file(file_name):
     # 建立namedtuple object
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
-    action = namedtuple("action", "name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
+    action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
 
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -67,8 +66,35 @@ def write_individual(countryDict, name, roundnow):
     sheet = client.open(name).sheet1
 
     # 更新成現在的國家資訊
-    # clear_sheet(sheet)
+    clear_sheet(sheet)
     sheet.insert_row(list(roundnow) + countryDict[name].to_list()[1:], 2)
+
+
+def write_wonders(countryDict):
+    # 抓取google雲端上的試算表
+    scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
+             "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
+    creds = ServiceAccountCredentials.from_json_keyfile_name("google.json", scope)
+    client = gspread.authorize(creds)
+    sheet = client.open("世界奇觀").sheet1
+
+    row = 2
+    appendList = [i.wonders for i in countryDict.values()]
+    for i, j in zip(appendList[::2], appendList[1::2]):
+        sheet.update_cell(row, 3, i + j)
+        sheet.update_cell(row, 5, i)
+        sheet.update_cell(row, 6, j)
+        if i + j < 25:
+            sheet.update_cell(row, 4, 0)
+        elif i + j < 50:
+            sheet.update_cell(row, 4, 1)
+        elif i + j < 75:
+            sheet.update_cell(row, 4, 2)
+        elif i + j < 100:
+            sheet.update_cell(row, 4, 3)
+        elif i + j == 100:
+            sheet.update_cell(row, 4, 4)
+        row += 1
 
 
 def createCountry():
@@ -83,7 +109,7 @@ def createCountry():
 
 def handle_action():
     """將各國的行動單做處理，讓接下來資料處理起來比較方便"""
-    info = recordclass("info", "name produceList useCard soldCard Pwonders war solider occupyMan resource Rspeed")
+    info = namedtuple("info", "name produceList useCard soldCard Pwonders war solider occupyMan resource Rspeed")
 
     returnList = []
     for i in read_file("伊康攻略(回覆)"):
@@ -441,36 +467,40 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
         if Update:
             createCountry[name].population += 3000
 
+    elif state == 4:
+        return
+
+    countryDict[name].wonders += int(percentWonders)
+
 
 def wonder(countryDict, wonderlist, actionlist):  # 這邊把actionlist傳進去的寫法很糟，但目前我沒想到好辦法
     currstate = {}      # [奇觀名字] : 現在階段
     totalwonder = {}    # [奇觀名字] : 準備要建造多少比例
     currwonder = {}     # [奇觀名字] : 現在有多少比例
-    wonderdict = {}     # [國家名字] : 每國準備貢獻多少比例
+    wonderdict = {i.name: i.Pwonders for i in actionlist}     # [國家名字] : 每國準備貢獻多少比例
     Update = {}
-    for i in actionlist:
-        wonderdict[i.name] = i.Pwonders
 
     for i in wonderlist:
         temp = list(i)
-        currstate[temp[0]] = temp[3]
-        currwonder[temp[0]] = temp[2]
-        Update[temp[0]] = False
-        for j in temp[1].split():
-            revisePwonder(countryDict, j, currstate[0], wonderdict)
-            if temp[0] in totalwonder:
-                totalwonder[temp[0]] += wonderdict[j]
+        Wname = temp[0]
+        currstate[Wname] = int(temp[3])
+        currwonder[Wname] = temp[2]
+        Update[Wname] = False
+        for name in temp[1].split():
+            revisePwonder(countryDict, name, currstate[Wname], wonderdict)
+            if Wname in totalwonder:
+                totalwonder[Wname] += wonderdict[name]
             else:
-                totalwonder[temp[0]] = wonderdict[j]
+                totalwonder[Wname] = wonderdict[name]
 
-        if currwonder[temp[0]] + totalwonder[temp[0]] - currstate[temp[0]] * 25 > 25:
-            Update[temp[0]] = True
-            weight = (25 - (currwonder % 25)) / (totalwonder[temp[0]] - currwonder[temp[0]])
-            for j in temp[1].split():
-                wonderdict[j] = round(wonderdict[j] * weight, 0)
+        if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 > 25:
+            Update[Wname] = True
+            weight = (25 - (currwonder[Wname] % 25)) / (totalwonder[Wname] - currwonder[Wname])
+            for name in temp[1].split():
+                wonderdict[name] = round(wonderdict[name] * weight, 0)
 
-        for j in temp[1].split():
-            buildwonder(countryDict, j, wonderdict[j], temp[3], Update[temp[0]])
+        for name in temp[1].split():
+            buildwonder(countryDict, name, wonderdict[name], temp[3], Update[Wname])
 
 
 def revisePwonder(countryDict, name, state, wonderdict):
@@ -481,14 +511,14 @@ def revisePwonder(countryDict, name, state, wonderdict):
         material.append(countryDict[name].gold / 500)
 
         if min(material) < wonderdict[name]:
-            wonderdict[name] = min(material)
+            wonderdict[name] = int(min(material))
     elif state == 1:
         material.append(countryDict[name].wood / 800)
         material.append(countryDict[name].stone / 400)
         material.append(countryDict[name].gold / 1500)
 
         if min(material) < wonderdict[name]:
-            wonderdict[name] = min(material)
+            wonderdict[name] = int(min(material))
 
     elif state == 2:
         material.append(countryDict[name].wood / 1500)
@@ -496,7 +526,7 @@ def revisePwonder(countryDict, name, state, wonderdict):
         material.append(countryDict[name].gold / 3000)
 
         if min(material) < wonderdict[name]:
-            wonderdict[name] = min(material)
+            wonderdict[name] = int(min(material))
 
     elif state == 3:
         material.append(countryDict[name].wood / 3000)
@@ -504,7 +534,7 @@ def revisePwonder(countryDict, name, state, wonderdict):
         material.append(countryDict[name].gold / 6000)
 
         if min(material) < wonderdict[name]:
-            wonderdict[name] = min(material)
+            wonderdict[name] = int(min(material))
 
 
 if __name__ == "__main__":
