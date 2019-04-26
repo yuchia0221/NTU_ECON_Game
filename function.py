@@ -443,19 +443,68 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
 
 
 def wonder(countryDict, wonderlist, actionlist):  # 這邊把actionlist傳進去的寫法很糟，但目前我沒想到好辦法
-    totalstate = {}
-    currstate = {}
-    totalwonder = {}
-    currwonder = {}
-    wonderdict = {}
+    currstate = {}      # [奇觀名字] : 現在階段
+    totalwonder = {}    # [奇觀名字] : 準備要建造多少比例
+    currwonder = {}     # [奇觀名字] : 現在有多少比例
+    wonderdict = {}     # [國家名字] : 每國準備貢獻多少比例
+    Update = {}
     for i in actionlist:
         wonderdict[i.name] = i.Pwonders
 
     for i in wonderlist:
         temp = list(i)
+        currstate[temp[0]] = temp[3]
+        currwonder[temp[0]] = temp[2]
+        Update[temp[0]] = False
         for j in temp[1].split():
-            currstate[j] = temp[3]
-            currwonder
+            revisePwonder(countryDict, j, currstate[0], wonderdict)
+            if temp[0] in totalwonder:
+                totalwonder[temp[0]] += wonderdict[j]
+            else:
+                totalwonder[temp[0]] = wonderdict[j]
+
+        if currwonder[temp[0]] + totalwonder[temp[0]] - currstate[temp[0]] * 25 > 25:
+            Update[temp[0]] = True
+            weight = (25 - (currwonder % 25)) / (totalwonder[temp[0]] - currwonder[temp[0]])
+            for j in temp[1].split():
+                wonderdict[j] = round(wonderdict[j] * weight, 0)
+
+        for j in temp[1].split():
+            buildwonder(countryDict, j, wonderdict[j], temp[3], Update[temp[0]])
+
+
+def revisePwonder(countryDict, name, state, wonderdict):
+    material = []
+    if state == 0:
+        material.append(countryDict[name].wood / 300)
+        material.append(countryDict[name].stone / 200)
+        material.append(countryDict[name].gold / 500)
+
+        if min(material) < wonderdict[name]:
+            wonderdict[name] = min(material)
+    elif state == 1:
+        material.append(countryDict[name].wood / 800)
+        material.append(countryDict[name].stone / 400)
+        material.append(countryDict[name].gold / 1500)
+
+        if min(material) < wonderdict[name]:
+            wonderdict[name] = min(material)
+
+    elif state == 2:
+        material.append(countryDict[name].wood / 1500)
+        material.append(countryDict[name].stone / 800)
+        material.append(countryDict[name].gold / 3000)
+
+        if min(material) < wonderdict[name]:
+            wonderdict[name] = min(material)
+
+    elif state == 3:
+        material.append(countryDict[name].wood / 3000)
+        material.append(countryDict[name].stone / 1500)
+        material.append(countryDict[name].gold / 6000)
+
+        if min(material) < wonderdict[name]:
+            wonderdict[name] = min(material)
 
 
 if __name__ == "__main__":

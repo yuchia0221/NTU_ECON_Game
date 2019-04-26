@@ -25,6 +25,8 @@ if __name__ == "__main__":
         else:
             continue
 
+    wonder(countryDict, wonderlist, actionlist)
+
     roundnow = input()
     write_country_file(countryDict)
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
