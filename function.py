@@ -66,8 +66,9 @@ def write_individual(countryDict, name, roundnow):
     sheet = client.open(name).sheet1
 
     # 更新成現在的國家資訊
-    clear_sheet(sheet)
-    sheet.insert_row(list(roundnow) + countryDict[name].to_list()[1:], 2)
+    # clear_sheet(sheet)
+    tempt = list(roundnow) + countryDict[name].to_list()[1:]
+    sheet.insert_row(tempt, 2)
 
 
 def write_wonders(countryDict):
@@ -78,6 +79,7 @@ def write_wonders(countryDict):
     client = gspread.authorize(creds)
     sheet = client.open("世界奇觀").sheet1
 
+    # 更新世界奇觀位置
     row = 2
     appendList = [i.wonders for i in countryDict.values()]
     for i, j in zip(appendList[::2], appendList[1::2]):
@@ -135,7 +137,7 @@ def production(countryDict, name, produce_num, warrior):
         return int(round(pow(times, (2 / 3)) * speed, 1)) * 500
 
     if countryDict[name].population - warrior < sum(produce_num) * 100:
-        times = int((countryDict[name].population - warrior) / 100)
+        times = (countryDict[name].population - warrior) // 100
         for i in range(4):
             if times >= produce_num[i]:
                 times -= produce_num[i]
