@@ -136,8 +136,8 @@ def production(countryDict, name, produce_num, warrior):
     def production_f(times, speed):
         return int(round(pow(times, (2 / 3)) * speed * 500), 1)
 
-    if countryDict[name].population - warrior < sum(produce_num) * 100:
-        times = (countryDict[name].population - warrior) // 100
+    if countryDict[name].population - warrior < sum(produce_num) * 100:     # 人民不足生產
+        times = (countryDict[name].population - warrior) // 100             # 計算本回合共能生產幾次
         for i in range(4):
             if times >= produce_num[i]:
                 times -= produce_num[i]
