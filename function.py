@@ -136,7 +136,7 @@ def production(countryDict, name, produce_num, warrior):
         return int(round(pow(times, (2 / 3)) * speed * 500), 1)
 
     if countryDict[name].population - warrior < sum(produce_num) * 100:
-        times = int((countryDict[name].population - warrior) / 100)
+        times = (countryDict[name].population - warrior) // 100
         for i in range(4):
             if times >= produce_num[i]:
                 times -= produce_num[i]
