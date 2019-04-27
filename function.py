@@ -134,7 +134,12 @@ def handle_action():
 def production(countryDict, name, produce_num, warrior):
     """ 生產順序:糧食、木頭、鐵礦、石頭 """
     def production_f(times, speed):
-        return int(round(pow(times, (2 / 3)) * speed * 500), 1)
+        sum = 0
+        temp = 500
+        for i in range(times):
+            sum += temp
+            temp -= 25 * times
+        return sum * speed // 100
 
     if countryDict[name].population - warrior < sum(produce_num) * 100:     # 人民不足生產
         times = (countryDict[name].population - warrior) // 100             # 計算本回合共能生產幾次
