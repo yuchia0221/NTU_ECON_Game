@@ -477,9 +477,13 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
 
 def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated):
-    if attackedCountry == attackedCountry:
-        print(f"{attackedCountry} can't attack herself")
+    if attackingCountry == attackedCountry:
+        print(f"{attackingCountry} can't attack itself")
         return
+    elif countryDict[attackingCountry].population < soilder:
+        print(f"{attackingCountry}的士兵比人口還多")
+        return
+
     rubrate = 0.001
     diff = countryDict[attackingCountry].weapon * soilder - countryDict[attackedCountry].defense
     if diff >= 0 and not defeated[attackedCountry]:
