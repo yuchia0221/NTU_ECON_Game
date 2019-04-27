@@ -36,7 +36,7 @@ if __name__ == "__main__":
         else:
             continue
 
-    # wonder(countryDict, wonderlist, actionList)
+    wonder(countryDict, wonderlist, actionList)
 
     after = time()
     print(f"基本函數完成，共花費{after - before:.1f}s")
