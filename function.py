@@ -265,32 +265,6 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].stone_speed += 0.4
         print(f"{name} has successfully invest stone2")
 
-    def weapon1():
-        try:
-            countryDict[name].wood -= 300
-            countryDict[name].steel -= 500
-            countryDict[name].stone -= 300
-            countryDict[name].gold -= 300
-        except ValueError as e:
-            print(f"{name} dosen't have enough resource to invest weapon1")
-            return
-
-        countryDict[name].weapon += 0.2
-        print(f"{name} has successfully invest weapon1")
-
-    def weapon2():
-        try:
-            countryDict[name].wood -= 800
-            countryDict[name].steel -= 1500
-            countryDict[name].stone -= 800
-            countryDict[name].gold -= 1500
-        except ValueError as e:
-            print(f"{name} dosen't have enough resource to invest weapon2")
-            return
-
-        countryDict[name].weapon += 0.4
-        print(f"{name} has successfully invest weapon2")
-
     def food_wood():
         try:
             countryDict[name].food -= 900
@@ -404,6 +378,66 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].defense += 500
         print(f"{name} has successfully invest defense2")
+
+    def weapon1():
+        try:
+            countryDict[name].wood -= 300
+            countryDict[name].steel -= 500
+            countryDict[name].stone -= 300
+            countryDict[name].gold -= 300
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest weapon1")
+            return
+
+        countryDict[name].weapon += 0.3
+        print(f"{name} has successfully invest weapon1")
+
+    def weapon2():
+        try:
+            countryDict[name].wood -= 800
+            countryDict[name].steel -= 1500
+            countryDict[name].stone -= 800
+            countryDict[name].gold -= 1500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest weapon2")
+            return
+
+        countryDict[name].weapon += 0.5
+        print(f"{name} has successfully invest weapon2")
+
+    def all1():
+        try:
+            countryDict[name].food -= 3000
+            countryDict[name].wood -= 1000
+            countryDict[name].steel -= 1000
+            countryDict[name].stone -= 1000
+            countryDict[name].gold -= 2500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest all1")
+            return
+
+        countryDict[name].food += 0.3
+        countryDict[name].wood += 0.3
+        countryDict[name].steel += 0.3
+        countryDict[name].stone += 0.3
+        print(f"{name} has successfully invest all1")
+
+    def all2():
+        try:
+            countryDict[name].food -= 3000
+            countryDict[name].wood -= 1000
+            countryDict[name].steel -= 1000
+            countryDict[name].stone -= 1000
+            countryDict[name].gold -= 2500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest all2")
+            return
+
+        countryDict[name].food += 0.2
+        countryDict[name].wood += 0.2
+        countryDict[name].steel += 0.2
+        countryDict[name].stone += 0.2
+        print(f"{name} has successfully invest all2")
 
     for card in useCard:
         try:
