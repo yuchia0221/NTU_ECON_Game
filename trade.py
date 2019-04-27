@@ -16,33 +16,62 @@ if __name__ == "__main__":
     countryDict = createCountry()
 
     print(trade_info)
+    for i in countryDict.values():
+        print(i.to_list())
     # 定價
-    price_list = []
-    for i in range(4):
-        for j in trade_info:
-            demand = 0
-            supply = 0
-            try:
-                demand += j[6 + i]
-                supply += j[2 + i]
-                price_list.append(trade_function(demand, supply))
-            except TypeError as e:
-                pass
+    price_list = []                 # [糧食, 木頭, 鐵礦, 石頭]
+    demand = [0, 0, 0, 0]           # 物資的總需求，總供給 [糧食, 木頭, 鐵礦, 石頭]
+    supply = [0, 0, 0, 0]
+    for j in trade_info:        # [時間, 國家名, 賣糧, 賣木, 賣鐵, 賣石, 買糧, 買木, 買鐵, 買石]
+        if countryDict[j[1]].food < j[2]:
+            j[2] = countryDict[j[1]].food
+            print(f"{j[1]} doesn't have enough resources of food")
+        elif countryDict[j[1]].wood < j[3]:
+            j[3] = countryDict[j[1]].wood
+            print(f"{j[1]} doesn't have enough resources of wood")
+        elif countryDict[j[1]].steel < j[4]:
+            j[4] = countryDict[j[1]].steel
+            print(f"{j[1]} doesn't have enough resources of steel")
+        elif countryDict[j[1]].stone < j[5]:
+            j[5] = countryDict[j[1]].stone
+            print(f"{j[1]} doesn't have enough resources of stone")
+
+        for i in range(4):
+            supply[i] += j[i + 2]
+            demand[i] += j[i + 6]
+
+    for i, j in zip(demand, supply):
+        price_list.append(trade_function(i, j))  # 算出均衡價格
+
+    print(price_list)
 
     # 買賣
-    for i in trade_info:
-        countryDict[i[1]].food -= int(price_list[0] * i[2])
-        countryDict[i[1]].wood -= int(price_list[1] * i[3])
-        countryDict[i[1]].stone -= int(price_list[2] * i[4])
-        countryDict[i[1]].steel -= int(price_list[3] * i[5])
+    for i in trade_info:            # [時間, 國家名, 賣糧, 賣木, 賣鐵, 賣石, 買糧, 買木, 買鐵, 買石]
+
+        # 執行賣物資的動作
+        countryDict[i[1]].food -= i[2]
+        countryDict[i[1]].wood -= i[3]
+        countryDict[i[1]].stone -= i[4]
+        countryDict[i[1]].steel -= i[5]
         for j in range(4):
             countryDict[i[1]].gold += int(price_list[j] * i[j + 2])
+
+        # 執行買物資的動作
         for j in range(4):
+            if countryDict[i[1]].gold < int(price_list[j] * i[j + 6]):
+                print(f"{i[1]} doesn't have enough resources of gold")
+                i[j + 6] = 0
+                while(countryDict[i[1]].gold > int(price_list[j] * (i[j + 6] + 500))):
+                    i[j + 6] += 500
+
             countryDict[i[1]].gold -= int(price_list[j] * i[j + 6])
 
-        countryDict[i[1]].food += int(price_list[0] * i[6])
-        countryDict[i[1]].wood += int(price_list[1] * i[7])
-        countryDict[i[1]].stone += int(price_list[2] * i[8])
-        countryDict[i[1]].steel += int(price_list[3] * i[9])
+        countryDict[i[1]].food += i[6]
+        countryDict[i[1]].wood += i[7]
+        countryDict[i[1]].stone += i[8]
+        countryDict[i[1]].steel += i[9]
 
-    write_country_file(countryDict)
+    for i in countryDict.values():
+        print(i.to_list())
+
+    # write_country_file(countryDict)
