@@ -66,8 +66,9 @@ def write_individual(countryDict, name, roundnow):
     sheet = client.open(name).sheet1
 
     # 更新成現在的國家資訊
-    clear_sheet(sheet)
-    sheet.insert_row(list(roundnow) + countryDict[name].to_list()[1:], 2)
+    # clear_sheet(sheet)
+    tempt = list(roundnow) + countryDict[name].to_list()[1:]
+    sheet.insert_row(tempt, 2)
 
 
 def write_wonders(countryDict):
