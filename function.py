@@ -154,164 +154,236 @@ def card(countryDict, name, cardDict, useCard, soldCard):
     """ 發動卡片效果 """
 
     def food1():
-        countryDict[name].food -= 200
-        countryDict[name].wood -= 100
-        countryDict[name].steel -= 100
-        countryDict[name].stone -= 100
-        countryDict[name].gold -= 100
+        try:
+            countryDict[name].food -= 200
+            countryDict[name].wood -= 100
+            countryDict[name].steel -= 100
+            countryDict[name].stone -= 100
+            countryDict[name].gold -= 100
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest food1")
+            return
 
         countryDict[name].food_speed += 0.2
 
     def food2():
-        countryDict[name].food -= 500
-        countryDict[name].wood -= 200
-        countryDict[name].steel -= 200
-        countryDict[name].stone -= 200
-        countryDict[name].gold -= 500
+        try:
+            countryDict[name].food -= 500
+            countryDict[name].wood -= 200
+            countryDict[name].steel -= 200
+            countryDict[name].stone -= 200
+            countryDict[name].gold -= 500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest food2")
+            return
 
         countryDict[name].food_speed += 0.4
 
     def wood1():
-        countryDict[name].food -= 100
-        countryDict[name].wood -= 200
-        countryDict[name].steel -= 100
-        countryDict[name].stone -= 100
-        countryDict[name].gold -= 100
+        try:
+            countryDict[name].food -= 100
+            countryDict[name].wood -= 200
+            countryDict[name].steel -= 100
+            countryDict[name].stone -= 100
+            countryDict[name].gold -= 100
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest wood1")
+            return
 
         countryDict[name].wood_speed += 0.2
 
     def wood2():
-        countryDict[name].food -= 200
-        countryDict[name].wood -= 500
-        countryDict[name].steel -= 200
-        countryDict[name].stone -= 200
-        countryDict[name].gold -= 500
+        try:
+            countryDict[name].food -= 200
+            countryDict[name].wood -= 500
+            countryDict[name].steel -= 200
+            countryDict[name].stone -= 200
+            countryDict[name].gold -= 500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest wood2")
+            return
 
         countryDict[name].wood_speed += 0.4
 
     def steel1():
-        countryDict[name].food -= 100
-        countryDict[name].wood -= 100
-        countryDict[name].steel -= 200
-        countryDict[name].stone -= 100
-        countryDict[name].gold -= 100
+        try:
+            countryDict[name].food -= 100
+            countryDict[name].wood -= 100
+            countryDict[name].steel -= 200
+            countryDict[name].stone -= 100
+            countryDict[name].gold -= 100
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest steel1")
+            return
 
         countryDict[name].steel_speed += 0.2
 
     def steel2():
-        countryDict[name].food -= 200
-        countryDict[name].wood -= 200
-        countryDict[name].steel -= 500
-        countryDict[name].stone -= 200
-        countryDict[name].gold -= 500
+        try:
+            countryDict[name].food -= 200
+            countryDict[name].wood -= 200
+            countryDict[name].steel -= 500
+            countryDict[name].stone -= 200
+            countryDict[name].gold -= 500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest steel2")
+            return
 
         countryDict[name].steel_speed += 0.4
 
     def stone1():
-        countryDict[name].food -= 100
-        countryDict[name].wood -= 100
-        countryDict[name].steel -= 100
-        countryDict[name].stone -= 200
-        countryDict[name].gold -= 100
+        try:
+            countryDict[name].food -= 100
+            countryDict[name].wood -= 100
+            countryDict[name].steel -= 100
+            countryDict[name].stone -= 200
+            countryDict[name].gold -= 100
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest stone1")
+            return
 
         countryDict[name].stone_speed += 0.2
 
     def stone2():
-        countryDict[name].food -= 200
-        countryDict[name].wood -= 200
-        countryDict[name].steel -= 200
-        countryDict[name].stone -= 500
-        countryDict[name].gold -= 500
+        try:
+            countryDict[name].food -= 200
+            countryDict[name].wood -= 200
+            countryDict[name].steel -= 200
+            countryDict[name].stone -= 500
+            countryDict[name].gold -= 500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest stone2")
+            return
 
         countryDict[name].stone_speed += 0.4
 
     def weapon1():
-        countryDict[name].wood -= 300
-        countryDict[name].steel -= 500
-        countryDict[name].stone -= 300
-        countryDict[name].gold -= 300
+        try:
+            countryDict[name].wood -= 300
+            countryDict[name].steel -= 500
+            countryDict[name].stone -= 300
+            countryDict[name].gold -= 300
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest weapon1")
+            return
 
         countryDict[name].weapon += 0.2
 
     def weapon2():
-        countryDict[name].wood -= 800
-        countryDict[name].steel -= 1500
-        countryDict[name].stone -= 800
-        countryDict[name].gold -= 1500
+        try:
+            countryDict[name].wood -= 800
+            countryDict[name].steel -= 1500
+            countryDict[name].stone -= 800
+            countryDict[name].gold -= 1500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest weapon2")
+            return
 
         countryDict[name].weapon += 0.4
 
     def food_wood():
-        countryDict[name].food -= 900
-        countryDict[name].wood -= 900
-        countryDict[name].steel -= 400
-        countryDict[name].stone -= 400
-        countryDict[name].gold -= 1000
+        try:
+            countryDict[name].food -= 900
+            countryDict[name].wood -= 900
+            countryDict[name].steel -= 400
+            countryDict[name].stone -= 400
+            countryDict[name].gold -= 1000
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest food_wood")
+            return
 
         countryDict[name].food_speed += 0.3
         countryDict[name].wood_speed += 0.3
 
     def food_steel():
-        countryDict[name].food -= 900
-        countryDict[name].wood -= 400
-        countryDict[name].steel -= 900
-        countryDict[name].stone -= 400
-        countryDict[name].gold -= 1000
+        try:
+            countryDict[name].food -= 900
+            countryDict[name].wood -= 400
+            countryDict[name].steel -= 900
+            countryDict[name].stone -= 400
+            countryDict[name].gold -= 1000
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest food_steel")
+            return
 
         countryDict[name].food_speed += 0.3
         countryDict[name].steel_speed += 0.3
 
     def food_stone():
-        countryDict[name].food -= 900
-        countryDict[name].wood -= 400
-        countryDict[name].steel -= 400
-        countryDict[name].stone -= 900
-        countryDict[name].gold -= 1000
+        try:
+            countryDict[name].food -= 900
+            countryDict[name].wood -= 400
+            countryDict[name].steel -= 400
+            countryDict[name].stone -= 900
+            countryDict[name].gold -= 1000
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest food_stone")
+            return
 
         countryDict[name].food_speed += 0.3
         countryDict[name].stone_speed += 0.3
 
     def wood_steel():
-        countryDict[name].food -= 400
-        countryDict[name].wood -= 900
-        countryDict[name].steel -= 900
-        countryDict[name].stone -= 400
-        countryDict[name].gold -= 1000
+        try:
+            countryDict[name].food -= 400
+            countryDict[name].wood -= 900
+            countryDict[name].steel -= 900
+            countryDict[name].stone -= 400
+            countryDict[name].gold -= 1000
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest wood_steel")
+            return
 
         countryDict[name].wood_speed += 0.3
         countryDict[name].steel_speed += 0.3
 
     def wood_stone():
-        countryDict[name].food -= 400
-        countryDict[name].wood -= 900
-        countryDict[name].steel -= 400
-        countryDict[name].stone -= 900
-        countryDict[name].gold -= 1000
+        try:
+            countryDict[name].food -= 400
+            countryDict[name].wood -= 900
+            countryDict[name].steel -= 400
+            countryDict[name].stone -= 900
+            countryDict[name].gold -= 1000
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest wood_stone")
+            return
 
         countryDict[name].wood_speed += 0.3
         countryDict[name].stone_speed += 0.3
 
     def steel_stone():
-        countryDict[name].food -= 400
-        countryDict[name].wood -= 400
-        countryDict[name].steel -= 900
-        countryDict[name].stone -= 900
-        countryDict[name].gold -= 1000
+        try:
+            countryDict[name].food -= 400
+            countryDict[name].wood -= 400
+            countryDict[name].steel -= 900
+            countryDict[name].stone -= 900
+            countryDict[name].gold -= 1000
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest steel_stone")
+            return
 
         countryDict[name].steel_speed += 0.3
         countryDict[name].stone_speed += 0.3
 
     def defense1():
-        countryDict[name].wood -= 500
-        countryDict[name].steel -= 500
-        countryDict[name].gold -= 500
+        try:
+            countryDict[name].wood -= 500
+            countryDict[name].steel -= 500
+            countryDict[name].gold -= 500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest defense1")
+            return
 
         countryDict[name].defense += 200
 
     def defense2():
-        countryDict[name].wood -= 1500
-        countryDict[name].steel -= 1500
-        countryDict[name].gold -= 1500
+        try:
+            countryDict[name].wood -= 1500
+            countryDict[name].steel -= 1500
+            countryDict[name].gold -= 1500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest defense2")
+            return
 
         countryDict[name].defense += 500
 
