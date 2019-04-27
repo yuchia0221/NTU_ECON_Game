@@ -79,6 +79,7 @@ def write_wonders(countryDict):
     client = gspread.authorize(creds)
     sheet = client.open("世界奇觀").sheet1
 
+    # 更新世界奇觀位置
     row = 2
     appendList = [i.wonders for i in countryDict.values()]
     for i, j in zip(appendList[::2], appendList[1::2]):
