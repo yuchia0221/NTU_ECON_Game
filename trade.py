@@ -12,7 +12,7 @@ def trade_function(d, s):
 
 
 if __name__ == "__main__":
-    trade_info = [list(i) for i in read_file("系統貿易(回應)")]
+    trade_info = read_file("系統貿易(回應)")
     countryDict = createCountry()
 
     print(trade_info)
