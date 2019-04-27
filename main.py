@@ -11,6 +11,9 @@ if __name__ == "__main__":
     cardDict = read_card()
     wonderlist = read_file("世界奇觀")
 
+    for i in countryDict.values():
+        print(i.to_list())
+
     after = time()
     print(f"讀取檔案完成，共花費{after - before:.1f}s")
 
@@ -33,13 +36,16 @@ if __name__ == "__main__":
         else:
             continue
 
-    wonder(countryDict, wonderlist, actionList)
+    # wonder(countryDict, wonderlist, actionList)
 
     after = time()
     print(f"基本函數完成，共花費{after - before:.1f}s")
 
     print("開始寫檔")
     before = time()
+
+    for i in countryDict.values():
+        print(i.to_list())
 
     for i in countryDict.values():
         i.population += 100

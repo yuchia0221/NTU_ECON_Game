@@ -16,7 +16,7 @@ class Country:
         self._gold = int(gold)
         self._population = int(population)
         self._weapon = float(weapon)
-        self._defense = float(defense)
+        self._defense = int(defense)
         self._food_speed = float(food_speed)
         self._wood_speed = float(wood_speed)
         self._steel_speed = float(steel_speed)

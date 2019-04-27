@@ -135,10 +135,10 @@ def production(countryDict, name, produce_num, warrior):
     if countryDict[name].population - warrior < sum(produce_num) * 100:
         raise ValueError("人民不夠來生產")
 
-    countryDict[name].food += round(sqrt(produce_num[0]) * pow(countryDict[name].food_speed, (2 / 3)), 1) * 1000
-    countryDict[name].wood += round(sqrt(produce_num[1]) * pow(countryDict[name].wood_speed, (2 / 3)), 1) * 1000
-    countryDict[name].steel += round(sqrt(produce_num[2]) * pow(countryDict[name].steel_speed, (2 / 3)), 1) * 1000
-    countryDict[name].stone += round(sqrt(produce_num[3]) * pow(countryDict[name].stone_speed, (2 / 3)), 1) * 1000
+    countryDict[name].food += int(round(sqrt(produce_num[0]) * pow(countryDict[name].food_speed, (2 / 3)), 1) * 1000)
+    countryDict[name].wood += int(round(sqrt(produce_num[1]) * pow(countryDict[name].wood_speed, (2 / 3)), 1) * 1000)
+    countryDict[name].steel += int(round(sqrt(produce_num[2]) * pow(countryDict[name].steel_speed, (2 / 3)), 1) * 1000)
+    countryDict[name].stone += int(round(sqrt(produce_num[3]) * pow(countryDict[name].stone_speed, (2 / 3)), 1) * 1000)
 
     return
 
@@ -165,6 +165,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].food_speed += 0.2
+        print(f"{name} has successfully invest food1")
 
     def food2():
         try:
@@ -177,6 +178,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             print(f"{name} dosen't have enough resource to invest food2")
             return
 
+        print(f"{name} has successfully invest food2")
         countryDict[name].food_speed += 0.4
 
     def wood1():
@@ -191,6 +193,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].wood_speed += 0.2
+        print(f"{name} has successfully invest wood1")
 
     def wood2():
         try:
@@ -204,6 +207,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].wood_speed += 0.4
+        print(f"{name} has successfully invest wood2")
 
     def steel1():
         try:
@@ -217,6 +221,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].steel_speed += 0.2
+        print(f"{name} has successfully invest steel1")
 
     def steel2():
         try:
@@ -230,6 +235,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].steel_speed += 0.4
+        print(f"{name} has successfully invest steel2")
 
     def stone1():
         try:
@@ -243,6 +249,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].stone_speed += 0.2
+        print(f"{name} has successfully invest stone1")
 
     def stone2():
         try:
@@ -256,6 +263,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].stone_speed += 0.4
+        print(f"{name} has successfully invest stone2")
 
     def weapon1():
         try:
@@ -268,6 +276,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].weapon += 0.2
+        print(f"{name} has successfully invest weapon1")
 
     def weapon2():
         try:
@@ -280,6 +289,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].weapon += 0.4
+        print(f"{name} has successfully invest weapon2")
 
     def food_wood():
         try:
@@ -294,6 +304,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].food_speed += 0.3
         countryDict[name].wood_speed += 0.3
+        print(f"{name} has successfully invest food_wood")
 
     def food_steel():
         try:
@@ -308,6 +319,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].food_speed += 0.3
         countryDict[name].steel_speed += 0.3
+        print(f"{name} has successfully invest food_steel")
 
     def food_stone():
         try:
@@ -322,6 +334,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].food_speed += 0.3
         countryDict[name].stone_speed += 0.3
+        print(f"{name} has successfully invest food_stone")
 
     def wood_steel():
         try:
@@ -336,6 +349,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].wood_speed += 0.3
         countryDict[name].steel_speed += 0.3
+        print(f"{name} has successfully invest wood_steel")
 
     def wood_stone():
         try:
@@ -350,6 +364,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].wood_speed += 0.3
         countryDict[name].stone_speed += 0.3
+        print(f"{name} has successfully invest wood_stone")
 
     def steel_stone():
         try:
@@ -364,6 +379,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].steel_speed += 0.3
         countryDict[name].stone_speed += 0.3
+        print(f"{name} has successfully invest steel_stone")
 
     def defense1():
         try:
@@ -375,6 +391,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].defense += 200
+        print(f"{name} has successfully invest defense1")
 
     def defense2():
         try:
@@ -386,6 +403,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             return
 
         countryDict[name].defense += 500
+        print(f"{name} has successfully invest defense2")
 
     for card in useCard:
         try:
