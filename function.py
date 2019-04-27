@@ -1,6 +1,5 @@
 import csv
 import gspread
-from math import sqrt
 from collections import namedtuple
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
@@ -134,12 +133,12 @@ def handle_action():
 def production(countryDict, name, produce_num, warrior):
     """ 生產順序:糧食、木頭、鐵礦、石頭 """
     def production_f(times, speed):
-        sum = 0
+        total = 0
         temp = 500
         for i in range(times):
-            sum += temp
+            total += temp
             temp -= 25 * times
-        return sum * speed // 100
+        return round(total * speed, -1)
 
     if countryDict[name].population - warrior < sum(produce_num) * 100:     # 人民不足生產
         times = (countryDict[name].population - warrior) // 100             # 計算本回合共能生產幾次
@@ -484,10 +483,10 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
     rubrate = 0.001
     diff = countryDict[attackingCountry].weapon * soilder - countryDict[attackedCountry].defense
     if diff >= 0 and not defeated[attackedCountry]:
-        countryDict[attackingCountry].population -= soilder * 0.3
-        countryDict[attackedCountry].population *= 0.9
-        countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5
-        countryDict[attackedCountry].gold *= 0.5
+        countryDict[attackingCountry].population -= round(soilder * 0.3, -1)
+        countryDict[attackedCountry].population = round(countryDict[attackedCountry].population * 0.9, -1)
+        countryDict[attackingCountry].gold += round(countryDict[attackedCountry].gold * 0.5, -1)
+        countryDict[attackedCountry].gold = round(0.5 * countryDict[attackedCountry].gold, -1)
         defeated[attackedCountry] = True
 
         if resource == "糧食":
