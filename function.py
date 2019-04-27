@@ -131,14 +131,24 @@ def handle_action():
 
 def production(countryDict, name, produce_num, warrior):
     """ 生產順序:糧食、木頭、鐵礦、石頭 """
+    def production_f(times, speed):
+        return int(round(pow(times, (2 / 3)) * speed * 500), 1)
 
     if countryDict[name].population - warrior < sum(produce_num) * 100:
-        raise ValueError("人民不夠來生產")
+        times = int((countryDict[name].population - warrior) / 100)
+        for i in range(4):
+            if times >= produce_num[i]:
+                times -= produce_num[i]
+            else:
+                produce_num[i] = times
+                times = 0
 
-    countryDict[name].food += int(round(sqrt(produce_num[0]) * pow(countryDict[name].food_speed, (2 / 3)), 1) * 1000)
-    countryDict[name].wood += int(round(sqrt(produce_num[1]) * pow(countryDict[name].wood_speed, (2 / 3)), 1) * 1000)
-    countryDict[name].steel += int(round(sqrt(produce_num[2]) * pow(countryDict[name].steel_speed, (2 / 3)), 1) * 1000)
-    countryDict[name].stone += int(round(sqrt(produce_num[3]) * pow(countryDict[name].stone_speed, (2 / 3)), 1) * 1000)
+        print(f"{name}的人民不夠來生產")
+
+    countryDict[name].food += production_f(produce_num[0], countryDict[name].food_speed)
+    countryDict[name].wood += production_f(produce_num[1], countryDict[name].wood_speed)
+    countryDict[name].steel += production_f(produce_num[2], countryDict[name].steel_speed)
+    countryDict[name].stone += production_f(produce_num[3], countryDict[name].stone_speed)
 
     return
 
@@ -548,6 +558,8 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
 
     elif diff < 0:
         countryDict[attackingCountry].population -= soilder * 0.4
+
+    return
 
 
 def buildwonder(countryDict, name, percentWonders, state, Update):
