@@ -54,17 +54,17 @@ if __name__ == "__main__":
         countryDict[i[1]].stone -= i[4]
         countryDict[i[1]].steel -= i[5]
         for j in range(4):
-            countryDict[i[1]].gold += int(price_list[j] * i[j + 2])
+            countryDict[i[1]].gold += int(round(price_list[j] * i[j + 2], -1))
 
         # 執行買物資的動作
         for j in range(4):
-            if countryDict[i[1]].gold < int(price_list[j] * i[j + 6]):          # 如果黃金不夠買當項物資
+            if countryDict[i[1]].gold < int(round(price_list[j] * i[j + 6], -1)):          # 如果黃金不夠買當項物資
                 print(f"{i[1]} doesn't have enough resources of gold")          # 顯示錯誤訊息
                 i[j + 6] = 0
-                while(countryDict[i[1]].gold > int(price_list[j] * (i[j + 6] + 500))):  # 以500為間隔，從0開始，直到他買得起結束
+                while(countryDict[i[1]].gold > int(round(price_list[j] * (i[j + 6] + 500), -1))):  # 以500為間隔，從0開始，直到他買得起結束
                     i[j + 6] += 500
 
-            countryDict[i[1]].gold -= int(price_list[j] * i[j + 6])
+            countryDict[i[1]].gold -= int(round(price_list[j] * i[j + 6], -1))
 
         countryDict[i[1]].food += i[6]
         countryDict[i[1]].wood += i[7]
