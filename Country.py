@@ -80,10 +80,11 @@ class Country:
 
     @wonders.setter
     def wonders(self, value):
-        if value < 0 or not isinstance(value, int):
-            print(f"{self.name}的世界奇觀應該是正整數而不是{value}")
-            raise TypeError("wonders must be positive integer")
-        self._wonders = value
+        if value < 0:
+            print(f"{self.name}的世界奇觀應該是正數而不是{value}")
+            raise TypeError("wonders must be positive")
+
+        self._wonders = int(round(value, -1))
 
     # set the value of Country.gold and avoid it becomes negtive
     @property
@@ -92,10 +93,10 @@ class Country:
 
     @gold.setter
     def gold(self, value):
-        if value < 0 or not isinstance(value, int):
-            print(f"{self.name}的黃金應該是正整數而不是{value}")
-            raise ValueError("gold must be positive integer")
-        self._gold = value
+        if value < 0:
+            print(f"{self.name}的黃金應該是正數而不是{value}")
+            raise ValueError("gold must be positive")
+        self._gold = int(round(value, -1))
 
     # set the value of Country.population and avoid it becomes negtive
     @property
@@ -104,10 +105,10 @@ class Country:
 
     @population.setter
     def population(self, value):
-        if value < 0 or not isinstance(value, int):
-            print(f"{self.name}的黃金應該是正整數而不是{value}")
-            raise ValueError("population must be positive integer")
-        self._population = value
+        if value < 0:
+            print(f"{self.name}的黃金應該是正數而不是{value}")
+            raise ValueError("population must be positive")
+        self._population = int(round(value, -1))
 
     # set the value of Country.weapon and avoid it becomes negtive
     @property
@@ -128,10 +129,10 @@ class Country:
 
     @defense.setter
     def defense(self, value):
-        if value < 0 or not isinstance(value, int):
-            print(f"{self.name}的防禦力應該是正整數而不是{value}")
+        if value < 0:
+            print(f"{self.name}的防禦力應該是正數而不是{value}")
             raise ValueError("defense must be positive")
-        self._defense = value
+        self._defense = int(round(value, -1))
 
     # set the value of Country.food_speed and avoid it becomes negtive
     @property
@@ -188,10 +189,10 @@ class Country:
 
     @food.setter
     def food(self, value):
-        if value < 0 or not isinstance(value, int):
-            print(f"{self.name}的糧食應該是正整數而不是{value}")
+        if value < 0:
+            print(f"{self.name}的糧食應該是正數而不是{value}")
             raise ValueError("food must be positive")
-        self._food = value
+        self._food = int(round(value, -1))
 
     # set the value of Country.wood and avoid it becomes negtive
     @property
@@ -200,10 +201,10 @@ class Country:
 
     @wood.setter
     def wood(self, value):
-        if value < 0 or not isinstance(value, int):
-            print(f"{self.name}的木頭應該是正整數而不是{value}")
+        if value < 0:
+            print(f"{self.name}的木頭應該是正數而不是{value}")
             raise ValueError("wood must be positive")
-        self._wood = value
+        self._wood = int(round(value, -1))
 
     # set the value of Country.steel and avoid it becomes negtive
     @property
@@ -212,10 +213,10 @@ class Country:
 
     @steel.setter
     def steel(self, value):
-        if value < 0 or not isinstance(value, int):
-            print(f"{self.name}的鐵礦應該是正整數而不是{value}")
+        if value < 0:
+            print(f"{self.name}的鐵礦應該是正數而不是{value}")
             raise ValueError("steel must be positive")
-        self._steel = value
+        self._steel = int(round(value, -1))
 
     # set the value of Country.stone and avoid it becomes negtive
     @property
@@ -224,10 +225,10 @@ class Country:
 
     @stone.setter
     def stone(self, value):
-        if value < 0 or not isinstance(value, int):
-            print(f"{self.name}的石頭應該是正整數而不是{value}")
+        if value < 0:
+            print(f"{self.name}的石頭應該是正數而不是{value}")
             raise ValueError("stone must be positive")
-        self._stone = value
+        self._stone = int(round(value, -1))
 
 
 class Atlantis(Country):

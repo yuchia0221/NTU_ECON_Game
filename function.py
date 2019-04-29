@@ -151,10 +151,17 @@ def production(countryDict, name, produce_num, warrior):
 
         print(f"{name}的人民不夠來生產, 生產:{produce_num}")
 
-    countryDict[name].food += production_f(produce_num[0], countryDict[name].food_speed)
-    countryDict[name].wood += production_f(produce_num[1], countryDict[name].wood_speed)
-    countryDict[name].steel += production_f(produce_num[2], countryDict[name].steel_speed)
-    countryDict[name].stone += production_f(produce_num[3], countryDict[name].stone_speed)
+    food = production_f(produce_num[0], countryDict[name].food_speed)
+    wood = production_f(produce_num[1], countryDict[name].wood_speed)
+    steel = production_f(produce_num[2], countryDict[name].steel_speed)
+    stone = production_f(produce_num[3], countryDict[name].stone_speed)
+
+    countryDict[name].food += food
+    countryDict[name].wood += wood
+    countryDict[name].steel += steel
+    countryDict[name].stone += stone
+
+    print(f"{name} has produced {food} food {wood} wood {steel} steel {stone} stone ")
 
     return
 
@@ -487,37 +494,39 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
     rubrate = 0.001
     diff = countryDict[attackingCountry].weapon * soilder - countryDict[attackedCountry].defense
     if diff >= 0 and not defeated[attackedCountry]:
-        countryDict[attackingCountry].population -= int(round(soilder * 0.3, -1))
-        countryDict[attackedCountry].population = int(round(countryDict[attackedCountry].population * 0.9, -1))
-        countryDict[attackingCountry].gold += int(round(countryDict[attackedCountry].gold * 0.5, -1))
-        countryDict[attackedCountry].gold = int(round(0.5 * countryDict[attackedCountry].gold, -1))
+        countryDict[attackingCountry].population -= soilder * 0.3
+        countryDict[attackedCountry].population *= 0.9
+        countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5
+        countryDict[attackedCountry].gold *= 0.5
         defeated[attackedCountry] = True
+
+        print(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{resource}和{speed}倍率")
 
         if resource == "糧食":
             try:
-                countryDict[attackingCountry].food += int(round(countryDict[attackedCountry].food * (0.5 + rubrate * diff), -1))
-                countryDict[attackedCountry].food -= int(round(countryDict[attackedCountry].food * (0.5 + rubrate * diff), -1))
+                countryDict[attackingCountry].food += countryDict[attackedCountry].food * (0.5 + rubrate * diff)
+                countryDict[attackedCountry].food -= countryDict[attackedCountry].food * (0.5 + rubrate * diff)
             except ValueError:
                 countryDict[attackingCountry].food += countryDict[attackedCountry].food
                 countryDict[attackedCountry].food = 0
         elif resource == "木頭":
             try:
-                countryDict[attackingCountry].wood += int(round(countryDict[attackedCountry].wood * (0.5 + rubrate * diff), -1))
-                countryDict[attackedCountry].wood -= int(round(countryDict[attackedCountry].wood * (0.5 + rubrate * diff), -1))
+                countryDict[attackingCountry].wood += countryDict[attackedCountry].wood * (0.5 + rubrate * diff)
+                countryDict[attackedCountry].wood -= countryDict[attackedCountry].wood * (0.5 + rubrate * diff)
             except ValueError:
                 countryDict[attackingCountry].wood += countryDict[attackedCountry].wood
                 countryDict[attackedCountry].wood = 0
         elif resource == "鐵礦":
             try:
-                countryDict[attackingCountry].steel += int(round(countryDict[attackedCountry].steel * (0.5 + rubrate * diff), -1))
-                countryDict[attackedCountry].steel -= int(round(countryDict[attackedCountry].steel * (0.5 + rubrate * diff), -1))
+                countryDict[attackingCountry].steel += countryDict[attackedCountry].steel * (0.5 + rubrate * diff)
+                countryDict[attackedCountry].steel -= countryDict[attackedCountry].steel * (0.5 + rubrate * diff)
             except ValueError:
                 countryDict[attackingCountry].steel += countryDict[attackedCountry].steel
                 countryDict[attackedCountry].steel = 0
         elif resource == "石頭":
             try:
-                countryDict[attackingCountry].stone += int(round(countryDict[attackedCountry].stone * (0.5 + rubrate * diff), -1))
-                countryDict[attackedCountry].stone -= int(round(countryDict[attackedCountry].stone * (0.5 + rubrate * diff), -1))
+                countryDict[attackingCountry].stone += countryDict[attackedCountry].stone * (0.5 + rubrate * diff)
+                countryDict[attackedCountry].stone -= countryDict[attackedCountry].stone * (0.5 + rubrate * diff)
             except ValueError:
                 countryDict[attackingCountry].stone += countryDict[attackedCountry].stone
                 countryDict[attackedCountry].stone = 0
@@ -536,41 +545,42 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
             countryDict[attackedCountry].stone_speed -= 0.2
 
     elif diff >= 0 and defeated[attackedCountry]:
-        countryDict[attackingCountry].population -= int(round(soilder * 0.1, -1))
-        countryDict[attackingCountry].gold += int(round(countryDict[attackedCountry].gold * 0.5, -1))
-        countryDict[attackedCountry].gold -= int(round(0.5 * countryDict[attackedCountry].gold, -1))
+        countryDict[attackingCountry].population -= soilder * 0.1
+        countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5
+        countryDict[attackedCountry].gold *= 0.5
 
         if resource == "糧食":
             try:
-                countryDict[attackingCountry].food += int(round(0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff), -1))
-                countryDict[attackedCountry].food -= int(round(0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff), -1))
+                countryDict[attackingCountry].food += 0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff)
+                countryDict[attackedCountry].food -= 0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff)
             except ValueError:
                 countryDict[attackingCountry].food += countryDict[attackedCountry].food
                 countryDict[attackedCountry].food = 0
         elif resource == "木頭":
             try:
-                countryDict[attackingCountry].wood += int(round(0.5 * countryDict[attackedCountry].wood * (0.5 + rubrate * diff), -1))
-                countryDict[attackedCountry].wood -= int(round(0.5 * countryDict[attackedCountry].wood * (0.5 + rubrate * diff), -1))
+                countryDict[attackingCountry].wood += 0.5 * countryDict[attackedCountry].wood * (0.5 + rubrate * diff)
+                countryDict[attackedCountry].wood -= 0.5 * countryDict[attackedCountry].wood * (0.5 + rubrate * diff)
             except ValueError:
                 countryDict[attackingCountry].wood += countryDict[attackedCountry].wood
                 countryDict[attackedCountry].wood = 0
         elif resource == "鐵礦":
             try:
-                countryDict[attackingCountry].steel += int(round(0.5 * countryDict[attackedCountry].steel * (0.5 + rubrate * diff), -1))
-                countryDict[attackedCountry].steel -= int(round(0.5 * countryDict[attackedCountry].steel * (0.5 + rubrate * diff), -1))
+                countryDict[attackingCountry].steel += 0.5 * countryDict[attackedCountry].steel * (0.5 + rubrate * diff)
+                countryDict[attackedCountry].steel -= 0.5 * countryDict[attackedCountry].steel * (0.5 + rubrate * diff)
             except ValueError:
                 countryDict[attackingCountry].steel += countryDict[attackedCountry].steel
                 countryDict[attackedCountry].steel = 0
         elif resource == "石頭":
             try:
-                countryDict[attackingCountry].stone += int(round(0.5 * countryDict[attackedCountry].stone * (0.5 + rubrate * diff), -1))
-                countryDict[attackedCountry].stone -= int(round(0.5 * countryDict[attackedCountry].stone * (0.5 + rubrate * diff), -1))
+                countryDict[attackingCountry].stone += 0.5 * countryDict[attackedCountry].stone * (0.5 + rubrate * diff)
+                countryDict[attackedCountry].stone -= 0.5 * countryDict[attackedCountry].stone * (0.5 + rubrate * diff)
             except ValueError:
                 countryDict[attackingCountry].stone += countryDict[attackedCountry].stone
                 countryDict[attackedCountry].stone = 0
 
     elif diff < 0:
-        countryDict[attackingCountry].population -= int(round(soilder * 0.4, -1))
+        countryDict[attackingCountry].population -= soilder * 0.4
+        print(f"{attackingCountry}進攻了{attackedCountry}但失敗了，損失四成士兵")
 
     return
 
@@ -620,6 +630,7 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
         return
 
     countryDict[name].wonders += int(percentWonders)
+    print(f"{name} 貢獻了 {percentWonders}%")
 
 
 def wonder(countryDict, wonderlist, actionlist):  # 這邊把actionlist傳進去的寫法很糟，但目前我沒想到好辦法
@@ -644,6 +655,7 @@ def wonder(countryDict, wonderlist, actionlist):  # 這邊把actionlist傳進去
 
         if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 > 25:
             Update[Wname] = True
+            print(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
             weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]
             for name in temp[1].split():
                 wonderdict[name] = round(wonderdict[name] * weight, 0)
