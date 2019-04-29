@@ -1,4 +1,4 @@
-from function import createCountry, read_file, write_country_file
+from function import createCountry, read_file
 from math import atan, pi
 
 
