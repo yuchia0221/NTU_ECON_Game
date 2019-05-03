@@ -434,7 +434,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             print(f"{name} dosen't have enough resource to invest weapon1")
             return
 
-        countryDict[name].weapon += 0.3
+        countryDict[name].weapon += 0.5
         print(f"{name} has successfully invest weapon1")
 
     def weapon2():
@@ -447,7 +447,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             print(f"{name} dosen't have enough resource to invest weapon2")
             return
 
-        countryDict[name].weapon += 0.5
+        countryDict[name].weapon += 1
         print(f"{name} has successfully invest weapon2")
 
     def all1():
@@ -461,27 +461,27 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             print(f"{name} dosen't have enough resource to invest all1")
             return
 
-        countryDict[name].food += 0.3
-        countryDict[name].wood += 0.3
-        countryDict[name].steel += 0.3
-        countryDict[name].stone += 0.3
+        countryDict[name].food_speed += 0.3
+        countryDict[name].wood_speed += 0.2
+        countryDict[name].steel_speed += 0.2
+        countryDict[name].stone_speed += 0.2
         print(f"{name} has successfully invest all1")
 
     def all2():
         try:
-            countryDict[name].food -= 3000
-            countryDict[name].wood -= 1000
-            countryDict[name].steel -= 1000
-            countryDict[name].stone -= 1000
+            countryDict[name].food -= 2500
+            countryDict[name].wood -= 500
+            countryDict[name].steel -= 500
+            countryDict[name].stone -= 2500
             countryDict[name].gold -= 2500
         except ValueError as e:
             print(f"{name} dosen't have enough resource to invest all2")
             return
 
-        countryDict[name].food += 0.2
-        countryDict[name].wood += 0.2
-        countryDict[name].steel += 0.2
-        countryDict[name].stone += 0.2
+        countryDict[name].food_speed += 0.2
+        countryDict[name].wood_speed += 0.2
+        countryDict[name].steel_speed += 0.2
+        countryDict[name].stone_speed += 0.2
         print(f"{name} has successfully invest all2")
 
     for card in useCard:
