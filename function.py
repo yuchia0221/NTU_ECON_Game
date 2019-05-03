@@ -51,7 +51,7 @@ def write_country_file(countryDict):
         sheet.append_row(i.to_list())
 
 
-def write_individual(countryDict, name, roundnow):
+def write_individual(countryDict, name, roundnow, boolean=False):
     def clear_sheet(sheet):
         sheet.clear()
         sheet.append_row(['回合', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '防禦力', '糧食倍率',
@@ -65,7 +65,8 @@ def write_individual(countryDict, name, roundnow):
     sheet = client.open(name).sheet1
 
     # 更新成現在的國家資訊
-    # clear_sheet(sheet)
+    if boolean:
+        clear_sheet(sheet)
     tempt = list(roundnow) + countryDict[name].to_list()[1:]
     sheet.insert_row(tempt, 2)
 
@@ -96,6 +97,25 @@ def write_wonders(countryDict):
         elif i + j == 100:
             sheet.update_cell(row, 4, 4)
         row += 1
+
+
+def initialize():
+    # 建立namedtuple object
+    country_info = namedtuple("country_info",
+                              "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
+    class_list = {"亞特蘭提斯": Atlantis, "阿斯嘉": Asgard, "奧林帕斯": Olympus, "瓦干達": Wakanda,
+                  "香格里拉": ShangriLa, "瓦拉納西": Varanasi, "瑪雅": Maya, "塔爾塔洛斯": Tartarus,
+                  "特奧蒂瓦坎": Teotihuacan, "復活節島": EasterIsland}
+
+    with open("初始國家資訊.csv") as csv_file:
+        csv_reader = csv.reader(csv_file)
+        next(csv_reader)
+        countryList = [country_info(*i) for i in csv_reader]
+        countryDict = {i.name: class_list[i.name](*i) for i in countryList}
+
+    write_country_file(countryDict)
+    for i in class_list.keys():
+        write_individual(countryDict, i, "一", True)
 
 
 def createCountry():
@@ -653,12 +673,14 @@ def wonder(countryDict, wonderlist, actionlist):  # 這邊把actionlist傳進去
             else:
                 totalwonder[Wname] = wonderdict[name]
 
+        print(totalwonder, wonderdict)
+
         if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 > 25:
             Update[Wname] = True
             print(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
             weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]
             for name in temp[1].split():
-                wonderdict[name] = round(wonderdict[name] * weight, 0)
+                wonderdict[name] = int(round(wonderdict[name] * weight, 0))
 
         for name in temp[1].split():
             buildwonder(countryDict, name, wonderdict[name], temp[3], Update[Wname])

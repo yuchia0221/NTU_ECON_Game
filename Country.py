@@ -80,11 +80,10 @@ class Country:
 
     @wonders.setter
     def wonders(self, value):
-        if value < 0:
-            print(f"{self.name}的世界奇觀應該是正數而不是{value}")
-            raise TypeError("wonders must be positive")
-
-        self._wonders = int(round(value, -1))
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的世界奇觀應該是正整數而不是{value}")
+            raise TypeError("wonders must be positive integer")
+        self._wonders = value
 
     # set the value of Country.gold and avoid it becomes negtive
     @property
