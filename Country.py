@@ -56,6 +56,9 @@ class Country:
         """ Return all of the information in list """
         return list(self.__dict__().values())
 
+    def win_condition(self):
+        self.win = self.wonders * 5000 + self.gold
+
     # set the "ID" and "name" are immutable
     @property
     def ID(self):

@@ -606,7 +606,6 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
 
 
 def buildwonder(countryDict, name, percentWonders, state, Update):
-
     if state == 0:
         countryDict[name].wood -= 300 * percentWonders
         countryDict[name].stone -= 200 * percentWonders
@@ -718,6 +717,18 @@ def revisePwonder(countryDict, name, state, wonderdict):
 
         if min(material) < wonderdict[name]:
             wonderdict[name] = int(min(material))
+
+
+def consume(countryDict):
+    for i in countryDict.values():
+        i.population += 100
+        try:
+            i.food -= i.population
+        except ValueError as e:
+            try:
+                i.gold -= i.population * 2
+            except ValueError as e:
+                i.gold = 0
 
 
 if __name__ == "__main__":
