@@ -162,6 +162,10 @@ def production(countryDict, name, produce_num, warrior):
             temp -= 25 * times
         return int(round(total * speed, -1))
 
+    if countryDict[name].population < warrior:
+        for i in range(4):
+            produce_num[i] = 0
+
     if countryDict[name].population - warrior < sum(produce_num) * 100:     # 人民不足生產
         times = (countryDict[name].population - warrior) // 100             # 計算本回合共能生產幾次
         for i in range(4):

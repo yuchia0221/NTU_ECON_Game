@@ -3,7 +3,7 @@ from math import atan, pi
 
 
 def trade_function(d, s):
-    a, b, c = 2, 1, 0.04
+    a, b, c = 2, 2, 0.04
 
     if d > s:
         return a * (2 / pi) * atan(c * pow((d - s), (1 / 3))) + b
@@ -28,13 +28,13 @@ if __name__ == "__main__":
         if countryDict[j[1]].food < j[2]:               # 如果物資不夠賣，將當回賣的物資量等同現有物資存量，並顯示錯誤
             j[2] = countryDict[j[1]].food
             print(f"{j[1]} doesn't have enough resources of food")
-        elif countryDict[j[1]].wood < j[3]:
+        if countryDict[j[1]].wood < j[3]:
             j[3] = countryDict[j[1]].wood
             print(f"{j[1]} doesn't have enough resources of wood")
-        elif countryDict[j[1]].steel < j[4]:
+        if countryDict[j[1]].steel < j[4]:
             j[4] = countryDict[j[1]].steel
             print(f"{j[1]} doesn't have enough resources of steel")
-        elif countryDict[j[1]].stone < j[5]:
+        if countryDict[j[1]].stone < j[5]:
             j[5] = countryDict[j[1]].stone
             print(f"{j[1]} doesn't have enough resources of stone")
 
