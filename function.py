@@ -55,7 +55,7 @@ def write_individual(countryDict, name, roundnow, boolean=False):
     def clear_sheet(sheet):
         sheet.clear()
         sheet.append_row(['回合', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '防禦力', '糧食倍率',
-                          '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
+                          '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵礦', '石頭'])
 
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -734,4 +734,4 @@ def consume(countryDict):
 
 
 if __name__ == "__main__":
-    pass
+    initialize()

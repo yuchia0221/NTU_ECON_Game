@@ -48,7 +48,10 @@ if __name__ == "__main__":
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
                    '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
     for i in countryName:
-        write_individual(countryDict, i, "二")
+        try:
+            write_individual(countryDict, i, "二")
+        except:
+            write_individual(countryDict, i, "二")
 
     after = time()
     print(f"寫檔完成，共花費{after - before:.1f}s")

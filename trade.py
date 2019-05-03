@@ -1,4 +1,4 @@
-from function import createCountry, read_file
+from function import createCountry, read_file, write_country_file
 from math import atan, pi
 
 
@@ -75,4 +75,4 @@ if __name__ == "__main__":
         countryDict[i[1]].stone += i[9]
         print(f"{i[1]} 買進了 {i[6]} 糧食 {i[7]} 木頭 {i[8]} 鐵礦 {i[9]} 石頭")
 
-    # write_country_file(countryDict)
+    write_country_file(countryDict)
