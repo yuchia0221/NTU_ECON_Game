@@ -154,7 +154,9 @@ def production(countryDict, name, produce_num, warrior):
     """ 生產順序:糧食、木頭、鐵礦、石頭 """
     def production_f(times, speed):
         total = 0
-        temp = 500
+        temp = 550
+        if times > 6:
+            times = 6
         for i in range(times):
             total += temp
             temp -= 25 * times
