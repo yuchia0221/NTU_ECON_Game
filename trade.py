@@ -3,7 +3,7 @@ from math import atan, pi
 
 
 def trade_function(d, s):
-    a, b, c = 2, 2, 0.04
+    a, b, c = 15, 1.8, 0.005
 
     if d > s:
         return a * (2 / pi) * atan(c * pow((d - s), (1 / 3))) + b
@@ -17,6 +17,16 @@ def print_indo(countryDict):
 
 
 if __name__ == "__main__":
+    # print(trade_function(0, 500))
+    # print(trade_function(0, 1000))
+    # print(trade_function(0, 2500))
+    # print(trade_function(0, 5000))
+    # print(trade_function(0, 10000))
+    # print(trade_function(500, 0))
+    # print(trade_function(1000, 0))
+    # print(trade_function(2500, 0))
+    # print(trade_function(5000, 0))
+    # print(trade_function(10000, 0))
     resources = ["糧食", "木頭", "鐵礦", "石頭"]
     trade_info = read_file("系統貿易(回應)")              # [時間, 國家名, 賣糧, 賣木, 賣鐵, 賣石, 買糧, 買木, 買鐵, 買石]
     countryDict = createCountry()
