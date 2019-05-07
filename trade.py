@@ -3,7 +3,7 @@ from math import atan, pi
 
 
 def trade_function(d, s):
-    a, b, c = 15, 1.8, 0.005
+    a, b, c = 5, 1.8, 0.001
 
     if d > s:
         return a * (2 / pi) * atan(c * pow((d - s), (1 / 3))) + b
@@ -17,16 +17,18 @@ def print_indo(countryDict):
 
 
 if __name__ == "__main__":
-    # print(trade_function(0, 500))
-    # print(trade_function(0, 1000))
-    # print(trade_function(0, 2500))
-    # print(trade_function(0, 5000))
-    # print(trade_function(0, 10000))
-    # print(trade_function(500, 0))
-    # print(trade_function(1000, 0))
-    # print(trade_function(2500, 0))
-    # print(trade_function(5000, 0))
-    # print(trade_function(10000, 0))
+    # print("a = 5, c = 0.001")
+    # print(trade_function(0, 10000), "d = 0, s = 10000")
+    # print(trade_function(0, 5000), "d = 0, s = 5000")
+    # print(trade_function(0, 2500), "d = 0, s = 2500")
+    # print(trade_function(0, 1000), "d = 0, s = 1000")
+    # print(trade_function(0, 500), "d = 0, s = 500")
+    # print(trade_function(0, 0), "d = 0, s = 0")
+    # print(trade_function(500, 0), "d = 500, s = 0")
+    # print(trade_function(1000, 0), "d = 1000, s = 0")
+    # print(trade_function(2500, 0), "d = 2500, s = 0")
+    # print(trade_function(5000, 0), "d = 5000, s = 0")
+    # print(trade_function(10000, 0), "d = 10000, s = 0")
     resources = ["糧食", "木頭", "鐵礦", "石頭"]
     trade_info = read_file("系統貿易(回應)")              # [時間, 國家名, 賣糧, 賣木, 賣鐵, 賣石, 買糧, 買木, 買鐵, 買石]
     countryDict = createCountry()
