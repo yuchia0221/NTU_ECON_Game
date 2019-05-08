@@ -100,6 +100,7 @@ def write_wonders(countryDict):
 
 
 def initialize():
+    """ 根據初始國家資訊表，初始化google雲端上的所有檔案 """
     # 建立namedtuple object
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
@@ -129,7 +130,7 @@ def createCountry():
 
 
 def handle_action():
-    """將各國的行動單做處理，讓接下來資料處理起來比較方便"""
+    """ 將各國的行動單做處理，讓接下來資料處理起來比較方便 """
     info = namedtuple("info", "name produceList useCard soldCard Pwonders war solider occupyMan resource Rspeed")
 
     returnList = []
@@ -658,7 +659,8 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
     print(f"{name} 貢獻了 {percentWonders}%")
 
 
-def wonder(countryDict, wonderlist, actionlist):  # 這邊把actionlist傳進去的寫法很糟，但目前我沒想到好辦法
+def wonder(countryDict, wonderlist, actionlist):
+    # 這邊把actionlist傳進去的寫法很糟，但目前我沒想到好辦法
     currstate = {}      # [奇觀名字] : 現在階段
     totalwonder = {}    # [奇觀名字] : 準備要建造多少比例
     currwonder = {}     # [奇觀名字] : 現在有多少比例
