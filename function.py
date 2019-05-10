@@ -15,8 +15,8 @@ def read_file(file_name):
 
     # 建立namedtuple object
     country_info = namedtuple("country_info",
-                              "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
-    action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard Pwonders war solider resource Rspeed")
+                              "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone education")
+    action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard education war solider resource Rspeed Pwonders")
 
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -29,7 +29,7 @@ def read_file(file_name):
     # 根據抓取檔案的不同，回傳不同的物件
     if file_name == "國家資訊表":
         return [country_info(*i.values()) for i in data]
-    elif file_name == "伊康攻略(回覆)":
+    elif file_name == "伊康攻略回應表 (回應)":
         return [action(*i.values()) for i in data]
     else:
         return [list(i.values()) for i in data]
@@ -46,7 +46,7 @@ def write_country_file(countryDict):
 
     # 更新成現在的國家資訊
     sheet.append_row(['編號', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '防禦力', '糧食倍率',
-                      '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭'])
+                      '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵', '石頭', '教育'])
     for i in countryDict.values():
         sheet.append_row(i.to_list())
 
@@ -55,7 +55,7 @@ def write_individual(countryDict, name, roundnow, boolean=False):
     def clear_sheet(sheet):
         sheet.clear()
         sheet.append_row(['回合', '國家', '世界奇觀', '黃金', '人民', '武器倍率', '防禦力', '糧食倍率',
-                          '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵礦', '石頭'])
+                          '木頭倍率', '鐵礦倍率', '石頭倍率', '糧食', '木頭', '鐵礦', '石頭', '教育'])
 
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -103,7 +103,7 @@ def initialize():
     """ 根據初始國家資訊表，初始化google雲端上的所有檔案 """
     # 建立namedtuple object
     country_info = namedtuple("country_info",
-                              "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone")
+                              "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone education")
     class_list = {"亞特蘭提斯": Atlantis, "阿斯嘉": Asgard, "奧林帕斯": Olympus, "瓦干達": Wakanda,
                   "香格里拉": ShangriLa, "瓦拉納西": Varanasi, "瑪雅": Maya, "塔爾塔洛斯": Tartarus,
                   "特奧蒂瓦坎": Teotihuacan, "復活節島": EasterIsland}
@@ -131,10 +131,10 @@ def createCountry():
 
 def handle_action():
     """ 將各國的行動單做處理，讓接下來資料處理起來比較方便 """
-    info = namedtuple("info", "name produceList useCard soldCard Pwonders war solider occupyMan resource Rspeed")
+    info = namedtuple("info", "name produceList useCard soldCard education war solider occupyMan resource Rspeed Pwonders")
 
     returnList = []
-    for i in read_file("伊康攻略(回覆)"):
+    for i in read_file("伊康攻略回應表 (回應)"):
         if "不戰爭" in i.war.replace(",", "").split():
             war, occupyMan, solider, resource, Rspeed = ["不戰爭"], 0, [], [], []
         else:
@@ -145,7 +145,7 @@ def handle_action():
             Rspeed = i.Rspeed.split()
 
         tempt = info(i.name, [i.Pfood, i.Pwood, i.Psteel, i.Pstone], i.useCard.split(),
-                     i.soldCard.split(), i.Pwonders, war, solider, occupyMan, resource, Rspeed)
+                     i.soldCard.split(), i.education, war, solider, occupyMan, resource, Rspeed, i.Pwonders)
         returnList.append(tempt)
 
     return returnList
@@ -740,4 +740,5 @@ def consume(countryDict):
 
 
 if __name__ == "__main__":
-    initialize()
+    # initialize()
+    print(handle_action())

@@ -9,7 +9,7 @@ class Country:
 
     # Constructor of Country object
     def __init__(self, ID, name, wonders, gold, population, weapon, defense,
-                 food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone):
+                 food_speed, wood_speed, steel_speed, stone_speed, food, wood, steel, stone, education):
         self._ID = int(ID)
         self._name = name
         self._wonders = int(wonders)
@@ -25,6 +25,7 @@ class Country:
         self._wood = int(wood)
         self._steel = int(steel)
         self._stone = int(stone)
+        self._education = int(education)
 
     def __dict__(self):
         """ Return all of the variables in dictionary that Country has """
@@ -32,7 +33,8 @@ class Country:
                 "population": self.population, "weapon": self.weapon, "defense": self.defense,
                 "food_speed": self.food_speed, "wood_speed": self.wood_speed,
                 "steel_speed": self.steel_speed, "stone_speed": self.stone_speed,
-                "food": self.food, "wood": self.wood, "steel": self.steel, "stone": self.stone}
+                "food": self.food, "wood": self.wood, "steel": self.steel, "stone": self.stone,
+                "education": self.education}
 
     def __iter__(self):
         for attr, value in self.__dict__().items():
@@ -50,7 +52,7 @@ class Country:
         """ construct Country with namedtuple """
         return cls(data.id, data.name, data.wonders, data.gold, data.population, data.weapon,
                    data.defense, data.food_speed, data.wood_speed, data.steel_speed,
-                   data.stone_speed, data.food, data.wood, data.steel, data.stone)
+                   data.stone_speed, data.food, data.wood, data.steel, data.stone, data.education)
 
     def to_list(self):
         """ Return all of the information in list """
@@ -231,6 +233,18 @@ class Country:
             print(f"{self.name}的石頭應該是正數而不是{value}")
             raise ValueError("stone must be positive")
         self._stone = int(round(value, -1))
+
+    # set the value of Country.education and avoid it becomes negtive
+    @property
+    def education(self):
+        return self._education
+
+    @education.setter
+    def education(self, value):
+        if value < 0 or not isinstance(value, int):
+            print(f"{self.name}的教育應該是正整數而不是{value}")
+            raise ValueError("education must be positive")
+        self._education = value
 
 
 class Atlantis(Country):
