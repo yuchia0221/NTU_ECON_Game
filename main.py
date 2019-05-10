@@ -1,4 +1,4 @@
-from function import (read_file, write_country_file, createCountry, write_individual, consume,
+from function import (read_file, write_country_file, createCountry, write_individual, consume, eduction,
                       handle_action, production, read_card, card, war, wonder, write_wonders)
 from time import time
 
@@ -20,6 +20,7 @@ if __name__ == "__main__":
         production(countryDict, i.name, i.produceList, i.occupyMan)
         if i.useCard or i.soldCard:
             card(countryDict, i.name, cardDict, i.useCard, i.soldCard)
+        eduction(countryDict, i.name, i.eduction)
 
     del cardDict
 

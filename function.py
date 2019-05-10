@@ -510,6 +510,36 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             raise KeyError(f"卡片驗證碼:{card}不存在")
 
 
+def eduction(countryDict, name, invest):
+    if invest == "是":
+        if countryDict[name].eduction == 0:
+            try:
+                countryDict[name].food -= 3000
+            except ValueError as e:
+                print(f"{name}沒有足夠的物資投資教育")
+
+        if countryDict[name].eduction == 1:
+            try:
+                countryDict[name].food -= 5000
+            except ValueError as e:
+                print(f"{name}沒有足夠的物資投資教育")
+
+        if countryDict[name].eduction == 2:
+            try:
+                countryDict[name].food -= 7000
+            except ValueError as e:
+                print(f"{name}沒有足夠的物資投資教育")
+
+        if countryDict[name].eduction == 3:
+            try:
+                countryDict[name].food -= 9000
+            except ValueError as e:
+                print(f"{name}沒有足夠的物資投資教育")
+
+    else:
+        return
+
+
 def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated):
     if attackingCountry == attackedCountry:
         print(f"{attackingCountry} can't attack itself")
