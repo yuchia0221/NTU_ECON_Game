@@ -740,5 +740,4 @@ def consume(countryDict):
 
 
 if __name__ == "__main__":
-    # initialize()
-    print(handle_action())
+    initialize()
