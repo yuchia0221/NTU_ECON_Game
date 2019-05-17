@@ -231,8 +231,8 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
     def wood1():
         try:
-            countryDict[name].food -= 600
-            countryDict[name].wood -= 200
+            countryDict[name].food -= 200
+            countryDict[name].wood -= 600
             countryDict[name].steel -= 200
             countryDict[name].stone -= 200
             countryDict[name].gold -= 400
@@ -643,6 +643,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
 def buildwonder(countryDict, name, percentWonders, state, Update):
     if state == 0:
         countryDict[name].wood -= 300 * percentWonders
+        countryDict[name].steel -= 200 * percentWonders
         countryDict[name].stone -= 200 * percentWonders
         countryDict[name].gold -= 500 * percentWonders
         if Update:
@@ -651,6 +652,7 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
 
     elif state == 1:
         countryDict[name].wood -= 800 * percentWonders
+        countryDict[name].steel -= 300 * percentWonders
         countryDict[name].stone -= 400 * percentWonders
         countryDict[name].gold -= 1500 * percentWonders
         if Update:
@@ -662,21 +664,22 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
 
     elif state == 2:
         countryDict[name].wood -= 1500 * percentWonders
+        countryDict[name].steel -= 1000 * percentWonders
         countryDict[name].stone -= 800 * percentWonders
-        countryDict[name].gold -= 3000 * percentWonders
+        countryDict[name].gold -= 2500 * percentWonders
         if Update:
             countryDict[name].weapon += 4
             countryDict[name].defense += 1000
-            countryDict[name].food_speed += 1
-            countryDict[name].wood_speed += 1
-            countryDict[name].steel_speed += 1
-            countryDict[name].stone_speed += 1
-            countryDict[name].population += 200
+            countryDict[name].food_speed += 2
+            countryDict[name].wood_speed += 2
+            countryDict[name].steel_speed += 2
+            countryDict[name].stone_speed += 2
 
     elif state == 3:
-        countryDict[name].wood -= 3000 * percentWonders
+        countryDict[name].wood -= 2500 * percentWonders
+        countryDict[name].steel -= 1800 * percentWonders
         countryDict[name].stone -= 1500 * percentWonders
-        countryDict[name].gold -= 6000 * percentWonders
+        countryDict[name].gold -= 3500 * percentWonders
         if Update:
             createCountry[name].population += 3000
 
@@ -725,6 +728,7 @@ def revisePwonder(countryDict, name, state, wonderdict):
     material = []
     if state == 0:
         material.append(countryDict[name].wood / 300)
+        material.append(countryDict[name].steel / 200)
         material.append(countryDict[name].stone / 200)
         material.append(countryDict[name].gold / 500)
 
@@ -732,6 +736,7 @@ def revisePwonder(countryDict, name, state, wonderdict):
             wonderdict[name] = int(min(material))
     elif state == 1:
         material.append(countryDict[name].wood / 800)
+        material.append(countryDict[name].steel / 300)
         material.append(countryDict[name].stone / 400)
         material.append(countryDict[name].gold / 1500)
 
@@ -740,16 +745,18 @@ def revisePwonder(countryDict, name, state, wonderdict):
 
     elif state == 2:
         material.append(countryDict[name].wood / 1500)
+        material.append(countryDict[name].steel / 1000)
         material.append(countryDict[name].stone / 800)
-        material.append(countryDict[name].gold / 3000)
+        material.append(countryDict[name].gold / 2500)
 
         if min(material) < wonderdict[name]:
             wonderdict[name] = int(min(material))
 
     elif state == 3:
-        material.append(countryDict[name].wood / 3000)
-        material.append(countryDict[name].stone / 1500)
-        material.append(countryDict[name].gold / 6000)
+        material.append(countryDict[name].wood / 2500)
+        material.append(countryDict[name].steel / 1500)
+        material.append(countryDict[name].stone / 1800)
+        material.append(countryDict[name].gold / 3500)
 
         if min(material) < wonderdict[name]:
             wonderdict[name] = int(min(material))
