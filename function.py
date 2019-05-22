@@ -86,7 +86,7 @@ def write_wonders(countryDict):
         sheet.update_cell(row, 3, i + j)
         sheet.update_cell(row, 5, i)
         sheet.update_cell(row, 6, j)
-        if i + j < 25:
+        if i + j < 25:                                  # 0~24 第零階段 25~49 第一階段 50~74 第二階段 75~99 第三階段 100 第四階段
             sheet.update_cell(row, 4, 0)
         elif i + j < 50:
             sheet.update_cell(row, 4, 1)
@@ -161,32 +161,32 @@ def production(countryDict, name, produce_num, warrior):
             total += temp
         return int(round(total * speed, -1))
 
-    if countryDict[name].population < warrior:
+    if countryDict[name].population < warrior:              # 如果打仗人數超過人口上限，因為全民皆兵，本次生產作廢
         for i in range(4):
             produce_num[i] = 0
 
     if countryDict[name].population - warrior < sum(produce_num) * 100:     # 人民不足生產
         times = (countryDict[name].population - warrior) // 100             # 計算本回合共能生產幾次
-        for i in range(4):
-            if times >= produce_num[i]:
+        for i in range(4):                                                  # 對每一項物資
+            if times >= produce_num[i]:                                     # 讓預期生產次數和實際上剩餘生產次數比較
                 times -= produce_num[i]
             else:
-                produce_num[i] = times
+                produce_num[i] = times                                      # 如果已經無法生產，則讓實際生產次數歸0
                 times = 0
 
         print(f"{name}的人民不夠來生產, 生產:{produce_num}")
 
-    food = production_f(produce_num[0], countryDict[name].food_speed)
+    food = production_f(produce_num[0], countryDict[name].food_speed)       # 依序執行食物、木頭、鐵礦、石頭的生產
     wood = production_f(produce_num[1], countryDict[name].wood_speed)
     steel = production_f(produce_num[2], countryDict[name].steel_speed)
     stone = production_f(produce_num[3], countryDict[name].stone_speed)
 
-    countryDict[name].food += food
+    countryDict[name].food += food                                          # 讓該國物資量加上本回合生產量
     countryDict[name].wood += wood
     countryDict[name].steel += steel
     countryDict[name].stone += stone
 
-    print(f"{name} has produced {food} food {wood} wood {steel} steel {stone} stone ")
+    print(f"{name} has produced {food} food {wood} wood {steel} steel {stone} stone ")  # 顯示該國生產量
 
     return
 
@@ -201,7 +201,7 @@ def read_card():
 def card(countryDict, name, cardDict, useCard, soldCard):
     """ 發動卡片效果 """
 
-    def food1():
+    def food1():                                                            # 綠色革命
         try:
             countryDict[name].food -= 600
             countryDict[name].wood -= 200
@@ -215,7 +215,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].food_speed += 0.4
         print(f"{name} has successfully invest food1")
 
-    def food2():
+    def food2():                                                            # 神農氏萬歲
         try:
             countryDict[name].food -= 1000
             countryDict[name].wood -= 400
@@ -229,7 +229,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         print(f"{name} has successfully invest food2")
         countryDict[name].food_speed += 0.8
 
-    def wood1():
+    def wood1():                                                            # 天降黑森林
         try:
             countryDict[name].food -= 200
             countryDict[name].wood -= 600
@@ -243,7 +243,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].wood_speed += 0.4
         print(f"{name} has successfully invest wood1")
 
-    def wood2():
+    def wood2():                                                            # 人造林
         try:
             countryDict[name].food -= 400
             countryDict[name].wood -= 1000
@@ -257,7 +257,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].wood_speed += 0.8
         print(f"{name} has successfully invest wood2")
 
-    def steel1():
+    def steel1():                                                            # 挖礦機器人
         try:
             countryDict[name].food -= 200
             countryDict[name].wood -= 200
@@ -271,7 +271,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].steel_speed += 0.4
         print(f"{name} has successfully invest steel1")
 
-    def steel2():
+    def steel2():                                                            # 華鐵爐
         try:
             countryDict[name].food -= 400
             countryDict[name].wood -= 400
@@ -285,7 +285,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].steel_speed += 0.8
         print(f"{name} has successfully invest steel2")
 
-    def stone1():
+    def stone1():                                                            # 找到烏魯魯
         try:
             countryDict[name].food -= 200
             countryDict[name].wood -= 200
@@ -299,7 +299,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].stone_speed += 0.4
         print(f"{name} has successfully invest stone1")
 
-    def stone2():
+    def stone2():                                                            # 愚公移山
         try:
             countryDict[name].food -= 400
             countryDict[name].wood -= 400
@@ -313,7 +313,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].stone_speed += 0.8
         print(f"{name} has successfully invest stone2")
 
-    def food_wood():
+    def food_wood():                                                            # 食物木頭
         try:
             countryDict[name].food -= 800
             countryDict[name].wood -= 800
@@ -328,7 +328,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].wood_speed += 0.5
         print(f"{name} has successfully invest food_wood")
 
-    def food_steel():
+    def food_steel():                                                            # 食物鐵礦
         try:
             countryDict[name].food -= 800
             countryDict[name].wood -= 400
@@ -343,7 +343,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].steel_speed += 0.5
         print(f"{name} has successfully invest food_steel")
 
-    def food_stone():
+    def food_stone():                                                            # 食物石頭
         try:
             countryDict[name].food -= 800
             countryDict[name].wood -= 400
@@ -358,7 +358,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].stone_speed += 0.5
         print(f"{name} has successfully invest food_stone")
 
-    def wood_steel():
+    def wood_steel():                                                            # 木頭鐵礦
         try:
             countryDict[name].food -= 400
             countryDict[name].wood -= 800
@@ -373,7 +373,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].steel_speed += 0.5
         print(f"{name} has successfully invest wood_steel")
 
-    def wood_stone():
+    def wood_stone():                                                            # 木頭石頭
         try:
             countryDict[name].food -= 400
             countryDict[name].wood -= 800
@@ -388,7 +388,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].stone_speed += 0.5
         print(f"{name} has successfully invest wood_stone")
 
-    def steel_stone():
+    def steel_stone():                                                            # 鐵礦石頭
         try:
             countryDict[name].food -= 400
             countryDict[name].wood -= 400
@@ -403,7 +403,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].stone_speed += 0.5
         print(f"{name} has successfully invest steel_stone")
 
-    def defense1():
+    def defense1():                                                            # 自強運動
         try:
             countryDict[name].wood -= 500
             countryDict[name].steel -= 500
@@ -415,7 +415,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].defense += 150
         print(f"{name} has successfully invest defense1")
 
-    def defense2():
+    def defense2():                                                            # 葵花寶典
         try:
             countryDict[name].wood -= 1500
             countryDict[name].steel -= 1500
@@ -427,7 +427,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].defense += 400
         print(f"{name} has successfully invest defense2")
 
-    def weapon1():
+    def weapon1():                                                            # 曼哈頓計畫
         try:
             countryDict[name].wood -= 300
             countryDict[name].steel -= 500
@@ -440,7 +440,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].weapon += 0.3
         print(f"{name} has successfully invest weapon1")
 
-    def weapon2():
+    def weapon2():                                                            # 石中劍
         try:
             countryDict[name].wood -= 800
             countryDict[name].steel -= 1500
@@ -453,7 +453,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].weapon += 0.5
         print(f"{name} has successfully invest weapon2")
 
-    def all1():
+    def all1():                                                            # 蟹堡秘方
         try:
             countryDict[name].food -= 1200
             countryDict[name].wood -= 600
@@ -470,7 +470,7 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].stone_speed += 0.3
         print(f"{name} has successfully invest all1")
 
-    def all2():
+    def all2():                                                            # 國富論
         try:
             countryDict[name].food -= 600
             countryDict[name].wood -= 700
@@ -538,24 +538,24 @@ def eduction(countryDict, name, invest):
         return
 
 
-def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated):
-    if attackingCountry == attackedCountry:
+def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated):    # 攻擊國為A國，防守國為B國
+    if attackingCountry == attackedCountry:                             # 如果A國和B國屬於同一個國家，則攻擊無效
         print(f"{attackingCountry} can't attack itself")
         return
-    elif countryDict[attackingCountry].population < soilder:
+    elif countryDict[attackingCountry].population < soilder:            # 如果派出的士兵比人口還多，則攻擊無效
         print(f"{attackingCountry}的士兵比人口還多")
         return
 
-    rubrate = 0.001
-    diff = countryDict[attackingCountry].weapon * soilder - countryDict[attackedCountry].defense
-    if diff >= 0 and not defeated[attackedCountry]:
-        countryDict[attackingCountry].population -= soilder * 0.3
-        countryDict[attackedCountry].population *= 0.9
-        countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5
+    rubrate = 0.001                                                     # 搶奪比率為0.001
+    diff = countryDict[attackingCountry].weapon * soilder - countryDict[attackedCountry].defense    # 勝負的判定為，A國武器倍率 * 士兵 vs B國防禦力
+    if diff >= 0 and not defeated[attackedCountry]:                                                 # 如果A國戰勝而且B國之前沒有戰敗過
+        countryDict[attackingCountry].population -= soilder * 0.3                                   # A國損失三成士兵
+        countryDict[attackedCountry].population *= 0.9                                              # B國損失一成人口
+        countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5               # A國盜取B國一半黃金
         countryDict[attackedCountry].gold *= 0.5
-        defeated[attackedCountry] = True
+        defeated[attackedCountry] = True                                                            # B國戰敗的布林值改為true
 
-        print(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{resource}和{speed}倍率")
+        print(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{resource}和{speed}倍率")            # A國搶奪B國一半加上0.001 * 戰力差的資源
 
         if resource == "糧食":
             try:
@@ -586,7 +586,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
                 countryDict[attackingCountry].stone += countryDict[attackedCountry].stone
                 countryDict[attackedCountry].stone = 0
 
-        if speed == "糧食":
+        if speed == "糧食":                                                                           # A國搶奪B國某種倍率
             countryDict[attackingCountry].food_speed += 0.2
             countryDict[attackedCountry].food_speed -= 0.2
         elif speed == "木頭":
@@ -599,12 +599,12 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
             countryDict[attackingCountry].stone_speed += 0.2
             countryDict[attackedCountry].stone_speed -= 0.2
 
-    elif diff >= 0 and defeated[attackedCountry]:
-        countryDict[attackingCountry].population -= soilder * 0.1
-        countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5
+    elif diff >= 0 and defeated[attackedCountry]:                                                       # 如果A國打贏B國，且B國曾經被打敗過
+        countryDict[attackingCountry].population -= soilder * 0.1                                       # A國損失一成士兵
+        countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5                   # A國搶奪B國一半黃金
         countryDict[attackedCountry].gold *= 0.5
 
-        if resource == "糧食":
+        if resource == "糧食":                                                                            # A國搶奪B國一半的物資和戰力差 * 0.001
             try:
                 countryDict[attackingCountry].food += 0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff)
                 countryDict[attackedCountry].food -= 0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff)
@@ -633,20 +633,20 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
                 countryDict[attackingCountry].stone += countryDict[attackedCountry].stone
                 countryDict[attackedCountry].stone = 0
 
-    elif diff < 0:
+    elif diff < 0:                                                  # 如果B國防守成功， A國損失四成士兵
         countryDict[attackingCountry].population -= soilder * 0.4
         print(f"{attackingCountry}進攻了{attackedCountry}但失敗了，損失四成士兵")
 
     return
 
 
-def buildwonder(countryDict, name, percentWonders, state, Update):
+def buildwonder(countryDict, name, percentWonders, state, Update):              # 建造奇蹟的函數
     if state == 0:
         countryDict[name].wood -= 300 * percentWonders
         countryDict[name].steel -= 200 * percentWonders
         countryDict[name].stone -= 200 * percentWonders
         countryDict[name].gold -= 500 * percentWonders
-        if Update:
+        if Update:                                                  # 第一階段完成的獎勵
             countryDict[name].weapon += 2
             countryDict[name].defense += 200
 
@@ -655,7 +655,7 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
         countryDict[name].steel -= 300 * percentWonders
         countryDict[name].stone -= 400 * percentWonders
         countryDict[name].gold -= 1500 * percentWonders
-        if Update:
+        if Update:                                                  # 第二階段完成的獎勵
             countryDict[name].food_speed += 2
             countryDict[name].wood_speed += 2
             countryDict[name].steel_speed += 2
@@ -667,7 +667,7 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
         countryDict[name].steel -= 1000 * percentWonders
         countryDict[name].stone -= 800 * percentWonders
         countryDict[name].gold -= 2500 * percentWonders
-        if Update:
+        if Update:                                                  # 第三階段完成的獎勵
             countryDict[name].weapon += 4
             countryDict[name].defense += 1000
             countryDict[name].food_speed += 2
@@ -680,7 +680,7 @@ def buildwonder(countryDict, name, percentWonders, state, Update):
         countryDict[name].steel -= 1800 * percentWonders
         countryDict[name].stone -= 1500 * percentWonders
         countryDict[name].gold -= 3500 * percentWonders
-        if Update:
+        if Update:                                                  # 第四階段完成的獎勵
             createCountry[name].population += 3000
 
     elif state == 4:
@@ -698,11 +698,11 @@ def wonder(countryDict, wonderlist, actionlist):
     wonderdict = {i.name: i.Pwonders for i in actionlist}     # [國家名字] : 每國準備貢獻多少比例
     Update = {}
 
-    for i in wonderlist:
+    for i in wonderlist:                                        # 對於每個奇觀
         temp = list(i)
-        Wname = temp[0]
-        currstate[Wname] = int(temp[3])
-        currwonder[Wname] = temp[2]
+        Wname = temp[0]                                         # Wname 為奇觀名字
+        currstate[Wname] = int(temp[3])                         # 目前階段
+        currwonder[Wname] = temp[2]                             # 目前進度
         Update[Wname] = False
         for name in temp[1].split():
             revisePwonder(countryDict, name, currstate[Wname], wonderdict)

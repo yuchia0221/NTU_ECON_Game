@@ -3,12 +3,7 @@ from math import atan, pi
 
 
 def trade_function(d, s):
-    a, b, c = 5, 1.8, 0.01
-
-    if d > s:
-        return a * (2 / pi) * atan(c * pow((d - s), (1 / 3))) + b
-    else:
-        return a * (2 / pi) * atan(c * -pow(abs(d - s), (1 / 3))) + b
+    return (1.2) * (2 / pi) * atan((d - s) * (1 / 5000)) + 1.2
 
 
 def print_indo(countryDict):
