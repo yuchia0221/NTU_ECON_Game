@@ -538,8 +538,8 @@ def eduction(countryDict, name, invest):
         return
 
 
-def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated):    # 攻擊國為A國，防守國為B國
-    if attackingCountry == attackedCountry:                             # 如果A國和B國屬於同一個國家，則攻擊無效
+def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated):
+    if attackingCountry == attackedCountry:                             # 如果攻打國和被攻打國屬於同一個國家，則攻擊無效
         print(f"{attackingCountry} can't attack itself")
         return
     elif countryDict[attackingCountry].population < soilder:            # 如果派出的士兵比人口還多，則攻擊無效
