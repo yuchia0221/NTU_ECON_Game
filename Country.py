@@ -133,9 +133,9 @@ class Country:
 
     @defense.setter
     def defense(self, value):
-        if value < 0:
-            print(f"{self.name}的防禦力應該是正數而不是{value}")
-            raise ValueError("defense must be positive")
+        if value < 0 and isinstance(value, int):
+            print(f"{self.name}的防禦力應該是正整數而不是{value}")
+            raise ValueError("defense must be positive integer")
         self._defense = int(round(value, -1))
 
     # set the value of Country.food_speed and avoid it becomes negtive

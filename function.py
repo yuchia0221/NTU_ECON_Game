@@ -198,9 +198,7 @@ def read_card():
         return {i[1]: (i[2], i[3], i[4]) for i in csv_reader}
 
 
-def card(countryDict, name, cardDict, useCard, soldCard):
-    """ 發動卡片效果 """
-
+def card(countryDict, name, cardDict, useCard, soldCard, defeated):
     def food1():                                                            # 綠色革命
         try:
             countryDict[name].food -= 600
@@ -228,6 +226,10 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         print(f"{name} has successfully invest food2")
         countryDict[name].food_speed += 0.8
+
+    def food3():
+        countryDict[name].food *= 1.5
+        print(f"{name} has successfully invest food3")
 
     def wood1():                                                            # 天降黑森林
         try:
@@ -257,6 +259,10 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].wood_speed += 0.8
         print(f"{name} has successfully invest wood2")
 
+    def wood3():
+        countryDict[name].wood *= 1.5
+        print(f"{name} has successfully invest wood3")
+
     def steel1():                                                            # 挖礦機器人
         try:
             countryDict[name].food -= 200
@@ -285,6 +291,10 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].steel_speed += 0.8
         print(f"{name} has successfully invest steel2")
 
+    def steel3():
+        countryDict[name].steel *= 1.5
+        print(f"{name} has successfully invest steel3")
+
     def stone1():                                                            # 找到烏魯魯
         try:
             countryDict[name].food -= 200
@@ -312,6 +322,10 @@ def card(countryDict, name, cardDict, useCard, soldCard):
 
         countryDict[name].stone_speed += 0.8
         print(f"{name} has successfully invest stone2")
+
+    def stone3():
+        countryDict[name].stone *= 1.5
+        print(f"{name} has successfully invest stone3")
 
     def food_wood():                                                            # 食物木頭
         try:
@@ -412,20 +426,32 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             print(f"{name} dosen't have enough resource to invest defense1")
             return
 
-        countryDict[name].defense += 150
+        countryDict[name].defense += 100
         print(f"{name} has successfully invest defense1")
 
     def defense2():                                                            # 葵花寶典
+        try:
+            countryDict[name].wood -= 1000
+            countryDict[name].steel -= 1000
+            countryDict[name].gold -= 1000
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest defense2")
+            return
+
+        countryDict[name].defense += 300
+        print(f"{name} has successfully invest defense2")
+
+    def defense3():                                                            # 葵花寶典
         try:
             countryDict[name].wood -= 1500
             countryDict[name].steel -= 1500
             countryDict[name].gold -= 1500
         except ValueError as e:
-            print(f"{name} dosen't have enough resource to invest defense2")
+            print(f"{name} dosen't have enough resource to invest defense3")
             return
 
-        countryDict[name].defense += 400
-        print(f"{name} has successfully invest defense2")
+        countryDict[name].defense += 500
+        print(f"{name} has successfully invest defense3   ")
 
     def weapon1():                                                            # 曼哈頓計畫
         try:
@@ -437,21 +463,62 @@ def card(countryDict, name, cardDict, useCard, soldCard):
             print(f"{name} dosen't have enough resource to invest weapon1")
             return
 
-        countryDict[name].weapon += 0.3
+        countryDict[name].weapon += 0.2
         print(f"{name} has successfully invest weapon1")
 
     def weapon2():                                                            # 石中劍
+        try:
+            countryDict[name].wood -= 550
+            countryDict[name].steel -= 1000
+            countryDict[name].stone -= 550
+            countryDict[name].gold -= 900
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest weapon2")
+            return
+
+        countryDict[name].weapon += 0.4
+        print(f"{name} has successfully invest weapon2")
+
+    def weapon3():                                                            # 石中劍
         try:
             countryDict[name].wood -= 800
             countryDict[name].steel -= 1500
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1500
         except ValueError as e:
-            print(f"{name} dosen't have enough resource to invest weapon2")
+            print(f"{name} dosen't have enough resource to invest weapon3")
+            return
+
+        countryDict[name].weapon += 0.6
+        print(f"{name} has successfully invest weapon3")
+
+    def war1():                                                            # 石中劍
+        try:
+            countryDict[name].wood -= 600
+            countryDict[name].steel -= 1000
+            countryDict[name].stone -= 400
+            countryDict[name].gold -= 1000
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest war1")
+            return
+
+        countryDict[name].weapon += 0.3
+        countryDict[name].defense += 150
+        print(f"{name} has successfully invest war1")
+
+    def war2():                                                            # 石中劍
+        try:
+            countryDict[name].wood -= 2000
+            countryDict[name].steel -= 2500
+            countryDict[name].stone -= 600
+            countryDict[name].gold -= 2500
+        except ValueError as e:
+            print(f"{name} dosen't have enough resource to invest war2")
             return
 
         countryDict[name].weapon += 0.5
-        print(f"{name} has successfully invest weapon2")
+        countryDict[name].defense += 450
+        print(f"{name} has successfully invest war2")
 
     def all1():                                                            # 蟹堡秘方
         try:
@@ -486,6 +553,40 @@ def card(countryDict, name, cardDict, useCard, soldCard):
         countryDict[name].steel_speed += 0.3
         countryDict[name].stone_speed += 0.3
         print(f"{name} has successfully invest all2")
+
+    def special1():
+        countryDict[name].gold += 750
+        print(f"{name} has successfully invest special1")
+
+    def special2():
+        print(f"{name} has successfully invest special2")
+
+    def special3():
+        print(f"{name} has successfully invest special3")
+
+    def special4():
+        defeated[name] = "Cannot attack"
+        print(f"{name} has successfully invest special4")
+
+    def gold1():
+        countryDict[name].gold *= 1.5
+        print(f"{name} has successfully invest gold1")
+
+    def gold2():
+        countryDict[name].gold *= 2
+        print(f"{name} has successfully invest gold2")
+
+    def human1():
+        countryDict[name].population += 100
+        print(f"{name} has successfully invest human1")
+
+    def human2():
+        countryDict[name].population += 200
+        print(f"{name} has successfully invest human2")
+
+    def human3():
+        countryDict[name].population += 300
+        print(f"{name} has successfully invest human3")
 
     for card in useCard:
         try:
@@ -541,6 +642,8 @@ def eduction(countryDict, name, invest):
 def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated):
     if attackingCountry == attackedCountry:                             # 如果攻打國和被攻打國屬於同一個國家，則攻擊無效
         print(f"{attackingCountry} can't attack itself")
+        return
+    elif defeated[attackedCountry] == "Cannot attack":
         return
     elif countryDict[attackingCountry].population < soilder:            # 如果派出的士兵比人口還多，則攻擊無效
         print(f"{attackingCountry}的士兵比人口還多")
