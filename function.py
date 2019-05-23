@@ -611,27 +611,31 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
 
 def eduction(countryDict, name, invest):
     if invest == "是":
-        if countryDict[name].eduction == 0:
+        if countryDict[name].education == 0:
             try:
                 countryDict[name].food -= 3000
+                countryDict[name].education = 1
             except ValueError as e:
                 print(f"{name}沒有足夠的物資投資教育")
 
         if countryDict[name].eduction == 1:
             try:
                 countryDict[name].food -= 5000
+                countryDict[name].education = 2
             except ValueError as e:
                 print(f"{name}沒有足夠的物資投資教育")
 
         if countryDict[name].eduction == 2:
             try:
                 countryDict[name].food -= 7000
+                countryDict[name].education = 3
             except ValueError as e:
                 print(f"{name}沒有足夠的物資投資教育")
 
         if countryDict[name].eduction == 3:
             try:
                 countryDict[name].food -= 9000
+                countryDict[name].education = 4
             except ValueError as e:
                 print(f"{name}沒有足夠的物資投資教育")
 
@@ -652,7 +656,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
     rubrate = 0.001                                                     # 搶奪比率為0.001
     diff = countryDict[attackingCountry].weapon * soilder - countryDict[attackedCountry].defense    # 勝負的判定為，A國武器倍率 * 士兵 vs B國防禦力
     if diff >= 0 and not defeated[attackedCountry]:                                                 # 如果A國戰勝而且B國之前沒有戰敗過
-        countryDict[attackingCountry].population -= soilder * 0.3                                   # A國損失三成士兵
+        countryDict[attackingCountry].population -= soilder * 0.5                                   # A國損失五成士兵
         countryDict[attackedCountry].population *= 0.9                                              # B國損失一成人口
         countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5               # A國盜取B國一半黃金
         countryDict[attackedCountry].gold *= 0.5
@@ -736,41 +740,40 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
                 countryDict[attackingCountry].stone += countryDict[attackedCountry].stone
                 countryDict[attackedCountry].stone = 0
 
-    elif diff < 0:                                                  # 如果B國防守成功， A國損失四成士兵
+    elif diff < 0:                                                  # 如果B國防守成功， A國損失七成士兵
         countryDict[attackingCountry].population -= soilder * 0.4
         print(f"{attackingCountry}進攻了{attackedCountry}但失敗了，損失四成士兵")
 
     return
 
 
-def buildwonder(countryDict, name, percentWonders, state, Update):              # 建造奇蹟的函數
-    if state == 0:
-        countryDict[name].wood -= 300 * percentWonders
-        countryDict[name].steel -= 200 * percentWonders
-        countryDict[name].stone -= 200 * percentWonders
-        countryDict[name].gold -= 500 * percentWonders
-        if Update:                                                  # 第一階段完成的獎勵
+def buildwonder(countryDict, name, Wname, percentWonders, state, Update):              # 建造奇蹟的函數
+    bundle = {}     # bundle是一個字典，key 是奇觀名字, value是一個二維陣列， 第一個index值對應到階段， 第二個index值對應到物資數量
+    bundle["經思闕"] = [[300, 200, 200, 500], [800, 300, 400, 1500], [1500, 1000, 800, 2500], [2500, 1500, 1800, 3500]]    # 物資依序為[木頭, 鐵礦, 石頭, 黃金]
+    bundle["亡星陵"] = [[300, 200, 200, 500], [500, 700, 300, 1500], [1200, 900, 1200, 2500], [1400, 2000, 2400, 3500]]
+    bundle["釗晁榭"] = [[300, 200, 200, 500], [700, 400, 400, 1500], [900, 1000, 1400, 2500], [2200, 2000, 1600, 3500]]
+    bundle["橡彶軒"] = [[300, 200, 200, 500], [350, 800, 350, 1500], [800, 1000, 1500, 2500], [1800, 2500, 1500, 3500]]
+    bundle["噱町閣"] = [[300, 200, 200, 500], [400, 350, 750, 1500], [1000, 1300, 1000, 2500], [1800, 2200, 1800, 3500]]
+    package = bundle[Wname][state]                              # 選擇本次建造組合
+
+    countryDict[name].wood -= package[0] * percentWonders
+    countryDict[name].steel -= package[1] * percentWonders
+    countryDict[name].stone -= package[2] * percentWonders
+    countryDict[name].gold -= package[3] * percentWonders
+
+    if Update:
+        if state == 0:                                              # 第一階段完成的獎勵
             countryDict[name].weapon += 2
             countryDict[name].defense += 200
 
-    elif state == 1:
-        countryDict[name].wood -= 800 * percentWonders
-        countryDict[name].steel -= 300 * percentWonders
-        countryDict[name].stone -= 400 * percentWonders
-        countryDict[name].gold -= 1500 * percentWonders
-        if Update:                                                  # 第二階段完成的獎勵
-            countryDict[name].food_speed += 2
-            countryDict[name].wood_speed += 2
-            countryDict[name].steel_speed += 2
-            countryDict[name].stone_speed += 2
+        elif state == 1:                                            # 第二階段完成的獎勵
+            countryDict[name].food_speed += 1
+            countryDict[name].wood_speed += 1
+            countryDict[name].steel_speed += 1
+            countryDict[name].stone_speed += 1
             countryDict[name].population += 400
 
-    elif state == 2:
-        countryDict[name].wood -= 1500 * percentWonders
-        countryDict[name].steel -= 1000 * percentWonders
-        countryDict[name].stone -= 800 * percentWonders
-        countryDict[name].gold -= 2500 * percentWonders
-        if Update:                                                  # 第三階段完成的獎勵
+        elif state == 2:                                            # 第三階段完成的獎勵
             countryDict[name].weapon += 4
             countryDict[name].defense += 1000
             countryDict[name].food_speed += 2
@@ -778,19 +781,14 @@ def buildwonder(countryDict, name, percentWonders, state, Update):              
             countryDict[name].steel_speed += 2
             countryDict[name].stone_speed += 2
 
-    elif state == 3:
-        countryDict[name].wood -= 2500 * percentWonders
-        countryDict[name].steel -= 1800 * percentWonders
-        countryDict[name].stone -= 1500 * percentWonders
-        countryDict[name].gold -= 3500 * percentWonders
-        if Update:                                                  # 第四階段完成的獎勵
+        elif state == 3:                                            # 第四階段完成的獎勵
             createCountry[name].population += 3000
 
-    elif state == 4:
+    if state == 4:
         return
 
     countryDict[name].wonders += int(percentWonders)
-    print(f"{name} 貢獻了 {percentWonders}%")
+    print(f"{name} 貢獻了 {percentWonders}% 給{Wname}")
 
 
 def wonder(countryDict, wonderlist, actionlist):
@@ -807,8 +805,8 @@ def wonder(countryDict, wonderlist, actionlist):
         currstate[Wname] = int(temp[3])                         # 目前階段
         currwonder[Wname] = temp[2]                             # 目前進度
         Update[Wname] = False
-        for name in temp[1].split():
-            revisePwonder(countryDict, name, currstate[Wname], wonderdict)
+        for name in temp[1].split():                            # 對每一個國家
+            revisePwonder(countryDict, name, Wname, currstate[Wname], wonderdict)  # 確認物資是否足夠投資
             if Wname in totalwonder:
                 totalwonder[Wname] += wonderdict[name]
             else:
@@ -816,60 +814,41 @@ def wonder(countryDict, wonderlist, actionlist):
 
         print(totalwonder, wonderdict)
 
-        if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 > 25:
+        if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 > 25:     # 確認是否晉級
             Update[Wname] = True
             print(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
-            weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]
-            for name in temp[1].split():
+            weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]  # 計算線性權重
+            for name in temp[1].split():                                                    # 重寫每個國家的投資數量
                 wonderdict[name] = int(round(wonderdict[name] * weight, 0))
 
-        for name in temp[1].split():
-            buildwonder(countryDict, name, wonderdict[name], temp[3], Update[Wname])
+        for name in temp[1].split():                                                    # 蓋奇觀
+            buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname])
 
 
-def revisePwonder(countryDict, name, state, wonderdict):
+def revisePwonder(countryDict, name, Wname, state, wonderdict):
+    bundle = {}                                                 # 物資依序為[木頭, 鐵礦, 石頭, 黃金]
+    bundle["經思闕"] = [[300, 200, 200, 500], [800, 300, 400, 1500], [1500, 1000, 800, 2500], [2500, 1500, 1800, 3500]]
+    bundle["亡星陵"] = [[300, 200, 200, 500], [500, 700, 300, 1500], [1200, 900, 1200, 2500], [1400, 2000, 2400, 3500]]
+    bundle["釗晁榭"] = [[300, 200, 200, 500], [700, 400, 400, 1500], [900, 1000, 1400, 2500], [2200, 2000, 1600, 3500]]
+    bundle["橡彶軒"] = [[300, 200, 200, 500], [350, 800, 350, 1500], [800, 1000, 1500, 2500], [1800, 2500, 1500, 3500]]
+    bundle["噱町閣"] = [[300, 200, 200, 500], [400, 350, 750, 1500], [1000, 1300, 1000, 2500], [1800, 2200, 1800, 3500]]
+    package = bundle[Wname][state]                              # 選擇本次建造組合
     material = []
-    if state == 0:
-        material.append(countryDict[name].wood / 300)
-        material.append(countryDict[name].steel / 200)
-        material.append(countryDict[name].stone / 200)
-        material.append(countryDict[name].gold / 500)
 
-        if min(material) < wonderdict[name]:
-            wonderdict[name] = int(min(material))
-    elif state == 1:
-        material.append(countryDict[name].wood / 800)
-        material.append(countryDict[name].steel / 300)
-        material.append(countryDict[name].stone / 400)
-        material.append(countryDict[name].gold / 1500)
+    material.append(countryDict[name].wood / package[0])        # 確認最大可能生產次數
+    material.append(countryDict[name].steel / package[1])
+    material.append(countryDict[name].stone / package[2])
+    material.append(countryDict[name].gold / package[3])
 
-        if min(material) < wonderdict[name]:
-            wonderdict[name] = int(min(material))
-
-    elif state == 2:
-        material.append(countryDict[name].wood / 1500)
-        material.append(countryDict[name].steel / 1000)
-        material.append(countryDict[name].stone / 800)
-        material.append(countryDict[name].gold / 2500)
-
-        if min(material) < wonderdict[name]:
-            wonderdict[name] = int(min(material))
-
-    elif state == 3:
-        material.append(countryDict[name].wood / 2500)
-        material.append(countryDict[name].steel / 1500)
-        material.append(countryDict[name].stone / 1800)
-        material.append(countryDict[name].gold / 3500)
-
-        if min(material) < wonderdict[name]:
-            wonderdict[name] = int(min(material))
+    if min(material) < wonderdict[name]:                        # 如果欲建造次數超過能力上限，則讓欲建造次數等同能力上限
+        wonderdict[name] = int(min(material))
 
 
 def consume(countryDict):
     for i in countryDict.values():
         i.population += 100
         try:
-            i.food -= i.population
+            i.food -= i.population * 2
         except ValueError as e:
             try:
                 i.gold -= i.population * 2
