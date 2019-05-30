@@ -199,60 +199,64 @@ def read_card():
 
 
 def card(countryDict, name, cardDict, useCard, soldCard, defeated):
-    def food1():                                                            # 綠色革命
-        try:
+    def food1():
+        if (countryDict[name].food >= 600 and countryDict[name].wood >= 200 and countryDict[name].steel >= 200 and
+                countryDict[name].stone >= 200 and countryDict[name].gold >= 400):
             countryDict[name].food -= 600
             countryDict[name].wood -= 200
             countryDict[name].steel -= 200
             countryDict[name].stone -= 200
             countryDict[name].gold -= 400
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest food1")
             return
 
         countryDict[name].food_speed += 0.4
         print(f"{name} has successfully invest food1")
 
-    def food2():                                                            # 神農氏萬歲
-        try:
+    def food2():
+        if (countryDict[name].food >= 1000 and countryDict[name].wood >= 400 and countryDict[name].steel >= 400 and
+                countryDict[name].stone >= 400 and countryDict[name].gold >= 600):
             countryDict[name].food -= 1000
             countryDict[name].wood -= 400
             countryDict[name].steel -= 400
             countryDict[name].stone -= 400
             countryDict[name].gold -= 600
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest food2")
             return
 
-        print(f"{name} has successfully invest food2")
         countryDict[name].food_speed += 0.8
+        print(f"{name} has successfully invest food2")
 
     def food3():
         countryDict[name].food *= 1.5
         print(f"{name} has successfully invest food3")
 
-    def wood1():                                                            # 天降黑森林
-        try:
+    def wood1():
+        if (countryDict[name].food >= 200 and countryDict[name].wood >= 600 and countryDict[name].steel >= 200 and
+                countryDict[name].stone >= 200 and countryDict[name].gold >= 400):
             countryDict[name].food -= 200
             countryDict[name].wood -= 600
             countryDict[name].steel -= 200
             countryDict[name].stone -= 200
             countryDict[name].gold -= 400
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest wood1")
             return
 
         countryDict[name].wood_speed += 0.4
         print(f"{name} has successfully invest wood1")
 
-    def wood2():                                                            # 人造林
-        try:
+    def wood2():
+        if (countryDict[name].food >= 400 and countryDict[name].wood >= 1000 and countryDict[name].steel >= 400 and
+                countryDict[name].stone >= 400 and countryDict[name].gold >= 600):
             countryDict[name].food -= 400
             countryDict[name].wood -= 1000
             countryDict[name].steel -= 400
             countryDict[name].stone -= 400
             countryDict[name].gold -= 600
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest wood2")
             return
 
@@ -263,28 +267,30 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].wood *= 1.5
         print(f"{name} has successfully invest wood3")
 
-    def steel1():                                                            # 挖礦機器人
-        try:
+    def steel1():
+        if (countryDict[name].food >= 200 and countryDict[name].wood >= 200 and countryDict[name].steel >= 600 and
+                countryDict[name].stone >= 200 and countryDict[name].gold >= 400):
             countryDict[name].food -= 200
             countryDict[name].wood -= 200
             countryDict[name].steel -= 600
             countryDict[name].stone -= 200
             countryDict[name].gold -= 400
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest steel1")
             return
 
         countryDict[name].steel_speed += 0.4
         print(f"{name} has successfully invest steel1")
 
-    def steel2():                                                            # 華鐵爐
-        try:
+    def steel2():
+        if (countryDict[name].food >= 400 and countryDict[name].wood >= 400 and countryDict[name].steel >= 1000 and
+                countryDict[name].stone >= 400 and countryDict[name].gold >= 600):
             countryDict[name].food -= 400
             countryDict[name].wood -= 400
             countryDict[name].steel -= 1000
             countryDict[name].stone -= 400
             countryDict[name].gold -= 600
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest steel2")
             return
 
@@ -295,28 +301,30 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].steel *= 1.5
         print(f"{name} has successfully invest steel3")
 
-    def stone1():                                                            # 找到烏魯魯
-        try:
+    def stone1():
+        if (countryDict[name].food >= 200 and countryDict[name].wood >= 200 and countryDict[name].steel >= 200 and
+                countryDict[name].stone >= 600 and countryDict[name].gold >= 400):
             countryDict[name].food -= 200
             countryDict[name].wood -= 200
             countryDict[name].steel -= 200
             countryDict[name].stone -= 600
             countryDict[name].gold -= 400
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest stone1")
             return
 
         countryDict[name].stone_speed += 0.4
         print(f"{name} has successfully invest stone1")
 
-    def stone2():                                                            # 愚公移山
-        try:
+    def stone2():
+        if (countryDict[name].food >= 400 and countryDict[name].wood >= 400 and countryDict[name].steel >= 400 and
+                countryDict[name].stone >= 1000 and countryDict[name].gold >= 600):
             countryDict[name].food -= 400
             countryDict[name].wood -= 400
             countryDict[name].steel -= 400
             countryDict[name].stone -= 1000
             countryDict[name].gold -= 600
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest stone2")
             return
 
@@ -327,14 +335,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].stone *= 1.5
         print(f"{name} has successfully invest stone3")
 
-    def food_wood():                                                            # 食物木頭
-        try:
+    def food_wood():
+        if (countryDict[name].food >= 800 and countryDict[name].wood >= 800 and countryDict[name].steel >= 400 and
+                countryDict[name].stone >= 400 and countryDict[name].gold >= 1200):
             countryDict[name].food -= 800
             countryDict[name].wood -= 800
             countryDict[name].steel -= 400
             countryDict[name].stone -= 400
             countryDict[name].gold -= 1200
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest food_wood")
             return
 
@@ -342,14 +351,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].wood_speed += 0.5
         print(f"{name} has successfully invest food_wood")
 
-    def food_steel():                                                            # 食物鐵礦
-        try:
+    def food_steel():
+        if (countryDict[name].food >= 800 and countryDict[name].wood >= 400 and countryDict[name].steel >= 800 and
+                countryDict[name].stone >= 400 and countryDict[name].gold >= 1200):
             countryDict[name].food -= 800
             countryDict[name].wood -= 400
             countryDict[name].steel -= 800
             countryDict[name].stone -= 400
             countryDict[name].gold -= 1200
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest food_steel")
             return
 
@@ -357,14 +367,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].steel_speed += 0.5
         print(f"{name} has successfully invest food_steel")
 
-    def food_stone():                                                            # 食物石頭
-        try:
+    def food_stone():
+        if (countryDict[name].food >= 800 and countryDict[name].wood >= 400 and countryDict[name].steel >= 400 and
+                countryDict[name].stone >= 800 and countryDict[name].gold >= 1200):
             countryDict[name].food -= 800
             countryDict[name].wood -= 400
             countryDict[name].steel -= 400
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1200
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest food_stone")
             return
 
@@ -372,14 +383,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].stone_speed += 0.5
         print(f"{name} has successfully invest food_stone")
 
-    def wood_steel():                                                            # 木頭鐵礦
-        try:
+    def wood_steel():
+        if (countryDict[name].food >= 400 and countryDict[name].wood >= 800 and countryDict[name].steel >= 800 and
+                countryDict[name].stone >= 400 and countryDict[name].gold >= 1200):
             countryDict[name].food -= 400
             countryDict[name].wood -= 800
             countryDict[name].steel -= 800
             countryDict[name].stone -= 400
             countryDict[name].gold -= 1200
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest wood_steel")
             return
 
@@ -387,14 +399,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].steel_speed += 0.5
         print(f"{name} has successfully invest wood_steel")
 
-    def wood_stone():                                                            # 木頭石頭
-        try:
+    def wood_stone():
+        if (countryDict[name].food >= 400 and countryDict[name].wood >= 800 and countryDict[name].steel >= 400 and
+                countryDict[name].stone >= 800 and countryDict[name].gold >= 1200):
             countryDict[name].food -= 400
             countryDict[name].wood -= 800
             countryDict[name].steel -= 400
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1200
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest wood_stone")
             return
 
@@ -402,14 +415,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].stone_speed += 0.5
         print(f"{name} has successfully invest wood_stone")
 
-    def steel_stone():                                                            # 鐵礦石頭
-        try:
+    def steel_stone():
+        if (countryDict[name].food >= 400 and countryDict[name].wood >= 400 and countryDict[name].steel >= 800 and
+                countryDict[name].stone >= 800 and countryDict[name].gold >= 1200):
             countryDict[name].food -= 400
             countryDict[name].wood -= 400
             countryDict[name].steel -= 800
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1200
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest steel_stone")
             return
 
@@ -417,88 +431,92 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].stone_speed += 0.5
         print(f"{name} has successfully invest steel_stone")
 
-    def defense1():                                                            # 自強運動
-        try:
+    def defense1():
+        if countryDict[name].wood >= 500 and countryDict[name].steel >= 500 and countryDict[name].gold >= 500:
             countryDict[name].wood -= 500
             countryDict[name].steel -= 500
             countryDict[name].gold -= 500
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest defense1")
             return
 
         countryDict[name].defense += 100
         print(f"{name} has successfully invest defense1")
 
-    def defense2():                                                            # 葵花寶典
-        try:
+    def defense2():
+        if countryDict[name].wood >= 1000 and countryDict[name].steel >= 1000 and countryDict[name].gold >= 1000:
             countryDict[name].wood -= 1000
             countryDict[name].steel -= 1000
             countryDict[name].gold -= 1000
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest defense2")
             return
 
         countryDict[name].defense += 300
         print(f"{name} has successfully invest defense2")
 
-    def defense3():                                                            # 葵花寶典
-        try:
+    def defense3():
+        if countryDict[name].wood >= 1500 and countryDict[name].steel >= 1500 and countryDict[name].gold >= 1500:
             countryDict[name].wood -= 1500
             countryDict[name].steel -= 1500
             countryDict[name].gold -= 1500
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest defense3")
             return
 
         countryDict[name].defense += 500
         print(f"{name} has successfully invest defense3   ")
 
-    def weapon1():                                                            # 曼哈頓計畫
-        try:
+    def weapon1():
+        if (countryDict[name].wood >= 300 and countryDict[name].steel >= 500 and
+                countryDict[name].stone >= 300 and countryDict[name].gold >= 300):
             countryDict[name].wood -= 300
             countryDict[name].steel -= 500
             countryDict[name].stone -= 300
             countryDict[name].gold -= 300
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest weapon1")
             return
 
         countryDict[name].weapon += 0.2
         print(f"{name} has successfully invest weapon1")
 
-    def weapon2():                                                            # 石中劍
-        try:
+    def weapon2():
+        if (countryDict[name].wood >= 550 and countryDict[name].steel >= 1000 and
+                countryDict[name].stone >= 550 and countryDict[name].gold >= 900):
             countryDict[name].wood -= 550
             countryDict[name].steel -= 1000
             countryDict[name].stone -= 550
             countryDict[name].gold -= 900
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest weapon2")
             return
 
         countryDict[name].weapon += 0.4
         print(f"{name} has successfully invest weapon2")
 
-    def weapon3():                                                            # 石中劍
-        try:
+    def weapon3():
+        if (countryDict[name].wood >= 800 and countryDict[name].steel >= 1500 and
+                countryDict[name].stone >= 800 and countryDict[name].gold >= 1500):
             countryDict[name].wood -= 800
             countryDict[name].steel -= 1500
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1500
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest weapon3")
             return
 
         countryDict[name].weapon += 0.6
         print(f"{name} has successfully invest weapon3")
 
-    def war1():                                                            # 石中劍
-        try:
+    def war1():
+        if (countryDict[name].wood >= 600 and countryDict[name].steel >= 1000 and
+                countryDict[name].stone >= 400 and countryDict[name].gold >= 1000):
             countryDict[name].wood -= 600
             countryDict[name].steel -= 1000
             countryDict[name].stone -= 400
             countryDict[name].gold -= 1000
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest war1")
             return
 
@@ -507,12 +525,13 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         print(f"{name} has successfully invest war1")
 
     def war2():                                                            # 石中劍
-        try:
+        if (countryDict[name].wood >= 2000 and countryDict[name].steel >= 2500 and
+                countryDict[name].stone >= 600 and countryDict[name].gold >= 2500):
             countryDict[name].wood -= 2000
             countryDict[name].steel -= 2500
             countryDict[name].stone -= 600
             countryDict[name].gold -= 2500
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest war2")
             return
 
@@ -521,13 +540,14 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         print(f"{name} has successfully invest war2")
 
     def all1():                                                            # 蟹堡秘方
-        try:
+        if (countryDict[name].food >= 1200 and countryDict[name].wood >= 600 and countryDict[name].steel >= 600 and
+                countryDict[name].stone >= 600 and countryDict[name].gold >= 2500):
             countryDict[name].food -= 1200
             countryDict[name].wood -= 600
             countryDict[name].steel -= 600
             countryDict[name].stone -= 600
             countryDict[name].gold -= 2500
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest all1")
             return
 
@@ -538,13 +558,14 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         print(f"{name} has successfully invest all1")
 
     def all2():                                                            # 國富論
-        try:
+        if (countryDict[name].food >= 600 and countryDict[name].wood >= 700 and countryDict[name].steel >= 600 and
+                countryDict[name].stone >= 800 and countryDict[name].gold >= 2000):
             countryDict[name].food -= 600
             countryDict[name].wood -= 700
             countryDict[name].steel -= 600
             countryDict[name].stone -= 800
             countryDict[name].gold -= 2000
-        except ValueError as e:
+        else:
             print(f"{name} dosen't have enough resource to invest all2")
             return
 
