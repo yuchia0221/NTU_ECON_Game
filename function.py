@@ -1,5 +1,6 @@
 import csv
 import gspread
+import pandas as pd
 from collections import namedtuple
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
@@ -153,13 +154,6 @@ def handle_action():
 
 def production(countryDict, produceData, name, produce_num, warrior):
     """ 生產順序:糧食、木頭、鐵礦、石頭 """
-    def production_f(times, speed):
-        total = 550
-        temp = 550
-        for i in range(1, times):
-            temp -= 25 * i
-            total += temp
-        return int(round(total * speed, -1))
 
     if countryDict[name].population < warrior:              # 如果打仗人數超過人口上限，因為全民皆兵，本次生產作廢
         for i in range(4):
@@ -183,10 +177,10 @@ def production(countryDict, produceData, name, produce_num, warrior):
     steel = dict(produceData[str(produce_num[2])])[float(countryDict[name].steel_speed)]
     stone = dict(produceData[str(produce_num[3])])[float(countryDict[name].stone_speed)]
 
-    countryDict[name].food += food                                          # 讓該國物資量加上本回合生產量
-    countryDict[name].wood += wood
-    countryDict[name].steel += steel
-    countryDict[name].stone += stone
+    countryDict[name].food += int(food)                                          # 讓該國物資量加上本回合生產量
+    countryDict[name].wood += int(wood)
+    countryDict[name].steel += int(steel)
+    countryDict[name].stone += int(stone)
 
     print(f"{name} has produced {food} food {wood} wood {steel} steel {stone} stone ")  # 顯示該國生產量
 
