@@ -115,8 +115,8 @@ def initialize():
         countryDict = {i.name: class_list[i.name](*i) for i in countryList}
 
     write_country_file(countryDict)
-    for i in class_list.keys():
-        write_individual(countryDict, i, "一", True)
+    # for i in class_list.keys():
+    #     write_individual(countryDict, i, "一", True)
 
 
 def createCountry():
