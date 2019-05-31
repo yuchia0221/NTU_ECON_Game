@@ -1,6 +1,5 @@
 import csv
 import gspread
-import pandas as pd
 from collections import namedtuple
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
