@@ -24,6 +24,7 @@ if __name__ == "__main__":
     # print(trade_function(2500, 0), "d = 2500, s = 0")
     # print(trade_function(5000, 0), "d = 5000, s = 0")
     # print(trade_function(10000, 0), "d = 10000, s = 0")
+
     resources = ["糧食", "木頭", "鐵礦", "石頭"]
     trade_info = read_file("系統貿易(回應)")              # [時間, 國家名, 賣糧, 賣木, 賣鐵, 賣石, 買糧, 買木, 買鐵, 買石]
     countryDict = createCountry()
