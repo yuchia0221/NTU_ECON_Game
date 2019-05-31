@@ -590,6 +590,10 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].population += 300
         print(f"{name} has successfully invest human3")
 
+    def special4():
+        defeated[name] = "Cannot attack"
+        print(f"{name} has successfully invest special4")
+
     for card in useCard:
         try:
             if cardDict[card][1] == "Y":
