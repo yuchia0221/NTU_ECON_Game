@@ -612,7 +612,7 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
             raise KeyError(f"卡片驗證碼:{card}不存在")
 
 
-def eduction(countryDict, name, invest):
+def education(countryDict, name, invest):
     if invest == "是":
         if countryDict[name].education == 0:
             try:
@@ -849,14 +849,17 @@ def revisePwonder(countryDict, name, Wname, state, wonderdict):
 
 def consume(countryDict):
     for i in countryDict.values():
-        i.population += 100
         try:
             i.food -= i.population * 2
         except ValueError as e:
             try:
-                i.gold -= i.population * 2
+                i.gold -= i.population * 2 - i.food
+                i.food = 0
             except ValueError as e:
                 i.gold = 0
+                i.food = 0
+
+        i.population += 100
 
 
 if __name__ == "__main__":

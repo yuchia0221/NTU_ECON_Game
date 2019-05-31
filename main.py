@@ -1,6 +1,6 @@
 import pandas as pd
 from time import time
-from function import (read_file, write_country_file, createCountry, write_individual, consume, eduction,
+from function import (read_file, write_country_file, createCountry, write_individual, consume, education,
                       handle_action, production, read_card, card, war, wonder, write_wonders)
 
 
@@ -13,17 +13,18 @@ if __name__ == "__main__":
     cardDict = read_card()
     wonderlist = read_file("世界奇觀")
     produceNum = pd.read_csv("生產函數表.csv", index_col=0, encoding="ANSI")
-
+    print(dict(produceNum["0"])[1.2])
     after = time()
     print(f"讀取檔案完成，共花費{after - before:.1f}s")
 
     before = time()
 
+    print(actionList)
     for i in actionList:
         production(countryDict, produceNum, i.name, i.produceList, i.occupyMan)
         if i.useCard or i.soldCard:
             card(countryDict, i.name, cardDict, i.useCard, i.soldCard)
-        eduction(countryDict, i.name, i.eduction)
+        education(countryDict, i.name, i.education)
 
     del cardDict
 
@@ -37,7 +38,7 @@ if __name__ == "__main__":
         else:
             continue
 
-    wonder(countryDict, wonderlist, actionList)
+    # wonder(countryDict, wonderlist, actionList)
 
     consume(countryDict)
 
@@ -52,11 +53,11 @@ if __name__ == "__main__":
     write_wonders(countryDict)
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
                    '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
-    for i in countryName:
-        try:
-            write_individual(countryDict, i, loop)
-        except:
-            write_individual(countryDict, i, loop)
+    # for i in countryName:
+    #     try:
+    #         write_individual(countryDict, i, loop)
+    #     except:
+    #         write_individual(countryDict, i, loop)
 
     after = time()
     print(f"寫檔完成，共花費{after - before:.1f}s")
