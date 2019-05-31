@@ -1,6 +1,8 @@
+import pandas as pd
+from time import time
 from function import (read_file, write_country_file, createCountry, write_individual, consume, eduction,
                       handle_action, production, read_card, card, war, wonder, write_wonders)
-from time import time
+
 
 if __name__ == "__main__":
 
@@ -10,6 +12,7 @@ if __name__ == "__main__":
     actionList = handle_action()
     cardDict = read_card()
     wonderlist = read_file("世界奇觀")
+    produceNum = pd.read_csv("生產函數表.csv", index_col=0, encoding="ANSI")
 
     after = time()
     print(f"讀取檔案完成，共花費{after - before:.1f}s")
@@ -17,7 +20,7 @@ if __name__ == "__main__":
     before = time()
 
     for i in actionList:
-        production(countryDict, i.name, i.produceList, i.occupyMan)
+        production(countryDict, produceNum, i.name, i.produceList, i.occupyMan)
         if i.useCard or i.soldCard:
             card(countryDict, i.name, cardDict, i.useCard, i.soldCard)
         eduction(countryDict, i.name, i.eduction)

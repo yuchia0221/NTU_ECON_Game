@@ -151,7 +151,7 @@ def handle_action():
     return returnList
 
 
-def production(countryDict, name, produce_num, warrior):
+def production(countryDict, produceData, name, produce_num, warrior):
     """ 生產順序:糧食、木頭、鐵礦、石頭 """
     def production_f(times, speed):
         total = 550
@@ -176,10 +176,12 @@ def production(countryDict, name, produce_num, warrior):
 
         print(f"{name}的人民不夠來生產, 生產:{produce_num}")
 
-    food = production_f(produce_num[0], countryDict[name].food_speed)       # 依序執行食物、木頭、鐵礦、石頭的生產
-    wood = production_f(produce_num[1], countryDict[name].wood_speed)
-    steel = production_f(produce_num[2], countryDict[name].steel_speed)
-    stone = production_f(produce_num[3], countryDict[name].stone_speed)
+    # 依序執行食物、木頭、鐵礦、石頭的生產
+
+    food = dict(produceData[str(produce_num[0])])[float(countryDict[name].food_speed)]
+    wood = dict(produceData[str(produce_num[1])])[float(countryDict[name].wood_speed)]
+    steel = dict(produceData[str(produce_num[2])])[float(countryDict[name].steel_speed)]
+    stone = dict(produceData[str(produce_num[3])])[float(countryDict[name].stone_speed)]
 
     countryDict[name].food += food                                          # 讓該國物資量加上本回合生產量
     countryDict[name].wood += wood
@@ -864,4 +866,5 @@ def consume(countryDict):
 
 
 if __name__ == "__main__":
-    initialize()
+    # initialize()
+    pass
