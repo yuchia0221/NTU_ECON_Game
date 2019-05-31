@@ -575,20 +575,6 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].stone_speed += 0.3
         print(f"{name} has successfully invest all2")
 
-    def special1():
-        countryDict[name].gold += 750
-        print(f"{name} has successfully invest special1")
-
-    def special2():
-        print(f"{name} has successfully invest special2")
-
-    def special3():
-        print(f"{name} has successfully invest special3")
-
-    def special4():
-        defeated[name] = "Cannot attack"
-        print(f"{name} has successfully invest special4")
-
     def gold1():
         countryDict[name].gold *= 1.5
         print(f"{name} has successfully invest gold1")
