@@ -23,7 +23,9 @@ if __name__ == "__main__":
     # print(trade_function(1000, 0), "d = 1000, s = 0")
     # print(trade_function(2500, 0), "d = 2500, s = 0")
     # print(trade_function(5000, 0), "d = 5000, s = 0")
-    # print(trade_function(10000, 0), "d = 10000, s = 0")
+    # print(trade_function(0, 10000), "d = 0, s = 10000")
+    # print(trade_function(0, 30000), "d = 0, s = 30000")
+    # print(trade_function(0, 50000), "d = 0, s = 50000")
 
     resources = ["糧食", "木頭", "鐵礦", "石頭"]
     trade_info = read_file("系統貿易(回應)")              # [時間, 國家名, 賣糧, 賣木, 賣鐵, 賣石, 買糧, 買木, 買鐵, 買石]
