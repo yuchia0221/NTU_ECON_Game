@@ -59,7 +59,7 @@ class Country:
         return list(self.__dict__().values())
 
     def win_condition(self):
-        self.win = self.wonders * 5000 + self.gold
+        self.win = pow(self.wonders, 2) * 200 + self.wonders * 1000 + self.gold + 0.5 * (self.food + self.stone + self.steel + self.wood)
 
     # set the "ID" and "name" are immutable
     @property

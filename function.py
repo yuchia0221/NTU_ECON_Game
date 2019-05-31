@@ -624,21 +624,21 @@ def education(countryDict, name, invest):
             except ValueError as e:
                 print(f"{name}沒有足夠的物資投資教育")
 
-        if countryDict[name].eduction == 1:
+        if countryDict[name].education == 1:
             try:
                 countryDict[name].food -= 5000
                 countryDict[name].education = 2
             except ValueError as e:
                 print(f"{name}沒有足夠的物資投資教育")
 
-        if countryDict[name].eduction == 2:
+        if countryDict[name].education == 2:
             try:
                 countryDict[name].food -= 7000
                 countryDict[name].education = 3
             except ValueError as e:
                 print(f"{name}沒有足夠的物資投資教育")
 
-        if countryDict[name].eduction == 3:
+        if countryDict[name].education == 3:
             try:
                 countryDict[name].food -= 9000
                 countryDict[name].education = 4
