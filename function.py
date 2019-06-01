@@ -617,33 +617,36 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
 
 def education(countryDict, name, invest):
     if invest == "是":
-        if countryDict[name].education == 0:
-            try:
-                countryDict[name].food -= 3000
-                countryDict[name].education = 1
-            except ValueError as e:
-                print(f"{name}沒有足夠的糧食投資教育到一級，因為你的食物只有{countryDict[name].food}")
+        if countryDict[name].education == 0 and countryDict[name].food >= 3000:
+            countryDict[name].food -= 3000
+            countryDict[name].education = 1
+            print(f"{name}沒已經成功投資教育LV.1")
+            return
 
-        if countryDict[name].education == 1:
-            try:
-                countryDict[name].food -= 5000
-                countryDict[name].education = 2
-            except ValueError as e:
-                print(f"{name}沒有足夠的糧食投資教育到二級，因為你的食物只有{countryDict[name].food}")
+        else:
+            print(f"{name}沒有足夠的糧食投資教育LV.1，因為你的食物只有{countryDict[name].food} < 3000")
 
-        if countryDict[name].education == 2:
-            try:
-                countryDict[name].food -= 7000
-                countryDict[name].education = 3
-            except ValueError as e:
-                print(f"{name}沒有足夠的糧食投資教育到三級，因為你的食物只有{countryDict[name].food}")
+        if countryDict[name].education == 1 and countryDict[name].food >= 5000:
+            countryDict[name].food -= 5000
+            countryDict[name].education = 2
+            print(f"{name}沒已經成功投資教育LV.2")
+            return
+
+        else:
+            print(f"{name}沒有足夠的糧食投資教育LV.2，因為你的食物只有{countryDict[name].food} < 5000")
+
+        if countryDict[name].education == 2 and countryDict[name].food >= 9000:
+            countryDict[name].food -= 9000
+            countryDict[name].education = 3
+            print(f"{name}沒已經成功投資教育LV.3")
+            return
+
+        else:
+            print(f"{name}沒有足夠的糧食投資教育LV.3，因為你的食物只有{countryDict[name].food} < 9000")
 
         if countryDict[name].education == 3:
-            try:
-                countryDict[name].food -= 9000
-                countryDict[name].education = 4
-            except ValueError as e:
-                print(f"{name}沒有足夠的糧食投資教育到四級，因為你的食物只有{countryDict[name].food}")
+            print(f"{name}的教育已經滿級，不能再投資了")
+            return
 
     else:
         return
