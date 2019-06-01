@@ -856,16 +856,11 @@ def revisePwonder(countryDict, name, Wname, state, wonderdict):
 def consume(countryDict):
     for i in countryDict.values():
         try:
-            i.food -= i.population * 2
+            i.food -= i.population + 500
+            i.population += 100
         except ValueError as e:
-            try:
-                i.gold -= i.population * 2 - i.food
-                i.food = 0
-            except ValueError as e:
-                i.gold = 0
-                i.food = 0
-
-        i.population += 100
+            i.food = 0
+            i.population -= 100
 
 
 if __name__ == "__main__":
