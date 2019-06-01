@@ -594,22 +594,22 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         defeated[name] = "Cannot attack"
         print(f"{name} has successfully invest special4")
 
-    for card in useCard:
-        try:
-            if cardDict[card][1] == "Y":
-                print(f"這張卡片已經使用過了")
-            else:
-                locals()[cardDict[card][0]]()
-
-        except KeyError:
-            raise KeyError(f"卡片驗證碼:{card}不存在")
-
     for card in soldCard:
         try:
             if cardDict[card][1] == "Y":
                 print(f"這張卡片已經使用過了")
             else:
                 countryDict[name].gold += int(cardDict[card][2])
+
+        except KeyError:
+            raise KeyError(f"卡片驗證碼:{card}不存在")
+
+    for card in useCard:
+        try:
+            if cardDict[card][1] == "Y":
+                print(f"這張卡片已經使用過了")
+            else:
+                locals()[cardDict[card][0]]()
 
         except KeyError:
             raise KeyError(f"卡片驗證碼:{card}不存在")
