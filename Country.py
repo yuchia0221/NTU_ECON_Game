@@ -243,7 +243,7 @@ class Country:
     def education(self, value):
         if value < 0 or not isinstance(value, int):
             print(f"{self.name}的教育應該是正整數而不是{value}")
-            raise ValueError("education must be positive")
+            raise ValueError("education must be positive integer")
         self._education = value
 
 
