@@ -654,10 +654,13 @@ def education(countryDict, name, invest):
 
 def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated):
     if attackingCountry == attackedCountry:                             # 如果攻打國和被攻打國屬於同一個國家，則攻擊無效
-        print(f"{attackingCountry} can't attack itself")
+        print(f"{attackingCountry}無法攻擊自己")
         return
+
     elif defeated[attackedCountry] == "Cannot attack":
+        print(f"{attackedCountry}發動特殊效果，無法被攻擊")
         return
+
     elif countryDict[attackingCountry].population < soilder:            # 如果派出的士兵比人口還多，則攻擊無效
         print(f"{attackingCountry}的士兵比人口還多")
         return
@@ -748,6 +751,8 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
             except ValueError:
                 countryDict[attackingCountry].stone += countryDict[attackedCountry].stone
                 countryDict[attackedCountry].stone = 0
+
+        print(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{resource}，因{attackedCountry}已經被打過了，因此無法掠奪倍率")
 
     elif diff < 0:                                                  # 如果B國防守成功， A國損失七成士兵
         countryDict[attackingCountry].population -= soilder * 0.4
