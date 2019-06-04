@@ -771,6 +771,7 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle)
     countryDict[name].gold -= package[3] * percentWonders
 
     if Update:
+        print(f"{name}成功過得第{state}階段升級效果")
         if state == 0:                                              # 第一階段完成的獎勵
             countryDict[name].weapon += 2
             countryDict[name].defense += 200
