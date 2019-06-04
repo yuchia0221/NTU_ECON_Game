@@ -826,14 +826,12 @@ def wonder(countryDict, wonderlist, actionlist):
             else:
                 totalwonder[Wname] = wonderdict[name]
 
-        print(totalwonder, wonderdict)
-
         if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 >= 25:     # 確認是否晉級
             Update[Wname] = True
             print(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
             C = temp[1].split()
             if wonderdict[C[0]] == wonderdict[C[1]]:
-                if randint() == 1:
+                if randint(0, 1) == 1:
                     wonderdict[C[0]] += 1
                 else:
                     wonderdict[C[1]] += 1
@@ -843,6 +841,8 @@ def wonder(countryDict, wonderlist, actionlist):
 
         for name in temp[1].split():                                                    # 蓋奇觀
             buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname], bundle)
+
+    print(Update)
 
 
 def revisePwonder(countryDict, name, Wname, state, wonderdict, bundle):
@@ -855,6 +855,7 @@ def revisePwonder(countryDict, name, Wname, state, wonderdict, bundle):
     material.append(countryDict[name].gold / package[3])
 
     if min(material) < wonderdict[name]:                        # 如果欲建造次數超過能力上限，則讓欲建造次數等同能力上限
+        print(f"{name}沒有足夠多的資源投資{Wname}{wonderdict[name]}%，只能投資{int(min(material))}%")
         wonderdict[name] = int(min(material))
 
 
