@@ -1,6 +1,5 @@
 from random import shuffle, randint
 
-
 resourcePool, warPool, humanPool = [], [], []
 loopR = [34, 22, 10, 34, 22, 10, 34, 22, 10, 34, 22, 10, 20, 20, 20, 20, 20, 20, 8, 14, 20, 10]
 loopW = [60, 30, 10, 60, 30, 10, 75, 25]

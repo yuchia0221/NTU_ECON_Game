@@ -43,19 +43,19 @@ if __name__ == "__main__":
     after = time()
     print(f"基本函數完成，共花費{after - before:.1f}s")
 
-    print("開始寫檔")
-    before = time()
+    # print("開始寫檔")
+    # before = time()
 
-    loop = "二"
-    write_country_file(countryDict)
-    write_wonders(countryDict)
-    countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
-                   '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
-    # for i in countryName:
-    #     try:
-    #         write_individual(countryDict, i, loop)
-    #     except:
-    #         write_individual(countryDict, i, loop)
+    # loop = "二"
+    # write_country_file(countryDict)
+    # write_wonders(countryDict)
+    # countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
+    #                '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
+    # # for i in countryName:
+    # #     try:
+    # #         write_individual(countryDict, i, loop)
+    # #     except:
+    # #         write_individual(countryDict, i, loop)
 
-    after = time()
-    print(f"寫檔完成，共花費{after - before:.1f}s")
+    # after = time()
+    # print(f"寫檔完成，共花費{after - before:.1f}s")
