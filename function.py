@@ -4,6 +4,7 @@ from collections import namedtuple
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
                      Varanasi, Maya, Tartarus, Teotihuacan, EasterIsland)
+from random import randint
 
 
 def read_file(file_name):
@@ -761,13 +762,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
     return
 
 
-def buildwonder(countryDict, name, Wname, percentWonders, state, Update):              # 建造奇蹟的函數
-    bundle = {}     # bundle是一個字典，key 是奇觀名字, value是一個二維陣列， 第一個index值對應到階段， 第二個index值對應到物資數量
-    bundle["經思闕"] = [[300, 200, 200, 500], [800, 300, 400, 1500], [1500, 1000, 800, 2500], [2500, 1500, 1800, 3500]]    # 物資依序為[木頭, 鐵礦, 石頭, 黃金]
-    bundle["亡星陵"] = [[300, 200, 200, 500], [500, 700, 300, 1500], [1200, 900, 1200, 2500], [1400, 2000, 2400, 3500]]
-    bundle["釗晁榭"] = [[300, 200, 200, 500], [700, 400, 400, 1500], [900, 1000, 1400, 2500], [2200, 2000, 1600, 3500]]
-    bundle["橡彶軒"] = [[300, 200, 200, 500], [350, 800, 350, 1500], [800, 1000, 1500, 2500], [1800, 2500, 1500, 3500]]
-    bundle["噱町閣"] = [[300, 200, 200, 500], [400, 350, 750, 1500], [1000, 1300, 1000, 2500], [1800, 2200, 1800, 3500]]
+def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle):              # 建造奇蹟的函數
     package = bundle[Wname][state]                              # 選擇本次建造組合
 
     countryDict[name].wood -= package[0] * percentWonders
@@ -806,7 +801,12 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update):       
 
 
 def wonder(countryDict, wonderlist, actionlist):
-    # 這邊把actionlist傳進去的寫法很糟，但目前我沒想到好辦法
+    bundle = {}                                                 # 物資依序為[木頭, 鐵礦, 石頭, 黃金]
+    bundle["經思闕"] = [[300, 200, 200, 500], [800, 300, 400, 1500], [1500, 1000, 800, 2500], [2500, 1500, 1800, 3500]]
+    bundle["亡星陵"] = [[300, 200, 200, 500], [500, 700, 300, 1500], [1200, 900, 1200, 2500], [1400, 2000, 2400, 3500]]
+    bundle["釗晁榭"] = [[300, 200, 200, 500], [700, 400, 400, 1500], [900, 1000, 1400, 2500], [2200, 2000, 1600, 3500]]
+    bundle["橡彶軒"] = [[300, 200, 200, 500], [350, 800, 350, 1500], [800, 1000, 1500, 2500], [1800, 2500, 1500, 3500]]
+    bundle["噱町閣"] = [[300, 200, 200, 500], [400, 350, 750, 1500], [1000, 1300, 1000, 2500], [1800, 2200, 1800, 3500]]
     currstate = {}      # [奇觀名字] : 現在階段
     totalwonder = {}    # [奇觀名字] : 準備要建造多少比例
     currwonder = {}     # [奇觀名字] : 現在有多少比例
@@ -820,7 +820,7 @@ def wonder(countryDict, wonderlist, actionlist):
         currwonder[Wname] = temp[2]                             # 目前進度
         Update[Wname] = False
         for name in temp[1].split():                            # 對每一個國家
-            revisePwonder(countryDict, name, Wname, currstate[Wname], wonderdict)  # 確認物資是否足夠投資
+            revisePwonder(countryDict, name, Wname, currstate[Wname], wonderdict, bundle)  # 確認物資是否足夠投資
             if Wname in totalwonder:
                 totalwonder[Wname] += wonderdict[name]
             else:
@@ -828,24 +828,24 @@ def wonder(countryDict, wonderlist, actionlist):
 
         print(totalwonder, wonderdict)
 
-        if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 > 25:     # 確認是否晉級
+        if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 >= 25:     # 確認是否晉級
             Update[Wname] = True
             print(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
+            C = temp[1].split()
+            if wonderdict[C[0]] == wonderdict[C[1]]:
+                if randint() == 1:
+                    wonderdict[C[0]] += 1
+                else:
+                    wonderdict[C[1]] += 1
             weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]  # 計算線性權重
             for name in temp[1].split():                                                    # 重寫每個國家的投資數量
                 wonderdict[name] = int(round(wonderdict[name] * weight, 0))
 
         for name in temp[1].split():                                                    # 蓋奇觀
-            buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname])
+            buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname], bundle)
 
 
-def revisePwonder(countryDict, name, Wname, state, wonderdict):
-    bundle = {}                                                 # 物資依序為[木頭, 鐵礦, 石頭, 黃金]
-    bundle["經思闕"] = [[300, 200, 200, 500], [800, 300, 400, 1500], [1500, 1000, 800, 2500], [2500, 1500, 1800, 3500]]
-    bundle["亡星陵"] = [[300, 200, 200, 500], [500, 700, 300, 1500], [1200, 900, 1200, 2500], [1400, 2000, 2400, 3500]]
-    bundle["釗晁榭"] = [[300, 200, 200, 500], [700, 400, 400, 1500], [900, 1000, 1400, 2500], [2200, 2000, 1600, 3500]]
-    bundle["橡彶軒"] = [[300, 200, 200, 500], [350, 800, 350, 1500], [800, 1000, 1500, 2500], [1800, 2500, 1500, 3500]]
-    bundle["噱町閣"] = [[300, 200, 200, 500], [400, 350, 750, 1500], [1000, 1300, 1000, 2500], [1800, 2200, 1800, 3500]]
+def revisePwonder(countryDict, name, Wname, state, wonderdict, bundle):
     package = bundle[Wname][state]                              # 選擇本次建造組合
     material = []
 
