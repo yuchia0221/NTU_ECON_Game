@@ -764,7 +764,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
 
 
 def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle):              # 建造奇蹟的函數
-    package = bundle[Wname][state]                              # 選擇本次建造組合
+    package = bundle[Wname][state]                                  # 選擇本次建造組合
 
     countryDict[name].wood -= package[0] * percentWonders
     countryDict[name].steel -= package[1] * percentWonders
@@ -812,7 +812,16 @@ def wonder(countryDict, wonderlist, actionlist):
     currstate = {}      # [奇觀名字] : 現在階段
     totalwonder = {}    # [奇觀名字] : 準備要建造多少比例
     currwonder = {}     # [奇觀名字] : 現在有多少比例
-    wonderdict = {i.name: i.Pwonders for i in actionlist}     # [國家名字] : 每國準備貢獻多少比例
+    wonderdict = {i.name: i.Pwonders for i in actionlist}        # [國家名字] : 每國準備貢獻多少比例
+
+    countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
+                   '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
+    for i in countryName:
+        if i in wonderdict:
+            pass
+        else:
+            wonderdict[i] = 0
+
     Update = {}
 
     for i in wonderlist:                                        # 對於每個奇觀
@@ -828,7 +837,7 @@ def wonder(countryDict, wonderlist, actionlist):
             else:
                 totalwonder[Wname] = wonderdict[name]
 
-        if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 >= 25:     # 確認是否晉級
+        if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 >= 25:            # 確認是否晉級
             Update[Wname] = True
             print(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
             C = temp[1].split()
@@ -866,7 +875,7 @@ def consume(countryDict):
         try:
             i.food -= i.population + 500
             i.population += 100
-        except ValueError as e:
+        except ValueError:
             i.food = 0
             i.population -= 100
 
