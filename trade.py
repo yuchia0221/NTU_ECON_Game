@@ -1,3 +1,4 @@
+import os
 from function import createCountry, read_file, write_country_file
 from math import atan, pi
 
@@ -35,18 +36,19 @@ if __name__ == "__main__":
     price_list, demand, supply = [], [0] * 4, [0] * 4   # [糧食, 木頭, 鐵礦, 石頭], 物資的總需求，總供給 [糧食, 木頭, 鐵礦, 石頭]
 
     for j in trade_info:
-        if countryDict[j[1]].food < j[2]:               # 如果物資不夠賣，將當回賣的物資量等同現有物資存量，並顯示錯誤
-            j[2] = countryDict[j[1]].food
-            print(f"{j[1]} doesn't have enough resources of food")
-        if countryDict[j[1]].wood < j[3]:
-            j[3] = countryDict[j[1]].wood
-            print(f"{j[1]} doesn't have enough resources of wood")
-        if countryDict[j[1]].steel < j[4]:
-            j[4] = countryDict[j[1]].steel
-            print(f"{j[1]} doesn't have enough resources of steel")
-        if countryDict[j[1]].stone < j[5]:
-            j[5] = countryDict[j[1]].stone
-            print(f"{j[1]} doesn't have enough resources of stone")
+        name = j[1]
+        if countryDict[name].food < j[2]:               # 如果物資不夠賣，將當回賣的物資量等同現有物資存量，並顯示錯誤
+            j[2] = countryDict[name].food
+            print(f"{name} doesn't have enough resources of food")
+        if countryDict[name].wood < j[3]:
+            j[3] = countryDict[name].wood
+            print(f"{name} doesn't have enough resources of wood")
+        if countryDict[name].steel < j[4]:
+            j[4] = countryDict[name].steel
+            print(f"{name} doesn't have enough resources of steel")
+        if countryDict[name].stone < j[5]:
+            j[5] = countryDict[name].stone
+            print(f"{name} doesn't have enough resources of stone")
 
         for i in range(4):                          # 加總供給與需求
             supply[i] += j[i + 2]
@@ -60,29 +62,31 @@ if __name__ == "__main__":
 
     # 買賣
     for i in trade_info:
+        name = [i[1]]
         # 執行賣物資的動作
-        countryDict[i[1]].food -= i[2]
-        countryDict[i[1]].wood -= i[3]
-        countryDict[i[1]].steel -= i[4]
-        countryDict[i[1]].stone -= i[5]
-        print(f"{i[1]} 賣出了 {i[2]} 糧食 {i[3]} 木頭 {i[4]} 鐵礦 {i[5]} 石頭")
+        countryDict[name].food -= i[2]
+        countryDict[name].wood -= i[3]
+        countryDict[name].steel -= i[4]
+        countryDict[name].stone -= i[5]
+        print(f"{name} 賣出了 {i[2]} 糧食 {i[3]} 木頭 {i[4]} 鐵礦 {i[5]} 石頭")
         for j in range(4):
-            countryDict[i[1]].gold += price_list[j] * i[j + 2]
+            countryDict[name].gold += price_list[j] * i[j + 2]
 
         # 執行買物資的動作
         for j in range(4):
-            if countryDict[i[1]].gold < price_list[j] * i[j + 6]:                                   # 如果黃金不夠買當項物資
-                print(f"{i[1]} doesn't have enough resources of gold to buy {resources[j]}")        # 顯示錯誤訊息
+            if countryDict[name].gold < price_list[j] * i[j + 6]:                                   # 如果黃金不夠買當項物資
+                print(f"{name} doesn't have enough resources of gold to buy {resources[j]}")        # 顯示錯誤訊息
                 i[j + 6] = 0
-                while(countryDict[i[1]].gold > price_list[j] * (i[j + 6] + 500)):  # 以500為間隔，從0開始，直到他買得起結束
+                while(countryDict[name].gold > price_list[j] * (i[j + 6] + 500)):  # 以500為間隔，從0開始，直到他買得起結束
                     i[j + 6] += 500
 
-            countryDict[i[1]].gold -= price_list[j] * i[j + 6]
+            countryDict[name].gold -= price_list[j] * i[j + 6]
 
-        countryDict[i[1]].food += i[6]
-        countryDict[i[1]].wood += i[7]
-        countryDict[i[1]].steel += i[8]
-        countryDict[i[1]].stone += i[9]
-        print(f"{i[1]} 買進了 {i[6]} 糧食 {i[7]} 木頭 {i[8]} 鐵礦 {i[9]} 石頭")
+        countryDict[name].food += i[6]
+        countryDict[name].wood += i[7]
+        countryDict[name].steel += i[8]
+        countryDict[name].stone += i[9]
+        print(f"{name} 買進了 {i[6]} 糧食 {i[7]} 木頭 {i[8]} 鐵礦 {i[9]} 石頭")
 
     write_country_file(countryDict)
+    os.system("pause")

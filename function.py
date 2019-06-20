@@ -145,8 +145,8 @@ def handle_action():
             resource = i.resource.split()
             Rspeed = i.Rspeed.split()
 
-        tempt = info(i.name, [i.Pfood, i.Pwood, i.Psteel, i.Pstone], i.useCard.split(),
-                     i.soldCard.split(), i.education, war, solider, occupyMan, resource, Rspeed, i.Pwonders)
+        tempt = info(i.name, [i.Pfood, i.Pwood, i.Psteel, i.Pstone], str(i.useCard).split(),
+                     str(i.soldCard).split(), i.education, war, solider, occupyMan, resource, Rspeed, i.Pwonders)
         returnList.append(tempt)
 
     return returnList
@@ -600,6 +600,7 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
             if cardDict[card][1] == "Y":
                 print(f"這張卡片已經使用過了")
             else:
+                print(f"{name}對{cardDict[card][0]}販賣成功")
                 countryDict[name].gold += int(cardDict[card][2])
 
         except KeyError:

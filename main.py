@@ -36,7 +36,7 @@ if __name__ == "__main__":
         else:
             continue
 
-    wonder(countryDict, wonderlist, actionList)
+    # wonder(countryDict, wonderlist, actionList)
 
     # consume(countryDict)
 
