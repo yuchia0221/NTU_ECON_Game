@@ -49,6 +49,4 @@
 a = "123"
 print(a)
 
-a = a.split("23")
-print(a)
-print(pow(-46, 2))
+input()
