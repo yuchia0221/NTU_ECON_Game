@@ -72,6 +72,6 @@ if __name__ == "__main__":
         countryDict[name].stone += i[9]
         print(f"{name} 買進了 {i[6]} 糧食 {i[7]} 木頭 {i[8]} 鐵礦 {i[9]} 石頭")
 
-    # write_country_file(countryDict)
+    write_country_file(countryDict)
 
     input("請按輸入結束程式:")

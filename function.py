@@ -155,9 +155,9 @@ def handle_action():
 def production(countryDict, produceData, name, produce_num, warrior):
     """ 生產順序:糧食、木頭、鐵礦、石頭 """
 
-    if countryDict[name].population < warrior:              # 如果打仗人數超過人口上限，因為全民皆兵，本次生產作廢
-        for i in range(4):
-            produce_num[i] = 0
+    if countryDict[name].population <= warrior:              # 如果打仗人數超過人口上限，因為全民皆兵，本次生產作廢
+        print(f"{name}的人民都去當兵了，無法從事生產")
+        return
 
     if countryDict[name].population - warrior < sum(produce_num) * 100:     # 人民不足生產
         times = (countryDict[name].population - warrior) // 100             # 計算本回合共能生產幾次
@@ -170,14 +170,15 @@ def production(countryDict, produceData, name, produce_num, warrior):
 
         print(f"{name}的人民不夠來生產, 生產:{produce_num}")
 
-    # 依序執行食物、木頭、鐵礦、石頭的生產
-
+    # dict(produceData[生產次數]): 回傳後的東西轉成dictionary:{1: 550, 1.1: 610...}
+    # 接著利用[float(countryDict[name].food_speed)]去對生產總額為何
     food = dict(produceData[str(produce_num[0])])[float(countryDict[name].food_speed)]
     wood = dict(produceData[str(produce_num[1])])[float(countryDict[name].wood_speed)]
     steel = dict(produceData[str(produce_num[2])])[float(countryDict[name].steel_speed)]
     stone = dict(produceData[str(produce_num[3])])[float(countryDict[name].stone_speed)]
 
-    countryDict[name].food += int(food)                                          # 讓該國物資量加上本回合生產量
+    # 依序執行食物、木頭、鐵礦、石頭的生產
+    countryDict[name].food += int(food)
     countryDict[name].wood += int(wood)
     countryDict[name].steel += int(steel)
     countryDict[name].stone += int(stone)
@@ -618,8 +619,8 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
 
 
 def education(countryDict, name, invest):
-    if invest == "是":
-        if countryDict[name].education == 0 and countryDict[name].food >= 3000:
+    if invest == "是":                                                               # 如果本回合選擇投資教育
+        if countryDict[name].education == 0 and countryDict[name].food >= 3000:      # 如果等級是0而且有3000糧食，則升級成功
             countryDict[name].food -= 3000
             countryDict[name].education = 1
             print(f"{name}沒已經成功投資教育LV.1")
@@ -627,8 +628,9 @@ def education(countryDict, name, invest):
 
         else:
             print(f"{name}沒有足夠的糧食投資教育LV.1，因為你的食物只有{countryDict[name].food} < 3000")
+            return
 
-        if countryDict[name].education == 1 and countryDict[name].food >= 5000:
+        if countryDict[name].education == 1 and countryDict[name].food >= 5000:      # 如果等級是1而且有5000糧食，則升級成功
             countryDict[name].food -= 5000
             countryDict[name].education = 2
             print(f"{name}沒已經成功投資教育LV.2")
@@ -636,8 +638,9 @@ def education(countryDict, name, invest):
 
         else:
             print(f"{name}沒有足夠的糧食投資教育LV.2，因為你的食物只有{countryDict[name].food} < 5000")
+            return
 
-        if countryDict[name].education == 2 and countryDict[name].food >= 9000:
+        if countryDict[name].education == 2 and countryDict[name].food >= 9000:      # 如果等級是2而且有9000糧食，則升級成功
             countryDict[name].food -= 9000
             countryDict[name].education = 3
             print(f"{name}沒已經成功投資教育LV.3")
@@ -645,8 +648,9 @@ def education(countryDict, name, invest):
 
         else:
             print(f"{name}沒有足夠的糧食投資教育LV.3，因為你的食物只有{countryDict[name].food} < 9000")
+            return
 
-        if countryDict[name].education == 3:
+        if countryDict[name].education == 3:                                         # 如果等級是3，則無法繼續投資
             print(f"{name}的教育已經滿級，不能再投資了")
             return
 
@@ -659,7 +663,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
         print(f"{attackingCountry}無法攻擊自己")
         return
 
-    elif defeated[attackedCountry] == "Cannot attack":
+    elif defeated[attackedCountry] == "Cannot attack":                  # 如果該國家無法被攻擊，則攻擊無效
         print(f"{attackedCountry}發動特殊效果，無法被攻擊")
         return
 
@@ -756,17 +760,19 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
 
         print(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{resource}，因{attackedCountry}已經被打過了，因此無法掠奪倍率")
 
-    elif diff < 0:                                                  # 如果B國防守成功， A國損失七成士兵
+    elif diff < 0:                                                  # 如果B國防守成功， A國損失四成士兵
         countryDict[attackingCountry].population -= soilder * 0.4
         print(f"{attackingCountry}進攻了{attackedCountry}但失敗了，損失四成士兵")
 
     return
 
 
-def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle):              # 建造奇蹟的函數
+def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle):
+    # 建造奇蹟的函數
     package = bundle[Wname][state]                                  # 選擇本次建造組合
+    # package = [糧食, 木頭, 鐵礦, 石頭]
 
-    countryDict[name].wood -= package[0] * percentWonders
+    countryDict[name].wood -= package[0] * percentWonders           # 建造奇觀成本 = 該階段成本 * 次數
     countryDict[name].steel -= package[1] * percentWonders
     countryDict[name].stone -= package[2] * percentWonders
     countryDict[name].gold -= package[3] * percentWonders
@@ -774,18 +780,18 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle)
     if Update:
         print(f"{name}成功過得第{state}階段升級效果")
         if state == 0:                                              # 第一階段完成的獎勵
-            countryDict[name].weapon += 2
-            countryDict[name].defense += 200
+            countryDict[name].weapon += 1
+            countryDict[name].defense += 300
 
         elif state == 1:                                            # 第二階段完成的獎勵
-            countryDict[name].food_speed += 1
-            countryDict[name].wood_speed += 1
-            countryDict[name].steel_speed += 1
-            countryDict[name].stone_speed += 1
-            countryDict[name].population += 400
+            countryDict[name].food_speed += 2
+            countryDict[name].wood_speed += 2
+            countryDict[name].steel_speed += 2
+            countryDict[name].stone_speed += 2
+            countryDict[name].population += 500
 
         elif state == 2:                                            # 第三階段完成的獎勵
-            countryDict[name].weapon += 4
+            countryDict[name].weapon += 2
             countryDict[name].defense += 1000
             countryDict[name].food_speed += 2
             countryDict[name].wood_speed += 2
@@ -795,7 +801,8 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle)
         elif state == 3:                                            # 第四階段完成的獎勵
             createCountry[name].population += 3000
 
-    if state == 4:
+    if state == 4:                                                  # 如果達到第四階段，則不再升級
+        print(f"{Wname}已經達到最高級了")
         return
 
     countryDict[name].wonders += int(percentWonders)
@@ -871,13 +878,13 @@ def revisePwonder(countryDict, name, Wname, state, wonderdict, bundle):
 
 
 def consume(countryDict):
-    for i in countryDict.values():
+    for i in countryDict.values():              # 對於每一個國家
         try:
-            i.food -= i.population + 500
-            i.population += 100
-        except ValueError:
-            i.food = 0
-            i.population -= 100
+            i.food -= i.population + 500        # 消耗 人民 + 500 糧食
+            i.population += 100                 # 再增加100人口
+        except ValueError:                      # 如果糧食耗盡
+            i.food = 0                          # 讓該國糧食耗盡
+            i.population -= 100                 # 人口減100
 
 
 if __name__ == "__main__":
