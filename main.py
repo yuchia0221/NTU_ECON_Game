@@ -19,26 +19,26 @@ if __name__ == "__main__":
     after = time()
     print(f"讀取檔案完成，共花費{after - before:.1f}s")
 
-    # before = time()
+    before = time()
 
-    # for i in actionList:
-    #     production(countryDict, produceNum, i.name, i.produceList, i.occupyMan)
-    #     if i.useCard or i.soldCard:
-    #         card(countryDict, i.name, cardDict, i.useCard, i.soldCard, defeated)
-    #     education(countryDict, i.name, i.education)
+    for i in actionList:
+        production(countryDict, produceNum, i.name, i.produceList, i.occupyMan)
+        if i.useCard or i.soldCard:
+            card(countryDict, i.name, cardDict, i.useCard, i.soldCard, defeated)
+        education(countryDict, i.name, i.education)
 
-    # del cardDict
+    del cardDict
 
-    # for i in actionList:
-    #     if i.war[0] != "不戰爭":
-    #         for j in range(len(i.war)):
-    #             war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated)
-    #     else:
-    #         continue
+    for i in actionList:
+        if i.war[0] != "不戰爭":
+            for j in range(len(i.war)):
+                war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated)
+        else:
+            continue
 
-    # wonder(countryDict, wonderlist, actionList)
+    wonder(countryDict, wonderlist, actionList)
 
-    # consume(countryDict)
+    consume(countryDict)
 
     after = time()
     print(f"基本函數完成，共花費{after - before:.1f}s")
