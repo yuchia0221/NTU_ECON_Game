@@ -845,17 +845,22 @@ def wonder(countryDict, wonderlist, actionlist):
                 totalwonder[Wname] = wonderdict[name]
 
         if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 >= 25:            # 確認是否晉級
+        	rest = (currstate[Wname] + 1) * 25 - currwonder[Wname]
+        	country = temp[1].split()
             Update[Wname] = True
             print(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
-            C = temp[1].split()
-            if wonderdict[C[0]] == wonderdict[C[1]]:
-                if randint(0, 1) == 1:
-                    wonderdict[C[0]] += 1
-                else:
-                    wonderdict[C[1]] += 1
             weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]  # 計算線性權重
-            for name in temp[1].split():                                                    # 重寫每個國家的投資數量
-                wonderdict[name] = int(round(wonderdict[name] * weight, 0))
+            for name in country:                                                    # 重寫每個國家的投資數量
+                wonderdict[name] = int(wonderdict[name] * weight)
+                rest -= wonderdict[name]
+
+            while rest > 0:
+            	print("rand running")
+            	if randint(0, 1) == 0:
+            		wonderdict[country[0]] += 1
+        		else:
+        			wonderdict[country[1]] += 1
+    			rest -= 1
 
         for name in temp[1].split():                                                    # 蓋奇觀
             buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname], bundle)
