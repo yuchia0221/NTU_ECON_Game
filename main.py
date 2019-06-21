@@ -19,26 +19,26 @@ if __name__ == "__main__":
     after = time()
     print(f"讀取檔案完成，共花費{after - before:.1f}s")
 
-    before = time()
+    # before = time()
 
-    for i in actionList:
-        production(countryDict, produceNum, i.name, i.produceList, i.occupyMan)
-        if i.useCard or i.soldCard:
-            card(countryDict, i.name, cardDict, i.useCard, i.soldCard, defeated)
-        education(countryDict, i.name, i.education)
+    # for i in actionList:
+    #     production(countryDict, produceNum, i.name, i.produceList, i.occupyMan)
+    #     if i.useCard or i.soldCard:
+    #         card(countryDict, i.name, cardDict, i.useCard, i.soldCard, defeated)
+    #     education(countryDict, i.name, i.education)
 
-    del cardDict
+    # del cardDict
 
-    for i in actionList:
-        if i.war[0] != "不戰爭":
-            for j in range(len(i.war)):
-                war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated)
-        else:
-            continue
+    # for i in actionList:
+    #     if i.war[0] != "不戰爭":
+    #         for j in range(len(i.war)):
+    #             war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated)
+    #     else:
+    #         continue
 
-    wonder(countryDict, wonderlist, actionList)
+    # wonder(countryDict, wonderlist, actionList)
 
-    consume(countryDict)
+    # consume(countryDict)
 
     after = time()
     print(f"基本函數完成，共花費{after - before:.1f}s")
@@ -46,16 +46,16 @@ if __name__ == "__main__":
     print("開始寫檔")
     before = time()
 
-    loop = "二"
+    loop = "一"
     write_country_file(countryDict)
     write_wonders(countryDict)
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
                    '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
     for i in countryName:
         try:
-            write_individual(countryDict, i, loop)
+            write_individual(countryDict, i, loop, True)
         except:
-            write_individual(countryDict, i, loop)
+            write_individual(countryDict, i, loop, True)
 
     after = time()
     print(f"寫檔完成，共花費{after - before:.1f}s")

@@ -623,7 +623,7 @@ def education(countryDict, name, invest):
         if countryDict[name].education == 0 and countryDict[name].food >= 3000:      # 如果等級是0而且有3000糧食，則升級成功
             countryDict[name].food -= 3000
             countryDict[name].education = 1
-            print(f"{name}沒已經成功投資教育LV.1")
+            print(f"{name}已經成功投資教育LV.1")
             return
 
         else:
@@ -834,8 +834,8 @@ def wonder(countryDict, wonderlist, actionlist):
     for i in wonderlist:                                        # 對於每個奇觀
         temp = list(i)
         Wname = temp[0]                                         # Wname 為奇觀名字
-        currstate[Wname] = int(temp[2])                         # 目前階段
-        currwonder[Wname] = temp[3]                             # 目前進度
+        currstate[Wname] = int(temp[3])                         # 目前階段
+        currwonder[Wname] = temp[2]                             # 目前進度
         Update[Wname] = False
         for name in temp[1].split():                            # 對每一個國家
             revisePwonder(countryDict, name, Wname, currstate[Wname], wonderdict, bundle)  # 確認物資是否足夠投資
@@ -862,7 +862,7 @@ def wonder(countryDict, wonderlist, actionlist):
                 rest -= 1
 
         for name in temp[1].split():                                                    # 蓋奇觀
-            buildwonder(countryDict, name, Wname, wonderdict[name], temp[2], Update[Wname], bundle)
+            buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname], bundle)
 
     print(Update)
 
@@ -886,9 +886,11 @@ def consume(countryDict):
         try:
             i.food -= i.population + 500        # 消耗 人民 + 500 糧食
             i.population += 100                 # 再增加100人口
+            print(f"{i.name}耗費了{i.population + 400}糧食，增加100人口")
         except ValueError:                      # 如果糧食耗盡
             i.food = 0                          # 讓該國糧食耗盡
             i.population -= 100                 # 人口減100
+            print(f"{i.name}糧食不夠，餓死了100人")
 
 
 if __name__ == "__main__":
