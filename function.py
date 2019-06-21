@@ -778,7 +778,7 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle)
     countryDict[name].gold -= package[3] * percentWonders
 
     if Update:
-        print(f"{name}成功過得第{state}階段升級效果")
+        print(f"{name}成功得到第{state}階段升級效果")
         if state == 0:                                              # 第一階段完成的獎勵
             countryDict[name].weapon += 1
             countryDict[name].defense += 300
@@ -834,8 +834,8 @@ def wonder(countryDict, wonderlist, actionlist):
     for i in wonderlist:                                        # 對於每個奇觀
         temp = list(i)
         Wname = temp[0]                                         # Wname 為奇觀名字
-        currstate[Wname] = int(temp[3])                         # 目前階段
-        currwonder[Wname] = temp[2]                             # 目前進度
+        currstate[Wname] = int(temp[2])                         # 目前階段
+        currwonder[Wname] = temp[3]                             # 目前進度
         Update[Wname] = False
         for name in temp[1].split():                            # 對每一個國家
             revisePwonder(countryDict, name, Wname, currstate[Wname], wonderdict, bundle)  # 確認物資是否足夠投資
@@ -845,25 +845,24 @@ def wonder(countryDict, wonderlist, actionlist):
                 totalwonder[Wname] = wonderdict[name]
 
         if currwonder[Wname] + totalwonder[Wname] - currstate[Wname] * 25 >= 25:            # 確認是否晉級
-        	rest = (currstate[Wname] + 1) * 25 - currwonder[Wname]
-        	country = temp[1].split()
+            rest = (currstate[Wname] + 1) * 25 - currwonder[Wname]
+            country = temp[1].split()
             Update[Wname] = True
             print(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
             weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]  # 計算線性權重
             for name in country:                                                    # 重寫每個國家的投資數量
                 wonderdict[name] = int(wonderdict[name] * weight)
                 rest -= wonderdict[name]
-
             while rest > 0:
-            	print("rand running")
-            	if randint(0, 1) == 0:
-            		wonderdict[country[0]] += 1
-        		else:
-        			wonderdict[country[1]] += 1
-    			rest -= 1
+                print("rand running")
+                if randint(0, 1) == 0:
+                    wonderdict[country[0]] += 1
+                else:
+                    wonderdict[country[1]] += 1
+                rest -= 1
 
         for name in temp[1].split():                                                    # 蓋奇觀
-            buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname], bundle)
+            buildwonder(countryDict, name, Wname, wonderdict[name], temp[2], Update[Wname], bundle)
 
     print(Update)
 
