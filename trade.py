@@ -1,4 +1,4 @@
-from function import createCountry, read_file, write_country_file
+from function import createCountry, read_file, write_country_file, write_individual
 from math import atan, pi
 
 
@@ -74,4 +74,14 @@ if __name__ == "__main__":
 
     write_country_file(countryDict)
 
-    input("請按輸入結束程式:")
+    loop = "二"
+    write_country_file(countryDict)
+    countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
+                   '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
+    for i in countryName:
+        try:
+            write_individual(countryDict, i, loop)
+        except:
+            write_individual(countryDict, i, loop)
+
+    input("請按輸入結束Q程式:")
