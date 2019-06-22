@@ -592,9 +592,57 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
         countryDict[name].population += 300
         print(f"{name} has successfully invest human3")
 
+    def special1():
+        countryDict[name].gold += 750
+
+    def special2():
+        pass
+
+    def special3():
+        pass
+
     def special4():
         defeated[name] = "Cannot attack"
         print(f"{name} has successfully invest special4")
+
+    def special5():
+        pass
+
+    def special47():
+        pass
+
+    def special48():
+        pass
+
+    def special49():
+        pass
+
+    def special50():
+        pass
+
+    def special51():
+        countryDict[name].food /= 2
+
+    def special52():
+        countryDict[name].population -= 200
+        countryDict[name].food_speed += 0.5
+        countryDict[name].wood_speed += 0.5
+        countryDict[name].steel_speed += 0.5
+        countryDict[name].stone_speed += 0.5
+
+    def special53():
+        countryDict[name].gold -= 2000
+        countryDict[name].defense += 500
+
+    def special54():
+        pass
+
+    def special55():
+        pass
+
+    def special56():
+        countryDict[name].gold = 0
+        countryDict[name].population *= 3
 
     for card in soldCard:
         try:
