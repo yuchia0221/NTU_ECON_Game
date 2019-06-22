@@ -34,40 +34,28 @@ shuffle(resourcePool)
 shuffle(warPool)
 shuffle(humanPool)
 
-Rcountry = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-Hcountry = [2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
-Wcountry = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-Scountry = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Ecountry = {'亞特蘭提斯': [1, 2, 0, 0],
+            '阿斯嘉': [1, 2, 0, 0],
+            '奧林帕斯': [1, 2, 0, 0],
+            '瓦干達': [1, 2, 0, 0],
+            '香格里拉': [1, 2, 0, 0],
+            '瓦拉納西': [1, 2, 0, 0],
+            '瑪雅': [1, 2, 0, 0],
+            '塔爾塔洛斯': [1, 2, 0, 0],
+            '特奧蒂瓦坎': [1, 2, 0, 0],
+            '復活節島': [1, 2, 0, 0],
+            }
+
 
 sumR, sumW, sumH = sum(loopR), sum(loopW), sum(loopH)
-cardR, cardW, cardH = sum(Rcountry), sum(Wcountry), sum(Hcountry)
 
-
-num = 1
-for i in Rcountry:
-    print(countryName[num - 1], end=": ")
-    num += 1
-    for j in range(i):
+for i in countryName:
+    print(i, end=": ")
+    for j in range(Ecountry[i][0]):
         print(resourcePool[randint(0, sumR - 1)], end=" ")
-    print()
-
-print("-" * 100)
-
-num = 1
-for i in Hcountry:
-    print(countryName[num - 1], end=": ")
-    num += 1
-    for j in range(i):
+    for j in range(Ecountry[i][1]):
         print(humanPool[randint(0, sumH - 1)], end=" ")
-    print()
-
-print("-" * 100)
-
-num = 1
-for i in Wcountry:
-    print(countryName[num - 1], end=": ")
-    num += 1
-    for j in range(i):
+    for j in range(Ecountry[i][2]):
         print(warPool[randint(0, sumW - 1)], end=" ")
     print()
 
