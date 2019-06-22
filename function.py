@@ -67,7 +67,9 @@ def write_individual(countryDict, name, roundnow, boolean=False):
 
     # 更新成現在的國家資訊
     if boolean:
+        roundnow = "零"
         clear_sheet(sheet)
+
     tempt = list(roundnow) + countryDict[name].to_list()[1:]
     sheet.insert_row(tempt, 2)
 
@@ -668,34 +670,40 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated):
 
 def education(countryDict, name, invest):
     if invest == "是":                                                               # 如果本回合選擇投資教育
-        if countryDict[name].education == 0 and countryDict[name].food >= 3000:      # 如果等級是0而且有3000糧食，則升級成功
-            countryDict[name].food -= 3000
-            countryDict[name].education = 1
-            print(f"{name}已經成功投資教育LV.1")
-            return
+        if countryDict[name].education == 0:                                         # 如果等級是0而且有3000糧食，則升級成功
+            if countryDict[name].food >= 3000:
+                countryDict[name].food -= 3000
+                countryDict[name].education = 1
+                print(f"{name}已經成功投資教育LV.1")
+                return
 
-        else:
-            print(f"{name}沒有足夠的糧食投資教育LV.1，因為你的食物只有{countryDict[name].food} < 3000")
+            else:
+                print(f"{name}沒有足夠的糧食投資教育LV.1，因為你的食物只有{countryDict[name].food} < 3000")
+                return
 
-        if countryDict[name].education == 1 and countryDict[name].food >= 5000:      # 如果等級是1而且有5000糧食，則升級成功
-            countryDict[name].food -= 5000
-            countryDict[name].education = 2
-            print(f"{name}沒已經成功投資教育LV.2")
-            return
+        elif countryDict[name].education == 1:                                         # 如果等級是1而且有5000糧食，則升級成功
+            if countryDict[name].food >= 5000:
+                countryDict[name].food -= 5000
+                countryDict[name].education = 2
+                print(f"{name}已經成功投資教育LV.2")
+                return
 
-        else:
-            print(f"{name}沒有足夠的糧食投資教育LV.2，因為你的食物只有{countryDict[name].food} < 5000")
+            else:
+                print(f"{name}沒有足夠的糧食投資教育LV.2，因為你的食物只有{countryDict[name].food} < 5000")
+                return
 
-        if countryDict[name].education == 2 and countryDict[name].food >= 9000:      # 如果等級是2而且有9000糧食，則升級成功
-            countryDict[name].food -= 9000
-            countryDict[name].education = 3
-            print(f"{name}沒已經成功投資教育LV.3")
-            return
+        elif countryDict[name].education == 2:                                         # 如果等級是2而且有9000糧食，則升級成功
+            if countryDict[name].food >= 9000:
+                countryDict[name].food -= 9000
+                countryDict[name].education = 3
+                print(f"{name}已經成功投資教育LV.3")
+                return
 
-        else:
-            print(f"{name}沒有足夠的糧食投資教育LV.3，因為你的食物只有{countryDict[name].food} < 9000")
+            else:
+                print(f"{name}沒有足夠的糧食投資教育LV.3，因為你的食物只有{countryDict[name].food} < 9000")
+                return
 
-        if countryDict[name].education == 3:                                         # 如果等級是3，則無法繼續投資
+        else:                                         # 如果等級是3，則無法繼續投資
             print(f"{name}的教育已經滿級，不能再投資了")
             return
 
