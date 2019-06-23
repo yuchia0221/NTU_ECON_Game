@@ -13,8 +13,12 @@ if __name__ == "__main__":
     cardDict = read_card()
     wonderlist = read_file("世界奇觀")
     produceNum = pd.read_csv("生產函數表.csv", index_col=0, encoding="ANSI")
+    countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
+                   '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
     defeated = {'亞特蘭提斯': False, '阿斯嘉': False, '奧林帕斯': False, '瓦干達': False, '香格里拉': False,
                 '瓦拉納西': False, '瑪雅': False, '塔爾塔洛斯': False, '特奧蒂瓦坎': False, '復活節島': False}
+
+    messageDict = {i: [] for i in countryName}
 
     after = time()
     print(f"讀取檔案完成，共花費{after - before:.1f}s")
@@ -49,8 +53,6 @@ if __name__ == "__main__":
     loop = "一"
     write_country_file(countryDict)
     write_wonders(countryDict)
-    countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
-                   '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
 
     for i in countryName:
         write_individual(countryDict, i, loop, True)
