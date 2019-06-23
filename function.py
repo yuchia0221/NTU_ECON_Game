@@ -170,7 +170,7 @@ def production(countryDict, produceData, name, produce_num, warrior, messageDict
                 produce_num[i] = times                                      # 如果已經無法生產，則讓實際生產次數歸0
                 times = 0
 
-        messageDict[name].append(f"{name}的人民不夠來生產, 生產:{produce_num}")
+        messageDict[name].append(f"{name}的人民不夠來生產, 改為生產:{produce_num[0]}次糧食, {produce_num[1]}次木頭, {produce_num[2]}次鐵礦, {produce_num[3]}次石頭")
 
     # dict(produceData[生產次數]): 回傳後的東西轉成dictionary:{1: 550, 1.1: 610...}
     # 接著利用[float(countryDict[name].food_speed)]去對生產總額為何
@@ -185,7 +185,7 @@ def production(countryDict, produceData, name, produce_num, warrior, messageDict
     countryDict[name].steel += int(steel)
     countryDict[name].stone += int(stone)
 
-    messageDict[name].append(f"{name} has produced {food} food {wood} wood {steel} steel {stone} stone ")  # 顯示該國生產量
+    messageDict[name].append(f"{name}總計生產了{food}糧食,{wood}木頭,{steel}鐵礦,{stone}石頭")  # 顯示該國生產量
 
     return
 
@@ -207,11 +207,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 200
             countryDict[name].gold -= 400
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest food1")
+            messageDict[name].append(f"{name}沒有足夠的資源投資綠色革命")
             return
 
         countryDict[name].food_speed += 0.4
-        messageDict[name].append(f"{name} has successfully invest food1")
+        messageDict[name].append(f"{name}已經成功投資綠色革命")
 
     def food2():
         if (countryDict[name].food >= 1000 and countryDict[name].wood >= 400 and countryDict[name].steel >= 400 and
@@ -222,15 +222,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 400
             countryDict[name].gold -= 600
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest food2")
+            messageDict[name].append(f"{name}沒有足夠的資源投資神農氏萬歲")
             return
 
         countryDict[name].food_speed += 0.8
-        messageDict[name].append(f"{name} has successfully invest food2")
+        messageDict[name].append(f"{name}已經成功投資神農氏萬歲")
 
     def food3():
         countryDict[name].food *= 1.5
-        messageDict[name].append(f"{name} has successfully invest food3")
+        messageDict[name].append(f"{name}已經成功投資糧食酒")
 
     def wood1():
         if (countryDict[name].food >= 200 and countryDict[name].wood >= 600 and countryDict[name].steel >= 200 and
@@ -241,11 +241,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 200
             countryDict[name].gold -= 400
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest wood1")
+            messageDict[name].append(f"{name}沒有足夠的資源投資天降黑森林")
             return
 
         countryDict[name].wood_speed += 0.4
-        messageDict[name].append(f"{name} has successfully invest wood1")
+        messageDict[name].append(f"{name}已經成功投資天降黑森林")
 
     def wood2():
         if (countryDict[name].food >= 400 and countryDict[name].wood >= 1000 and countryDict[name].steel >= 400 and
@@ -256,15 +256,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 400
             countryDict[name].gold -= 600
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest wood2")
+            messageDict[name].append(f"{name}沒有足夠的資源投資人造林")
             return
 
         countryDict[name].wood_speed += 0.8
-        messageDict[name].append(f"{name} has successfully invest wood2")
+        messageDict[name].append(f"{name}已經成功投資人造林")
 
     def wood3():
         countryDict[name].wood *= 1.5
-        messageDict[name].append(f"{name} has successfully invest wood3")
+        messageDict[name].append(f"{name}已經成功投資榆木椅")
 
     def steel1():
         if (countryDict[name].food >= 200 and countryDict[name].wood >= 200 and countryDict[name].steel >= 600 and
@@ -275,11 +275,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 200
             countryDict[name].gold -= 400
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest steel1")
+            messageDict[name].append(f"{name}沒有足夠的資源投資挖礦機器人")
             return
 
         countryDict[name].steel_speed += 0.4
-        messageDict[name].append(f"{name} has successfully invest steel1")
+        messageDict[name].append(f"{name}已經成功投資挖礦機器人")
 
     def steel2():
         if (countryDict[name].food >= 400 and countryDict[name].wood >= 400 and countryDict[name].steel >= 1000 and
@@ -290,15 +290,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 400
             countryDict[name].gold -= 600
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest steel2")
+            messageDict[name].append(f"{name}沒有足夠的資源投資華鐵爐")
             return
 
         countryDict[name].steel_speed += 0.8
-        messageDict[name].append(f"{name} has successfully invest steel2")
+        messageDict[name].append(f"{name}已經成功投資華鐵爐")
 
     def steel3():
         countryDict[name].steel *= 1.5
-        messageDict[name].append(f"{name} has successfully invest steel3")
+        messageDict[name].append(f"{name}已經成功投資熔爐")
 
     def stone1():
         if (countryDict[name].food >= 200 and countryDict[name].wood >= 200 and countryDict[name].steel >= 200 and
@@ -309,11 +309,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 600
             countryDict[name].gold -= 400
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest stone1")
+            messageDict[name].append(f"{name}沒有足夠的資源投資找到烏魯魯")
             return
 
         countryDict[name].stone_speed += 0.4
-        messageDict[name].append(f"{name} has successfully invest stone1")
+        messageDict[name].append(f"{name}已經成功投資找到烏魯魯")
 
     def stone2():
         if (countryDict[name].food >= 400 and countryDict[name].wood >= 400 and countryDict[name].steel >= 400 and
@@ -324,15 +324,15 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 1000
             countryDict[name].gold -= 600
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest stone2")
+            messageDict[name].append(f"{name}沒有足夠的資源投資愚公移山")
             return
 
         countryDict[name].stone_speed += 0.8
-        messageDict[name].append(f"{name} has successfully invest stone2")
+        messageDict[name].append(f"{name}已經成功投資愚公移山")
 
     def stone3():
         countryDict[name].stone *= 1.5
-        messageDict[name].append(f"{name} has successfully invest stone3")
+        messageDict[name].append(f"{name}已經成功投資留遷石")
 
     def food_wood():
         if (countryDict[name].food >= 800 and countryDict[name].wood >= 800 and countryDict[name].steel >= 400 and
@@ -343,12 +343,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 400
             countryDict[name].gold -= 1200
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest food_wood")
+            messageDict[name].append(f"{name}沒有足夠的資源投資免洗餐具")
             return
 
         countryDict[name].food_speed += 0.5
         countryDict[name].wood_speed += 0.5
-        messageDict[name].append(f"{name} has successfully invest food_wood")
+        messageDict[name].append(f"{name}已經成功投資免洗餐具")
 
     def food_steel():
         if (countryDict[name].food >= 800 and countryDict[name].wood >= 400 and countryDict[name].steel >= 800 and
@@ -359,12 +359,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 400
             countryDict[name].gold -= 1200
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest food_steel")
+            messageDict[name].append(f"{name}沒有足夠的資源投資菠菜罐頭")
             return
 
         countryDict[name].food_speed += 0.5
         countryDict[name].steel_speed += 0.5
-        messageDict[name].append(f"{name} has successfully invest food_steel")
+        messageDict[name].append(f"{name}已經成功投資菠菜罐頭")
 
     def food_stone():
         if (countryDict[name].food >= 800 and countryDict[name].wood >= 400 and countryDict[name].steel >= 400 and
@@ -375,12 +375,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1200
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest food_stone")
+            messageDict[name].append(f"{name}沒有足夠的資源投資石板烤肉")
             return
 
         countryDict[name].food_speed += 0.5
         countryDict[name].stone_speed += 0.5
-        messageDict[name].append(f"{name} has successfully invest food_stone")
+        messageDict[name].append(f"{name}已經成功投資石板烤肉")
 
     def wood_steel():
         if (countryDict[name].food >= 400 and countryDict[name].wood >= 800 and countryDict[name].steel >= 800 and
@@ -391,12 +391,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 400
             countryDict[name].gold -= 1200
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest wood_steel")
+            messageDict[name].append(f"{name}沒有足夠的資源投資金斧頭銀斧頭")
             return
 
         countryDict[name].wood_speed += 0.5
         countryDict[name].steel_speed += 0.5
-        messageDict[name].append(f"{name} has successfully invest wood_steel")
+        messageDict[name].append(f"{name}已經成功投資金斧頭銀斧頭")
 
     def wood_stone():
         if (countryDict[name].food >= 400 and countryDict[name].wood >= 800 and countryDict[name].steel >= 400 and
@@ -407,12 +407,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1200
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest wood_stone")
+            messageDict[name].append(f"{name}沒有足夠的資源投資原始人")
             return
 
         countryDict[name].wood_speed += 0.5
         countryDict[name].stone_speed += 0.5
-        messageDict[name].append(f"{name} has successfully invest wood_stone")
+        messageDict[name].append(f"{name}已經成功投資原始人")
 
     def steel_stone():
         if (countryDict[name].food >= 400 and countryDict[name].wood >= 400 and countryDict[name].steel >= 800 and
@@ -423,12 +423,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1200
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest steel_stone")
+            messageDict[name].append(f"{name}沒有足夠的資源投資鏗鏘鏗鏘")
             return
 
         countryDict[name].steel_speed += 0.5
         countryDict[name].stone_speed += 0.5
-        messageDict[name].append(f"{name} has successfully invest steel_stone")
+        messageDict[name].append(f"{name}已經成功投資鏗鏘鏗鏘")
 
     def defense1():
         if countryDict[name].wood >= 500 and countryDict[name].steel >= 500 and countryDict[name].gold >= 500:
@@ -436,11 +436,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].steel -= 500
             countryDict[name].gold -= 500
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest defense1")
+            messageDict[name].append(f"{name}沒有足夠的資源投資自強運動")
             return
 
         countryDict[name].defense += 100
-        messageDict[name].append(f"{name} has successfully invest defense1")
+        messageDict[name].append(f"{name}已經成功投資自強運動")
 
     def defense2():
         if countryDict[name].wood >= 1000 and countryDict[name].steel >= 1000 and countryDict[name].gold >= 1000:
@@ -448,11 +448,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].steel -= 1000
             countryDict[name].gold -= 1000
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest defense2")
+            messageDict[name].append(f"{name}沒有足夠的資源投資埃癸斯")
             return
 
         countryDict[name].defense += 300
-        messageDict[name].append(f"{name} has successfully invest defense2")
+        messageDict[name].append(f"{name}已經成功投資埃癸斯")
 
     def defense3():
         if countryDict[name].wood >= 1500 and countryDict[name].steel >= 1500 and countryDict[name].gold >= 1500:
@@ -460,11 +460,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].steel -= 1500
             countryDict[name].gold -= 1500
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest defense3")
+            messageDict[name].append(f"{name}沒有足夠的資源投資葵花寶典")
             return
 
         countryDict[name].defense += 500
-        messageDict[name].append(f"{name} has successfully invest defense3   ")
+        messageDict[name].append(f"{name}已經成功投資葵花寶典")
 
     def weapon1():
         if (countryDict[name].wood >= 300 and countryDict[name].steel >= 500 and
@@ -474,11 +474,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 300
             countryDict[name].gold -= 300
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest weapon1")
+            messageDict[name].append(f"{name}沒有足夠的資源投資曼哈頓計畫")
             return
 
         countryDict[name].weapon += 0.2
-        messageDict[name].append(f"{name} has successfully invest weapon1")
+        messageDict[name].append(f"{name}已經成功投資曼哈頓計畫")
 
     def weapon2():
         if (countryDict[name].wood >= 550 and countryDict[name].steel >= 1000 and
@@ -488,11 +488,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 550
             countryDict[name].gold -= 900
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest weapon2")
+            messageDict[name].append(f"{name}沒有足夠的資源投資甲不離人")
             return
 
         countryDict[name].weapon += 0.4
-        messageDict[name].append(f"{name} has successfully invest weapon2")
+        messageDict[name].append(f"{name}已經成功投資甲不離人")
 
     def weapon3():
         if (countryDict[name].wood >= 800 and countryDict[name].steel >= 1500 and
@@ -502,11 +502,11 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 800
             countryDict[name].gold -= 1500
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest weapon3")
+            messageDict[name].append(f"{name}沒有足夠的資源投資石中劍")
             return
 
         countryDict[name].weapon += 0.6
-        messageDict[name].append(f"{name} has successfully invest weapon3")
+        messageDict[name].append(f"{name}已經成功投資石中劍")
 
     def war1():
         if (countryDict[name].wood >= 600 and countryDict[name].steel >= 1000 and
@@ -516,12 +516,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 400
             countryDict[name].gold -= 1000
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest war1")
+            messageDict[name].append(f"{name}沒有足夠的資源投資劍盾在身")
             return
 
         countryDict[name].weapon += 0.3
         countryDict[name].defense += 150
-        messageDict[name].append(f"{name} has successfully invest war1")
+        messageDict[name].append(f"{name}已經成功投資劍盾在身")
 
     def war2():                                                            # 石中劍
         if (countryDict[name].wood >= 2000 and countryDict[name].steel >= 2500 and
@@ -531,12 +531,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 600
             countryDict[name].gold -= 2500
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest war2")
+            messageDict[name].append(f"{name}沒有足夠的資源投資上下其手")
             return
 
         countryDict[name].weapon += 0.5
         countryDict[name].defense += 450
-        messageDict[name].append(f"{name} has successfully invest war2")
+        messageDict[name].append(f"{name}已經成功投資上下其手")
 
     def all1():                                                            # 蟹堡秘方
         if (countryDict[name].food >= 1200 and countryDict[name].wood >= 600 and countryDict[name].steel >= 600 and
@@ -547,14 +547,14 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 600
             countryDict[name].gold -= 2500
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest all1")
+            messageDict[name].append(f"{name}沒有足夠的資源投資蟹堡秘方")
             return
 
         countryDict[name].food_speed += 0.5
         countryDict[name].wood_speed += 0.3
         countryDict[name].steel_speed += 0.3
         countryDict[name].stone_speed += 0.3
-        messageDict[name].append(f"{name} has successfully invest all1")
+        messageDict[name].append(f"{name}已經成功投資蟹堡秘方")
 
     def all2():                                                            # 國富論
         if (countryDict[name].food >= 600 and countryDict[name].wood >= 700 and countryDict[name].steel >= 600 and
@@ -565,34 +565,34 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
             countryDict[name].stone -= 800
             countryDict[name].gold -= 2000
         else:
-            messageDict[name].append(f"{name} dosen't have enough resource to invest all2")
+            messageDict[name].append(f"{name}沒有足夠的資源投資國富論")
             return
 
         countryDict[name].food_speed += 0.3
         countryDict[name].wood_speed += 0.3
         countryDict[name].steel_speed += 0.3
         countryDict[name].stone_speed += 0.3
-        messageDict[name].append(f"{name} has successfully invest all2")
+        messageDict[name].append(f"{name}已經成功投資國富論")
 
     def gold1():
         countryDict[name].gold *= 1.5
-        messageDict[name].append(f"{name} has successfully invest gold1")
+        messageDict[name].append(f"{name}已經成功投資發小財")
 
     def gold2():
         countryDict[name].gold *= 2
-        messageDict[name].append(f"{name} has successfully invest gold2")
+        messageDict[name].append(f"{name}已經成功投資發大財")
 
     def human1():
         countryDict[name].population += 100
-        messageDict[name].append(f"{name} has successfully invest human1")
+        messageDict[name].append(f"{name}已經成功投資轉小人")
 
     def human2():
         countryDict[name].population += 200
-        messageDict[name].append(f"{name} has successfully invest human2")
+        messageDict[name].append(f"{name}已經成功投資做中人")
 
     def human3():
         countryDict[name].population += 300
-        messageDict[name].append(f"{name} has successfully invest human3")
+        messageDict[name].append(f"{name}已經成功投資登大人")
 
     def special1():
         countryDict[name].gold += 750
@@ -605,7 +605,7 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
 
     def special4():
         defeated[name] = "Cannot attack"
-        messageDict[name].append(f"{name} has successfully invest special4")
+        messageDict[name].append(f"{name}已經成功投資special4")
 
     def special5():
         pass
