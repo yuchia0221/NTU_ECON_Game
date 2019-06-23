@@ -26,23 +26,21 @@ if __name__ == "__main__":
     before = time()
 
     for i in actionList:
-        production(countryDict, produceNum, i.name, i.produceList, i.occupyMan)
+        production(countryDict, produceNum, i.name, i.produceList, i.occupyMan, messageDict)
         if i.useCard or i.soldCard:
-            card(countryDict, i.name, cardDict, i.useCard, i.soldCard, defeated)
-        education(countryDict, i.name, i.education)
-
-    del cardDict
+            card(countryDict, i.name, cardDict, i.useCard, i.soldCard, defeated, messageDict)
+        education(countryDict, i.name, i.education, messageDict)
 
     for i in actionList:
         if i.war[0] != "不戰爭":
             for j in range(len(i.war)):
-                war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated)
+                war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated, messageDict)
         else:
             continue
 
-    wonder(countryDict, wonderlist, actionList)
+    wonder(countryDict, wonderlist, actionList, messageDict)
 
-    consume(countryDict)
+    consume(countryDict, messageDict)
 
     after = time()
     print(f"基本函數完成，共花費{after - before:.1f}s")
