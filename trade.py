@@ -76,10 +76,7 @@ if __name__ == "__main__":
 
     loop = "2.5"
     write_country_file(countryDict)
-    countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達']
-    # , '香格里拉',
-    # '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
+    countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
+                   '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
     for i in countryName:
         write_individual(countryDict, i, loop)
-
-    input("請按輸入結束Q程式:")
