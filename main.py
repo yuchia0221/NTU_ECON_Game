@@ -5,7 +5,7 @@ from function import (read_file, write_country_file, createCountry, write_indivi
 
 
 if __name__ == "__main__":
-
+    print("開始執行程式")
     before = time()
 
     countryDict = createCountry()
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     print("開始寫檔")
     before = time()
 
-    loop = "一"
+    loop = "二"
     write_country_file(countryDict)
     write_wonders(countryDict)
 
