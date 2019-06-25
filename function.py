@@ -67,7 +67,7 @@ def write_individual(countryDict, name, roundnow, boolean=False):
 
     # 更新成現在的國家資訊
     if boolean:
-        roundnow = "1"
+        roundnow = "0"
         clear_sheet(sheet)
 
     tempt = list(roundnow) + countryDict[name].to_list()[1:]
@@ -118,8 +118,6 @@ def initialize():
         countryDict = {i.name: class_list[i.name](*i) for i in countryList}
 
     write_country_file(countryDict)
-    # for i in class_list.keys():
-    #     write_individual(countryDict, i, "一", True)
 
 
 def createCountry():

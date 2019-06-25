@@ -39,7 +39,6 @@ if __name__ == "__main__":
             continue
 
     wonder(countryDict, wonderlist, actionList, messageDict)
-
     consume(countryDict, messageDict)
 
     after = time()
@@ -48,12 +47,12 @@ if __name__ == "__main__":
     print("開始寫檔")
     before = time()
 
-    loop = "2"
+    loop = "1"
     write_country_file(countryDict)
     write_wonders(countryDict)
 
     for i in countryName:
-        write_individual(countryDict, i, loop, True)
+        write_individual(countryDict, i, loop)
 
     after = time()
     print(f"寫檔完成，共花費{after - before:.1f}s")
