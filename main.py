@@ -48,7 +48,7 @@ if __name__ == "__main__":
     print("開始寫檔")
     before = time()
 
-    loop = "二"
+    loop = "2"
     write_country_file(countryDict)
     write_wonders(countryDict)
 

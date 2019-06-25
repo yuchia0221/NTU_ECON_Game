@@ -74,7 +74,7 @@ if __name__ == "__main__":
 
     write_country_file(countryDict)
 
-    loop = "七"
+    loop = "2.5"
     write_country_file(countryDict)
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達']
     # , '香格里拉',

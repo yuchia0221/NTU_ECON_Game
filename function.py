@@ -67,7 +67,7 @@ def write_individual(countryDict, name, roundnow, boolean=False):
 
     # 更新成現在的國家資訊
     if boolean:
-        roundnow = "零"
+        roundnow = "1"
         clear_sheet(sheet)
 
     tempt = list(roundnow) + countryDict[name].to_list()[1:]
