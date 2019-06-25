@@ -80,9 +80,6 @@ if __name__ == "__main__":
     # , '香格里拉',
     # '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
     for i in countryName:
-        try:
-            write_individual(countryDict, i, loop)
-        except:
-            write_individual(countryDict, i, loop)
+        write_individual(countryDict, i, loop)
 
     input("請按輸入結束Q程式:")
