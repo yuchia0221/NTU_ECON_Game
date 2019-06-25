@@ -592,6 +592,35 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
         countryDict[name].population += 300
         messageDict[name].append(f"{name}已經成功投資登大人")
 
+    def special1():
+        countryDict[name].gold += 10000
+        messageDict[name].append(f"{name}已經成功使用海神王的王冠")
+
+    def special2():
+        defeated[name] = "Cannot attack"
+        messageDict[name].append(f"{name}已經成功使用隱形斗篷")
+
+    def special3():
+        countryDict[name].weapon *= 2
+        messageDict[name].append(f"{name}已經成功使用誓約勝利之劍")
+        print(f"回合結束記得改{name}的武器倍率")
+
+    def special4():
+        countryDict[name].food_speed *= 2
+        countryDict[name].wood_speed *= 2
+        countryDict[name].steel_speed *= 2
+        countryDict[name].stone_speed *= 2
+        messageDict[name].append(f"{name}已經成功使用大躍進")
+        print(f"回合結束記得改{name}的基礎資源生產倍率")
+
+    def special5():
+        randnum = randint(0, 3)
+        if randnum:
+            messageDict[name].append(f"{name}執行雷神之鎚失敗")
+        else:
+            countryDict[name].defense += 2000
+            messageDict[name].append(f"{name}已經成功使用雷神之鎚")
+
     for card in soldCard:
         try:
             if cardDict[card][1] == "Y":
