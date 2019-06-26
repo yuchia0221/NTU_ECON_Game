@@ -67,7 +67,7 @@ def write_individual(countryDict, name, roundnow, boolean=False):
 
     # 更新成現在的國家資訊
     if boolean:
-        roundnow = "0"
+        roundnow = "零"
         clear_sheet(sheet)
 
     tempt = list(roundnow) + countryDict[name].to_list()[1:]
@@ -881,13 +881,12 @@ def wonder(countryDict, wonderlist, actionlist, messageDict):
             for name in country:                                                    # 重寫每個國家的投資數量
                 wonderdict[name] = int(wonderdict[name] * weight)
                 rest -= wonderdict[name]
-            while rest > 0:
+            if rest != 0:
                 messageDict[name].append("rand running")
                 if randint(0, 1) == 0:
                     wonderdict[country[0]] += 1
                 else:
                     wonderdict[country[1]] += 1
-                rest -= 1
 
         for name in temp[1].split():                                                    # 蓋奇觀
             buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname], bundle, messageDict)
