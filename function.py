@@ -911,11 +911,14 @@ def wonder(countryDict, wonderlist, actionlist, messageDict):
                 wonderdict[name] = int(wonderdict[name] * weight)
                 rest -= wonderdict[name]
             if rest != 0:
-                messageDict[name].append("rand running")
                 if randint(0, 1) == 0:
                     wonderdict[country[0]] += 1
+                    messageDict[country[0]].append(f"進入世界奇觀隨機分配過程，由{country[0]}獲得最後一單位")
+                    messageDict[country[1]].append(f"進入世界奇觀隨機分配過程，由{country[0]}獲得最後一單位")
                 else:
                     wonderdict[country[1]] += 1
+                    messageDict[country[0]].append(f"進入世界奇觀隨機分配過程，由{country[1]}獲得最後一單位")
+                    messageDict[country[1]].append(f"進入世界奇觀隨機分配過程，由{country[1]}獲得最後一單位")
 
         for name in temp[1].split():                                                        # 蓋奇觀
             buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname], bundle, messageDict)
@@ -925,14 +928,14 @@ def revisePwonder(countryDict, name, Wname, state, wonderdict, bundle, messageDi
     package = bundle[Wname][state]                              # 選擇本次建造組合
     material = []
 
-    material.append(countryDict[name].wood / package[0])        # 確認最大可能生產次數
-    material.append(countryDict[name].steel / package[1])
-    material.append(countryDict[name].stone / package[2])
-    material.append(countryDict[name].gold / package[3])
+    material.append(countryDict[name].wood // package[0])        # 確認最大可能生產次數
+    material.append(countryDict[name].steel // package[1])
+    material.append(countryDict[name].stone // package[2])
+    material.append(countryDict[name].gold // package[3])
 
     if min(material) < wonderdict[name]:                        # 如果欲建造次數超過能力上限，則讓欲建造次數等同能力上限
         messageDict[name].append(f"{name}沒有足夠多的資源投資{Wname}{wonderdict[name]}%，只能投資{int(min(material))}%")
-        wonderdict[name] = int(min(material))
+        wonderdict[name] = min(material)
 
 
 def consume(countryDict, messageDict):
