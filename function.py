@@ -1,10 +1,10 @@
 import csv
 import gspread
+from random import randint
 from collections import namedtuple
 from oauth2client.service_account import ServiceAccountCredentials
 from Country import (Atlantis, Asgard, Olympus, Wakanda, ShangriLa,
                      Varanasi, Maya, Tartarus, Teotihuacan, EasterIsland)
-from random import randint
 
 
 def read_file(file_name):
@@ -706,19 +706,15 @@ def war(countryDict, attackingCountry, attackedCountry, solider, resource, speed
         messageDict[attackingCountry].append(f"{attackedCountry}發動特殊效果，無法被攻擊")
         return
 
-    elif countryDict[attackingCountry].population < solider:            # 如果派出的士兵比人口還多，則攻擊無效
-        messageDict[attackingCountry].append(f"{attackingCountry}的士兵比人口還多")
-        return
-
     rubrate = 0.001                                                     # 搶奪比率為0.001
     diff = countryDict[attackingCountry].weapon * solider - countryDict[attackedCountry].defense    # 勝負的判定為，A國武器倍率 * 士兵 vs B國防禦力
     if diff >= 0 and not defeated[attackedCountry]:                                                 # 如果A國戰勝而且B國之前沒有戰敗過
-        countryDict[attackingCountry].population -= solider * 0.5                                   # A國損失五成士兵
+        rubgold = countryDict[attackedCountry].gold * 0.5
+        countryDict[attackingCountry].population -= solider * 0.7                                   # A國損失七成士兵
         countryDict[attackedCountry].population *= 0.9                                              # B國損失一成人口
         countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5               # A國盜取B國一半黃金
-        rubgold = countryDict[attackedCountry].gold * 0.5
-        countryDict[attackedCountry].gold *= 0.5
-        defeated[attackedCountry] = True                                                            # B國戰敗的布林值改為true
+        countryDict[attackedCountry].gold *= 0.5                                                    # B國損失一半黃金
+        defeated[attackedCountry] = True                                                            # B國戰敗的布林值改為True
 
         if resource == "糧食":
             try:
@@ -774,10 +770,10 @@ def war(countryDict, attackingCountry, attackedCountry, solider, resource, speed
         messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊並戰敗了，被掠奪了{rubgold}黃金{rubresource}{resource}和{speed}倍率")
 
     elif diff >= 0 and defeated[attackedCountry]:                                                       # 如果A國打贏B國，且B國曾經被打敗過
+        rubgold = countryDict[attackedCountry].gold * 0.5
         countryDict[attackingCountry].population -= solider * 0.1                                       # A國損失一成士兵
         countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5                   # A國搶奪B國一半黃金
         countryDict[attackedCountry].gold *= 0.5
-        rubgold = countryDict[attackedCountry].gold * 0.5
 
         if resource == "糧食":                                                                            # A國搶奪B國一半的物資和戰力差 * 0.001
             try:
