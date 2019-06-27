@@ -861,13 +861,9 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle,
         messageDict[name].append(f"{Wname}已經達到最高級了")
         return
 
-    wood = package[0] * percentWonders
-    steel = package[1] * percentWonders
-    stone = package[2] * percentWonders
-    gold = package[3] * percentWonders
-
+    rwood, rsteel, rstone, rgold = [i * percentWonders for i in package]
     countryDict[name].wonders += int(percentWonders)
-    messageDict[name].append(f"{name} 貢獻了 {percentWonders}% 給{Wname}, 耗費了{wood}木頭, {steel}鐵礦, {stone}石頭, {gold}黃金")
+    messageDict[name].append(f"{name} 貢獻了 {percentWonders}% 給{Wname}, 耗費了{rwood}木頭, {rsteel}鐵礦, {rstone}石頭, {rgold}黃金")
 
 
 def wonder(countryDict, wonderlist, actionlist, messageDict):
