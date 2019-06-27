@@ -7,7 +7,8 @@ from function import (read_file, write_country_file, createCountry, write_indivi
 if __name__ == "__main__":
     print("開始執行程式")
 
-    countryDict, actionList, cardDict = createCountry(), handle_action(), read_card()
+    countryDict = createCountry()
+    actionList, cardDict = handle_action(countryDict), read_card()
     wonderlist = read_file("世界奇觀")
     produceNum = pd.read_csv("生產函數表.csv", index_col=0, encoding="ANSI")
     countryName = ["亞特蘭提斯", "阿斯嘉", "奧林帕斯", "瓦干達", "香格里拉",
