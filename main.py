@@ -1,5 +1,5 @@
 import pandas as pd
-from time import time
+from time import time, sleep
 from function import (read_file, write_country_file, createCountry, write_individual, consume, education,
                       handle_action, production, read_card, card, war, wonder, write_wonders)
 
@@ -8,21 +8,15 @@ if __name__ == "__main__":
     print("開始執行程式")
     before = time()
 
-    countryDict = createCountry()
-    actionList = handle_action()
-    cardDict = read_card()
+    countryDict, actionList, cardDict = createCountry(), handle_action(), read_card()
     wonderlist = read_file("世界奇觀")
     produceNum = pd.read_csv("生產函數表.csv", index_col=0, encoding="ANSI")
     countryName = ["亞特蘭提斯", "阿斯嘉", "奧林帕斯", "瓦干達", "香格里拉",
                    "瓦拉納西", "瑪雅", "塔爾塔洛斯", "特奧蒂瓦坎", "復活節島"]
-    defeated = {"亞特蘭提斯": False, "阿斯嘉": False, "奧林帕斯": False, "瓦干達": False, "香格里拉": False,
-                "瓦拉納西": False, "瑪雅": False, "塔爾塔洛斯": False, "特奧蒂瓦坎": False, "復活節島": False}
-
-    messageDict = {i: [] for i in countryName}
+    defeated, messageDict = {i: False for i in countryName}, {i: [] for i in countryName}
 
     after = time()
     print(f"讀取檔案完成，共花費{after - before:.1f}s")
-
     before = time()
 
     for i in actionList:
@@ -52,7 +46,12 @@ if __name__ == "__main__":
     write_wonders(countryDict)
 
     for i in countryName:
-        write_individual(countryDict, i, loop)
+        try:
+            write_individual(countryDict, i, loop)
+        except:
+            print(f"Google API存取過度，暫停存取100s再繼續")
+            sleep(100)
+            write_individual(countryDict, i, loop)
 
     after = time()
     print(f"寫檔完成，共花費{after - before:.1f}s")

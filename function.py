@@ -691,7 +691,7 @@ def education(countryDict, name, invest, messageDict):
         return
 
 
-def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed, defeated, messageDict):
+def war(countryDict, attackingCountry, attackedCountry, solider, resource, speed, defeated, messageDict):
     if attackingCountry == attackedCountry:                             # 如果攻打國和被攻打國屬於同一個國家，則攻擊無效
         messageDict[attackingCountry].append(f"{attackingCountry}無法攻擊自己")
         return
@@ -700,14 +700,14 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
         messageDict[attackingCountry].append(f"{attackedCountry}發動特殊效果，無法被攻擊")
         return
 
-    elif countryDict[attackingCountry].population < soilder:            # 如果派出的士兵比人口還多，則攻擊無效
+    elif countryDict[attackingCountry].population < solider:            # 如果派出的士兵比人口還多，則攻擊無效
         messageDict[attackingCountry].append(f"{attackingCountry}的士兵比人口還多")
         return
 
     rubrate = 0.001                                                     # 搶奪比率為0.001
-    diff = countryDict[attackingCountry].weapon * soilder - countryDict[attackedCountry].defense    # 勝負的判定為，A國武器倍率 * 士兵 vs B國防禦力
+    diff = countryDict[attackingCountry].weapon * solider - countryDict[attackedCountry].defense    # 勝負的判定為，A國武器倍率 * 士兵 vs B國防禦力
     if diff >= 0 and not defeated[attackedCountry]:                                                 # 如果A國戰勝而且B國之前沒有戰敗過
-        countryDict[attackingCountry].population -= soilder * 0.5                                   # A國損失五成士兵
+        countryDict[attackingCountry].population -= solider * 0.5                                   # A國損失五成士兵
         countryDict[attackedCountry].population *= 0.9                                              # B國損失一成人口
         countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5               # A國盜取B國一半黃金
         rubgold = countryDict[attackedCountry].gold * 0.5
@@ -768,7 +768,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
         messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊並戰敗了，被掠奪了{rubgold}黃金{rubresource}{resource}和{speed}倍率")
 
     elif diff >= 0 and defeated[attackedCountry]:                                                       # 如果A國打贏B國，且B國曾經被打敗過
-        countryDict[attackingCountry].population -= soilder * 0.1                                       # A國損失一成士兵
+        countryDict[attackingCountry].population -= solider * 0.1                                       # A國損失一成士兵
         countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5                   # A國搶奪B國一半黃金
         countryDict[attackedCountry].gold *= 0.5
         rubgold = countryDict[attackedCountry].gold * 0.5
@@ -814,7 +814,7 @@ def war(countryDict, attackingCountry, attackedCountry, soilder, resource, speed
         messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊並戰敗了，因為之前已經戰敗過，因此只被掠奪{rubgold}黃金和{rubresource}{resource}")
 
     elif diff < 0:                                                  # 如果B國防守成功， A國損失四成士兵
-        countryDict[attackingCountry].population -= soilder * 0.4
+        countryDict[attackingCountry].population -= solider * 0.4
         messageDict[attackingCountry].append(f"{attackingCountry}進攻了{attackedCountry}但失敗了，損失四成士兵")
         messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊但失敗了")
 
@@ -875,10 +875,10 @@ def wonder(countryDict, wonderlist, actionlist, messageDict):
     bundle["釗晁榭"] = [[300, 200, 200, 500], [700, 400, 400, 1500], [900, 1000, 1400, 2500], [2200, 2000, 1600, 3500]]
     bundle["橡彶軒"] = [[300, 200, 200, 500], [350, 800, 350, 1500], [800, 1000, 1500, 2500], [1800, 2500, 1500, 3500]]
     bundle["噱町閣"] = [[300, 200, 200, 500], [400, 350, 750, 1500], [1000, 1300, 1000, 2500], [1800, 2200, 1800, 3500]]
-    currstate = {}      # [奇觀名字] : 現在階段
-    totalwonder = {}    # [奇觀名字] : 準備要建造多少比例
-    currwonder = {}     # [奇觀名字] : 現在有多少比例
-    wonderdict = {i.name: i.Pwonders for i in actionlist}        # [國家名字] : 每國準備貢獻多少比例
+    currstate = {}                                              # [奇觀名字] : 現在階段
+    totalwonder = {}                                            # [奇觀名字] : 準備要建造多少比例
+    currwonder = {}                                             # [奇觀名字] : 現在有多少比例
+    wonderdict = {i.name: i.Pwonders for i in actionlist}       # [國家名字] : 每國準備貢獻多少比例
 
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
                    '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
@@ -909,7 +909,7 @@ def wonder(countryDict, wonderlist, actionlist, messageDict):
             Update[Wname] = True
             messageDict[name].append(f"{Wname} 達到了第{currstate[Wname] + 1}階段，所有在這奇觀下的國家都獲得加成")
             weight = (25 + currstate[Wname] * 25 - currwonder[Wname]) / totalwonder[Wname]  # 計算線性權重
-            for name in country:                                                    # 重寫每個國家的投資數量
+            for name in country:                                                            # 重寫每個國家的投資數量
                 wonderdict[name] = int(wonderdict[name] * weight)
                 rest -= wonderdict[name]
             if rest != 0:
@@ -919,7 +919,7 @@ def wonder(countryDict, wonderlist, actionlist, messageDict):
                 else:
                     wonderdict[country[1]] += 1
 
-        for name in temp[1].split():                                                    # 蓋奇觀
+        for name in temp[1].split():                                                        # 蓋奇觀
             buildwonder(countryDict, name, Wname, wonderdict[name], temp[3], Update[Wname], bundle, messageDict)
 
 
@@ -938,16 +938,17 @@ def revisePwonder(countryDict, name, Wname, state, wonderdict, bundle, messageDi
 
 
 def consume(countryDict, messageDict):
-    for i in countryDict.values():              # 對於每一個國家
+    for i in countryDict.values():                              # 對於每一個國家
         try:
-            i.food -= i.population + 500        # 消耗 人民 + 500 糧食
-            i.population += 100                 # 再增加100人口
-            messageDict[i.name].append(f"{i.name}耗費了{i.population + 400}糧食，增加100人口")
-        except ValueError:                      # 如果糧食耗盡
-            i.food = 0                          # 讓該國糧食耗盡
-            i.population -= 100                 # 人口減100
+            i.food -= i.population + 500                        # 消耗 人民 + 500 糧食
+            i.population += 100                                 # 再增加100人口
+            messageDict[i.name].append(f"{i.name}耗費了{i.population + 500}糧食，增加100人口")
+        except ValueError:                                      # 如果糧食耗盡
+            i.food = 0                                          # 讓該國糧食耗盡
+            i.population -= 100                                 # 人口減100
             messageDict[i.name].append(f"{i.name}有{i.population}人民，但糧食不夠，餓死了100人")
 
 
 if __name__ == "__main__":
-    initialize()
+    a = handle_action()
+    print(a)
