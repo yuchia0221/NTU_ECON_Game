@@ -130,20 +130,26 @@ def createCountry():
     return {i.name: class_list[i.name](*i) for i in read_file("國家資訊表")}
 
 
-def handle_action():
+def handle_action(countryDict):
     """ 將各國的行動單做處理，讓接下來資料處理起來比較方便 """
     info = namedtuple("info", "name produceList useCard soldCard education war solider occupyMan resource Rspeed Pwonders")
 
     returnList = []
     for i in read_file("伊康攻略回應表 (回應)"):
-        if "不戰爭" in i.war.replace(",", "").split():
+        if "不戰爭" in i.war.replace(",", "").split():                             # 如果選擇了"不戰爭"，那麼無論有沒有想攻打其他國家，這回合都無法戰爭
             war, occupyMan, solider, resource, Rspeed = ["不戰爭"], 0, [], [], []
-        else:
-            war = i.war.replace(",", "").split()
-            occupyMan = sum([int(j) for j in str(i.solider).split()])
+        else:                                                                     # 先處理看看資訊再檢查看看有沒有問題
+            war = i.war.replace(",", "").split()                                  # 先把資訊存放好然後開始檢查
             solider = [int(j) for j in str(i.solider).split()]
-            resource = i.resource.split()
-            Rspeed = i.Rspeed.split()
+            resource, Rspeed = i.resource.split(), i.Rspeed.split()
+            occupyMan = sum(solider)
+
+            if (len(war) != len(solider)) or (len(war) != len(resource)) or (len(war) != len(Rspeed)):  # 如果表單填錯的話，就會出現error
+                raise IndexError(f"{i.name}戰爭國家和資料對不齊")
+
+            elif countryDict[i.name].population < occupyMan:                      # 如果派出去戰爭的人數比人口總數的話，此回合就無法戰爭
+                war, occupyMan, solider, resource, Rspeed = ["不戰爭"], 0, [], [], []
+                print(f"{i.name}所派出去戰爭的人大於所有人民，因此此回合無法戰爭")
 
         tempt = info(i.name, [i.Pfood, i.Pwood, i.Psteel, i.Pstone], str(i.useCard).split(),
                      str(i.soldCard).split(), i.education, war, solider, occupyMan, resource, Rspeed, i.Pwonders)
@@ -669,7 +675,7 @@ def education(countryDict, name, invest, messageDict):
                 return
 
             else:
-                messageDict[name].append(f"{name}沒有足夠的糧食投資教育LV.2，因為你的食物只有{countryDict[name].food} < 5000")
+                messageDict[name].append(f"{name}沒有足夠的糧食投資教育LV.2，因為你的食物只有{countryDict[name].food} < 6000")
                 return
 
         elif countryDict[name].education == 2:                                         # 如果等級是2而且有9000糧食，則升級成功
@@ -680,7 +686,7 @@ def education(countryDict, name, invest, messageDict):
                 return
 
             else:
-                messageDict[name].append(f"{name}沒有足夠的糧食投資教育LV.3，因為你的食物只有{countryDict[name].food} < 9000")
+                messageDict[name].append(f"{name}沒有足夠的糧食投資教育LV.3，因為你的食物只有{countryDict[name].food} < 12000")
                 return
 
         else:                                                                           # 如果等級是3，則無法繼續投資
@@ -950,5 +956,6 @@ def consume(countryDict, messageDict):
 
 
 if __name__ == "__main__":
-    a = handle_action()
+    countryDict = createCountry()
+    a = handle_action(countryDict)
     print(a)
