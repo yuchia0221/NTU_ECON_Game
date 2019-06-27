@@ -952,6 +952,4 @@ def consume(countryDict, messageDict):
 
 
 if __name__ == "__main__":
-    countryDict = createCountry()
-    a = handle_action(countryDict)
-    print(a)
+    initialize()
