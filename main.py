@@ -1,12 +1,11 @@
 import pandas as pd
-from time import time, sleep
+from time import sleep
 from function import (read_file, write_country_file, createCountry, write_individual, consume, education,
                       handle_action, production, read_card, card, war, wonder, write_wonders)
 
 
 if __name__ == "__main__":
     print("開始執行程式")
-    before = time()
 
     countryDict, actionList, cardDict = createCountry(), handle_action(), read_card()
     wonderlist = read_file("世界奇觀")
@@ -15,9 +14,7 @@ if __name__ == "__main__":
                    "瓦拉納西", "瑪雅", "塔爾塔洛斯", "特奧蒂瓦坎", "復活節島"]
     defeated, messageDict = {i: False for i in countryName}, {i: [] for i in countryName}
 
-    after = time()
-    print(f"讀取檔案完成，共花費{after - before:.1f}s")
-    before = time()
+    print("讀取檔案完成")
 
     for i in actionList:
         production(countryDict, produceNum, i.name, i.produceList, i.occupyMan, messageDict)
@@ -35,11 +32,7 @@ if __name__ == "__main__":
     wonder(countryDict, wonderlist, actionList, messageDict)
     consume(countryDict, messageDict)
 
-    after = time()
-    print(f"基本函數完成，共花費{after - before:.1f}s")
-
-    print("開始寫檔")
-    before = time()
+    print("基本函數完成n開始寫檔")
 
     loop = "一"
     write_country_file(countryDict)
@@ -53,5 +46,4 @@ if __name__ == "__main__":
             sleep(100)
             write_individual(countryDict, i, loop)
 
-    after = time()
-    print(f"寫檔完成，共花費{after - before:.1f}s")
+    print("寫檔完成")

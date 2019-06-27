@@ -6,11 +6,6 @@ def trade_function(d, s):
     return (1.2) * (2 / pi) * atan((d - s) * (1 / 5000)) + 1.2
 
 
-def print_indo(countryDict):
-    for i in countryDict.values():
-        print(i.to_list())
-
-
 if __name__ == "__main__":
     resources = ["糧食", "木頭", "鐵礦", "石頭"]
     trade_info = read_file("系統貿易(回應)")              # [時間, 國家名, 賣糧, 賣木, 賣鐵, 賣石, 買糧, 買木, 買鐵, 買石]
