@@ -837,7 +837,7 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle,
         messageDict[name].append(f"{name}成功得到第{state}階段升級效果")
         if state == 0:                                              # 第一階段完成的獎勵
             countryDict[name].weapon += 1
-            countryDict[name].defense += 300
+            countryDict[name].defense += 500
 
         elif state == 1:                                            # 第二階段完成的獎勵
             countryDict[name].food_speed += 2
