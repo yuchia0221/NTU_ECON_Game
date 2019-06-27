@@ -1,5 +1,5 @@
-from function import createCountry, read_file, write_country_file, write_individual
 from math import atan, pi
+from function import createCountry, read_file, write_country_file, write_individual
 
 
 def trade_function(d, s):
@@ -18,16 +18,16 @@ if __name__ == "__main__":
         name = j[1]
         if countryDict[name].food < j[2]:               # 如果物資不夠賣，將當回賣的物資量等同現有物資存量，並顯示錯誤
             j[2] = countryDict[name].food
-            print(f"{name} doesn't have enough resources of food")
+            print(f"{name}沒有足夠的糧食去貿易")
         if countryDict[name].wood < j[3]:
             j[3] = countryDict[name].wood
-            print(f"{name} doesn't have enough resources of wood")
+            print(f"{name}沒有足夠的木頭去貿易")
         if countryDict[name].steel < j[4]:
             j[4] = countryDict[name].steel
-            print(f"{name} doesn't have enough resources of steel")
+            print(f"{name}沒有足夠的鐵礦去貿易")
         if countryDict[name].stone < j[5]:
             j[5] = countryDict[name].stone
-            print(f"{name} doesn't have enough resources of stone")
+            print(f"{name}沒有足夠的石頭去貿易")
 
         for i in range(4):                          # 加總供給與需求
             supply[i] += j[i + 2]
@@ -53,10 +53,10 @@ if __name__ == "__main__":
 
         # 執行買物資的動作
         for j in range(4):
-            if countryDict[name].gold < price_list[j] * i[j + 6]:                                   # 如果黃金不夠買當項物資
-                print(f"{name} doesn't have enough resources of gold to buy {resources[j]}")        # 顯示錯誤訊息
+            if countryDict[name].gold < price_list[j] * i[j + 6]:                   # 如果黃金不夠買當項物資
+                print(f"{name}沒有足夠的黃金去購買{resources[j]}")                    # 顯示錯誤訊息
                 i[j + 6] = 0
-                while(countryDict[name].gold > price_list[j] * (i[j + 6] + 500)):  # 以500為間隔，從0開始，直到他買得起結束
+                while(countryDict[name].gold > price_list[j] * (i[j + 6] + 500)):   # 以500為間隔，從0開始，直到他買得起結束
                     i[j + 6] += 500
 
             countryDict[name].gold -= price_list[j] * i[j + 6]
