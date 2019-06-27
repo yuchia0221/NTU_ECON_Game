@@ -26,13 +26,11 @@ if __name__ == "__main__":
         if i.war[0] != "不戰爭":
             for j in range(len(i.war)):
                 war(countryDict, i.name, i.war[j], i.solider[j], i.resource[j], i.Rspeed[j], defeated, messageDict)
-        else:
-            continue
 
     wonder(countryDict, wonderlist, actionList, messageDict)
     consume(countryDict, messageDict)
 
-    print("基本函數完成n開始寫檔")
+    print("基本函數完成\n開始寫檔")
 
     loop = "一"
     write_country_file(countryDict)
