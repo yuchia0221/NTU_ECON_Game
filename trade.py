@@ -67,8 +67,6 @@ if __name__ == "__main__":
         countryDict[name].stone += i[9]
         print(f"{name} 買進了 {i[6]} 糧食 {i[7]} 木頭 {i[8]} 鐵礦 {i[9]} 石頭")
 
-    write_country_file(countryDict)
-
     loop = "一點五"
     write_country_file(countryDict)
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
