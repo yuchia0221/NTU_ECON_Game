@@ -876,7 +876,7 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle,
             countryDict[name].wood_speed += 1
             countryDict[name].steel_speed += 1
             countryDict[name].stone_speed += 1
-            countryDict[name].population += 500
+            countryDict[name].population += 1000
 
         elif state == 2:                                            # 第三階段完成的獎勵
             countryDict[name].weapon += 2
