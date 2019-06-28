@@ -17,7 +17,7 @@ def read_file(file_name):
     # 建立namedtuple object
     country_info = namedtuple("country_info",
                               "id name wonders gold population weapon defense food_speed wood_speed steel_speed stone_speed food wood steel stone education")
-    action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard education war solider resource Rspeed Pwonders")
+    action = namedtuple("action", "time name Pfood Pwood Psteel Pstone useCard soldCard education war soldier resource Rspeed Pwonders")
 
     # 抓取google雲端上的試算表
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -132,27 +132,27 @@ def createCountry():
 
 def handle_action(countryDict):
     """ 將各國的行動單做處理，讓接下來資料處理起來比較方便 """
-    info = namedtuple("info", "name produceList useCard soldCard education war solider occupyMan resource Rspeed Pwonders")
+    info = namedtuple("info", "name produceList useCard soldCard education war soldier occupyMan resource Rspeed Pwonders")
 
     returnList = []
     for i in read_file("伊康攻略回應表 (回應)"):
         if "不戰爭" in i.war.replace(",", "").split():                             # 如果選擇了"不戰爭"，那麼無論有沒有想攻打其他國家，這回合都無法戰爭
-            war, occupyMan, solider, resource, Rspeed = ["不戰爭"], 0, [], [], []
+            war, occupyMan, soldier, resource, Rspeed = ["不戰爭"], 0, [], [], []
         else:                                                                     # 先處理看看資訊再檢查看看有沒有問題
             war = i.war.replace(",", "").split()                                  # 先把資訊存放好然後開始檢查
-            solider = [int(j) for j in str(i.solider).split()]
+            soldier = [int(j) for j in str(i.soldier).split()]
             resource, Rspeed = i.resource.split(), i.Rspeed.split()
-            occupyMan = sum(solider)
+            occupyMan = sum(soldier)
 
-            if (len(war) != len(solider)) or (len(war) != len(resource)) or (len(war) != len(Rspeed)):  # 如果表單填錯的話，就會出現error
+            if (len(war) != len(soldier)) or (len(war) != len(resource)) or (len(war) != len(Rspeed)):  # 如果表單填錯的話，就會出現error
                 raise IndexError(f"{i.name}戰爭國家和資料對不齊")
 
             elif countryDict[i.name].population < occupyMan:                      # 如果派出去戰爭的人數比人口總數的話，此回合就無法戰爭
-                war, occupyMan, solider, resource, Rspeed = ["不戰爭"], 0, [], [], []
+                war, occupyMan, soldier, resource, Rspeed = ["不戰爭"], 0, [], [], []
                 print(f"{i.name}所派出去戰爭的人大於所有人民，因此此回合無法戰爭")
 
         tempt = info(i.name, [i.Pfood, i.Pwood, i.Psteel, i.Pstone], str(i.useCard).split(),
-                     str(i.soldCard).split(), i.education, war, solider, occupyMan, resource, Rspeed, i.Pwonders)
+                     str(i.soldCard).split(), i.education, war, soldier, occupyMan, resource, Rspeed, i.Pwonders)
         returnList.append(tempt)
 
     return returnList
@@ -604,33 +604,65 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
         messageDict[name].append(f"{name}已經成功投資登大人")
 
     def special1():
-        countryDict[name].gold += 10000
-        messageDict[name].append(f"{name}已經成功使用海神王的王冠")
+        countryDict[name].gold += 100000
+        messageDict[name].append(f"{name}已經成功使用海神王的王冠，效果為黃金+100000")
 
     def special2():
         defeated[name] = "Cannot attack"
-        messageDict[name].append(f"{name}已經成功使用隱形斗篷")
+        messageDict[name].append(f"{name}已經成功使用隱形斗篷，效果為這回合進攻你的國家行動無效")
 
     def special3():
         countryDict[name].weapon *= 2
-        messageDict[name].append(f"{name}已經成功使用誓約勝利之劍")
+        messageDict[name].append(f"{name}已經成功使用誓約勝利之劍，效果武器倍率+2")
         print(f"回合結束記得改{name}的武器倍率")
 
     def special4():
-        countryDict[name].food_speed *= 2
-        countryDict[name].wood_speed *= 2
-        countryDict[name].steel_speed *= 2
-        countryDict[name].stone_speed *= 2
-        messageDict[name].append(f"{name}已經成功使用大躍進")
-        print(f"回合結束記得改{name}的基礎資源生產倍率")
-
-    def special5():
         randnum = randint(0, 3)
         if randnum:
             messageDict[name].append(f"{name}執行雷神之鎚失敗")
         else:
             countryDict[name].defense += 2000
-            messageDict[name].append(f"{name}已經成功使用雷神之鎚")
+            messageDict[name].append(f"{name}已經成功使用雷神之鎚，效果為防禦力+2000")
+
+    def special5():
+        countryDict[name].food *= 0.5
+        messageDict[name].append(f"{name}已經成功使用南北菜蟲一起串連，效果為糧食減少一半")
+
+    def special6():
+        try:
+            countryDict[name].population -= 500
+            countryDict[name].food_speed += 0.5
+            countryDict[name].wood_speed += 0.5
+            countryDict[name].steel_speed += 0.5
+            countryDict[name].stone_speed += 0.5
+            messageDict[name].append(f"{name}已經成功使用富士康，效果為犧牲500人民，換取全部生產效率+0.5")
+
+        except ValueError:
+            messageDict[name].append(f"{name}無法使用富士康")
+
+    def special7():
+        try:
+            countryDict[name].gold -= 1000
+            countryDict[name].defense += 1500
+            messageDict[name].append(f"{name}已經成功使用墨西哥圍牆，效果為付出1000黃金換取1500防禦力")
+
+        except ValueError:
+            messageDict[name].append(f"{name}無法使用墨西哥圍牆")
+
+    def special8():
+        messageDict[name].append(f"{name}已經成功使用慈姑觀音")
+
+    def special9():
+        countryDict[name].population += 800
+        messageDict[name].append(f"{name}已經成功使用愛情摩天輪，效果為人口+800")
+
+    def special10():
+        countryDict[name].gold = 0
+        countryDict[name].population *= 3
+        messageDict[name].append(f"{name}已經成功使用人多好辦事，效果為黃金歸0，人口增加為3倍")
+
+    def nothing():
+        return
 
     for card in soldCard:
         try:
@@ -697,7 +729,7 @@ def education(countryDict, name, invest, messageDict):
         return
 
 
-def war(countryDict, attackingCountry, attackedCountry, solider, resource, speed, defeated, messageDict):
+def war(countryDict, attackingCountry, attackedCountry, soldier, resource, speed, defeated, messageDict):
     if attackingCountry == attackedCountry:                             # 如果攻打國和被攻打國屬於同一個國家，則攻擊無效
         messageDict[attackingCountry].append(f"{attackingCountry}無法攻擊自己")
         return
@@ -707,10 +739,10 @@ def war(countryDict, attackingCountry, attackedCountry, solider, resource, speed
         return
 
     rubrate = 0.001                                                     # 搶奪比率為0.001
-    diff = countryDict[attackingCountry].weapon * solider - countryDict[attackedCountry].defense    # 勝負的判定為，A國武器倍率 * 士兵 vs B國防禦力
+    diff = countryDict[attackingCountry].weapon * soldier - countryDict[attackedCountry].defense    # 勝負的判定為，A國武器倍率 * 士兵 vs B國防禦力
     if diff >= 0 and not defeated[attackedCountry]:                                                 # 如果A國戰勝而且B國之前沒有戰敗過
         rubgold = countryDict[attackedCountry].gold * 0.5
-        countryDict[attackingCountry].population -= solider * 0.7                                   # A國損失七成士兵
+        countryDict[attackingCountry].population -= soldier * 0.7                                   # A國損失七成士兵
         countryDict[attackedCountry].population *= 0.9                                              # B國損失一成人口
         countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5               # A國盜取B國一半黃金
         countryDict[attackedCountry].gold *= 0.5                                                    # B國損失一半黃金
@@ -771,7 +803,7 @@ def war(countryDict, attackingCountry, attackedCountry, solider, resource, speed
 
     elif diff >= 0 and defeated[attackedCountry]:                                                       # 如果A國打贏B國，且B國曾經被打敗過
         rubgold = countryDict[attackedCountry].gold * 0.5
-        countryDict[attackingCountry].population -= solider * 0.1                                       # A國損失一成士兵
+        countryDict[attackingCountry].population -= soldier * 0.1                                       # A國損失一成士兵
         countryDict[attackingCountry].gold += countryDict[attackedCountry].gold * 0.5                   # A國搶奪B國一半黃金
         countryDict[attackedCountry].gold *= 0.5
 
@@ -816,7 +848,7 @@ def war(countryDict, attackingCountry, attackedCountry, solider, resource, speed
         messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊並戰敗了，因為之前已經戰敗過，因此只被掠奪{rubgold}黃金和{rubresource}{resource}")
 
     elif diff < 0:                                                  # 如果B國防守成功， A國損失四成士兵
-        countryDict[attackingCountry].population -= solider * 0.4
+        countryDict[attackingCountry].population -= soldier * 0.4
         messageDict[attackingCountry].append(f"{attackingCountry}進攻了{attackedCountry}但失敗了，損失四成士兵")
         messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊但失敗了")
 
