@@ -872,22 +872,22 @@ def buildwonder(countryDict, name, Wname, percentWonders, state, Update, bundle,
             countryDict[name].defense += 500
 
         elif state == 1:                                            # 第二階段完成的獎勵
-            countryDict[name].food_speed += 2
-            countryDict[name].wood_speed += 2
-            countryDict[name].steel_speed += 2
-            countryDict[name].stone_speed += 2
+            countryDict[name].food_speed += 1
+            countryDict[name].wood_speed += 1
+            countryDict[name].steel_speed += 1
+            countryDict[name].stone_speed += 1
             countryDict[name].population += 500
 
         elif state == 2:                                            # 第三階段完成的獎勵
             countryDict[name].weapon += 2
             countryDict[name].defense += 1000
-            countryDict[name].food_speed += 2
-            countryDict[name].wood_speed += 2
-            countryDict[name].steel_speed += 2
-            countryDict[name].stone_speed += 2
+            countryDict[name].food_speed += 1
+            countryDict[name].wood_speed += 1
+            countryDict[name].steel_speed += 1
+            countryDict[name].stone_speed += 1
 
         elif state == 3:                                            # 第四階段完成的獎勵
-            createCountry[name].population += 3000
+            createCountry[name].population += 5000
 
     if state == 4:                                                  # 如果達到第四階段，則不再升級
         messageDict[name].append(f"{Wname}已經達到最高級了")
