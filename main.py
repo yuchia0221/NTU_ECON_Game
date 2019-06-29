@@ -34,8 +34,14 @@ if __name__ == "__main__":
     print("基本函數完成\n開始寫檔")
 
     loop = "一"
-    write_country_file(countryDict)
-    write_wonders(countryDict)
+    try:
+        write_country_file(countryDict)
+        write_wonders(countryDict)
+    except:
+        print(f"Google API存取過度，暫停存取100s再繼續")
+        sleep(100)
+        write_country_file(countryDict)
+        write_wonders(countryDict)
 
     for i in countryName:
         try:
