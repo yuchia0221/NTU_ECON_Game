@@ -7,9 +7,13 @@ def trade_function(d, s):
 
 
 if __name__ == "__main__":
+    print("開始執行程式")
+
     resources = ["糧食", "木頭", "鐵礦", "石頭"]
     trade_info = read_file("系統貿易(回應)")              # [時間, 國家名, 賣糧, 賣木, 賣鐵, 賣石, 買糧, 買木, 買鐵, 買石]
     countryDict = createCountry()
+
+    print("讀檔完成\n")
 
     # 定價
     price_list, demand, supply = [], [0] * 4, [0] * 4   # [糧食, 木頭, 鐵礦, 石頭], 物資的總需求，總供給 [糧食, 木頭, 鐵礦, 石頭]
@@ -67,7 +71,9 @@ if __name__ == "__main__":
         countryDict[name].stone += i[9]
         print(f"{name} 買進了 {i[6]} 糧食 {i[7]} 木頭 {i[8]} 鐵礦 {i[9]} 石頭")
 
-    loop = "七"
+    print("\n貿易結束\n開始寫檔")
+
+    loop = "一"
     write_country_file(countryDict)
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
                    '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']
