@@ -34,9 +34,9 @@ if __name__ == "__main__":
     print("基本函數完成\n開始寫檔")
 
     for i, j in messageDict.items():
-        print(i, j)
+        print(j)
 
-    loop = "一"
+    loop = "二"
     try:
         write_country_file(countryDict)
         write_wonders(countryDict)

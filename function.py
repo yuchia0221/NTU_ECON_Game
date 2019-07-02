@@ -798,8 +798,8 @@ def war(countryDict, attackingCountry, attackedCountry, soldier, resource, speed
             countryDict[attackingCountry].stone_speed += 0.2
             countryDict[attackedCountry].stone_speed -= 0.2
 
-        messageDict[attackingCountry].append(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{rubgold}黃金{rubresource}{resource}和{speed}倍率")            # A國搶奪B國一半加上0.001 * 戰力差的資源
-        messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊並戰敗了，被掠奪了{rubgold}黃金{rubresource}{resource}和{speed}倍率")
+        messageDict[attackingCountry].append(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{rubgold}黃金{rubresource}{resource}和{speed}倍率, 戰力差為{diff}")            # A國搶奪B國一半加上0.001 * 戰力差的資源
+        messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊並戰敗了，被掠奪了{rubgold}黃金{rubresource}{resource}和{speed}倍率, 戰力差為{diff}")
 
     elif diff >= 0 and defeated[attackedCountry]:                                                       # 如果A國打贏B國，且B國曾經被打敗過
         rubgold = countryDict[attackedCountry].gold * 0.5
@@ -844,8 +844,8 @@ def war(countryDict, attackingCountry, attackedCountry, soldier, resource, speed
                 countryDict[attackingCountry].stone += countryDict[attackedCountry].stone
                 countryDict[attackedCountry].stone = 0
 
-        messageDict[attackingCountry].append(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{rubgold}黃金和{rubresource}{resource}，因{attackedCountry}已經被打過了，因此無法掠奪倍率")
-        messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊並戰敗了，因為之前已經戰敗過，因此只被掠奪{rubgold}黃金和{rubresource}{resource}")
+        messageDict[attackingCountry].append(f"{attackingCountry}戰勝了{attackedCountry}，掠奪了{rubgold}黃金和{rubresource}{resource}，因{attackedCountry}已經被打過了，因此無法掠奪倍率, 戰力差為{diff}")
+        messageDict[attackedCountry].append(f"{attackedCountry}被{attackingCountry}攻擊並戰敗了，因為之前已經戰敗過，因此只被掠奪{rubgold}黃金和{rubresource}{resource}, 戰力差為{diff}")
 
     elif diff < 0:                                                  # 如果B國防守成功， A國損失四成士兵
         countryDict[attackingCountry].population -= soldier * 0.4
