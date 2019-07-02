@@ -35,7 +35,7 @@ if __name__ == "__main__":
 
     print([j for i, j in messageDict.items()])
 
-    loop = "三"
+    loop = "四"
     try:
         write_country_file(countryDict)
         write_wonders(countryDict)

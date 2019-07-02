@@ -73,7 +73,7 @@ if __name__ == "__main__":
 
     print("\n貿易結束\n開始寫檔")
 
-    loop = "三"
+    loop = "四"
     write_country_file(countryDict)
     countryName = ['亞特蘭提斯', '阿斯嘉', '奧林帕斯', '瓦干達', '香格里拉',
                    '瓦拉納西', '瑪雅', '塔爾塔洛斯', '特奧蒂瓦坎', '復活節島']

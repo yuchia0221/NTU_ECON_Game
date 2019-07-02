@@ -809,7 +809,7 @@ def war(countryDict, attackingCountry, attackedCountry, soldier, resource, speed
 
         if resource == "糧食":                                                                            # A國搶奪B國一半的物資和戰力差 * 0.001
             try:
-                rubresource = countryDict[attackedCountry].food * (0.5 + rubrate * diff)
+                rubresource = 0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff)
                 countryDict[attackingCountry].food += 0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff)
                 countryDict[attackedCountry].food -= 0.5 * countryDict[attackedCountry].food * (0.5 + rubrate * diff)
             except ValueError:
@@ -818,7 +818,7 @@ def war(countryDict, attackingCountry, attackedCountry, soldier, resource, speed
                 countryDict[attackedCountry].food = 0
         elif resource == "木頭":
             try:
-                rubresource = countryDict[attackedCountry].wood * (0.5 + rubrate * diff)
+                rubresource = 0.5 * countryDict[attackedCountry].wood * (0.5 + rubrate * diff)
                 countryDict[attackingCountry].wood += 0.5 * countryDict[attackedCountry].wood * (0.5 + rubrate * diff)
                 countryDict[attackedCountry].wood -= 0.5 * countryDict[attackedCountry].wood * (0.5 + rubrate * diff)
             except ValueError:
@@ -827,7 +827,7 @@ def war(countryDict, attackingCountry, attackedCountry, soldier, resource, speed
                 countryDict[attackedCountry].wood = 0
         elif resource == "鐵礦":
             try:
-                rubresource = countryDict[attackedCountry].steel * (0.5 + rubrate * diff)
+                rubresource = 0.5 * countryDict[attackedCountry].steel * (0.5 + rubrate * diff)
                 countryDict[attackingCountry].steel += 0.5 * countryDict[attackedCountry].steel * (0.5 + rubrate * diff)
                 countryDict[attackedCountry].steel -= 0.5 * countryDict[attackedCountry].steel * (0.5 + rubrate * diff)
             except ValueError:
@@ -836,7 +836,7 @@ def war(countryDict, attackingCountry, attackedCountry, soldier, resource, speed
                 countryDict[attackedCountry].steel = 0
         elif resource == "石頭":
             try:
-                rubresource = countryDict[attackedCountry].stone * (0.5 + rubrate * diff)
+                rubresource = 0.5 * countryDict[attackedCountry].stone * (0.5 + rubrate * diff)
                 countryDict[attackingCountry].stone += 0.5 * countryDict[attackedCountry].stone * (0.5 + rubrate * diff)
                 countryDict[attackedCountry].stone -= 0.5 * countryDict[attackedCountry].stone * (0.5 + rubrate * diff)
             except ValueError:
