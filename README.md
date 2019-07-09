@@ -10,7 +10,7 @@
   <li>time/li>
   <li>pandas</li>
 </ul>
-<p>透過gspread與google雲端連結，抓取玩家的行動資訊(回應表單)，利用Python在本地端跑完數據在更新上去雲端</p>
+<p>透過gspread與google雲端連結，抓取玩家的行動資訊(回應表單)，利用Python在本地端跑完數據在更新位在雲端資料</p>
 
 <h3>規則說明</h3>
 <h5>勝利條件</h5>
