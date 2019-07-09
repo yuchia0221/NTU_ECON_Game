@@ -1,6 +1,17 @@
 <h1>伊康攻略</h1>
 
 
+<h3>程式說明</h3>
+<h5>使用函式庫</h5>
+<ul>
+  <li>gspread</li>
+  <li>collections</li>
+  <li>random</li>
+  <li>time/li>
+  <li>pandas</li>
+</ul>
+<p>透過gspread與google雲端連結，抓取玩家的行動資訊(回應表單)，利用Python在本地端跑完數據在更新上去雲端</p>
+
 <h3>規則說明</h3>
 <h5>勝利條件</h5>
 <ul>
@@ -18,14 +29,3 @@
   <li>行動執行順序: 系統貿易 → 生產 → 投資 → 教育 → 戰爭 → 世界奇觀 → 消耗</li>
   <li>特殊事件會不定期的發生哦，要隨時做好應變工作。</li>
 </ul>
-
-<h3>程式說明</h3>
-<h5>使用函式庫</h5>
-<ul>
-  <li>gspread</li>
-  <li>collections</li>
-  <li>random</li>
-  <li>time/li>
-  <li>pandas</li>
-</ul>
-<p>透過gspread與google雲端連結，抓取玩家的行動資訊(回應表單)，利用Python在本地端跑完數據在更新上去雲端</p>
