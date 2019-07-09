@@ -22,6 +22,10 @@
 <h3>程式說明</h3>
 <h5>使用函式庫</h5>
 <ul>
-  <li>gspread:用於和雲端試算表連結</li>
+  <li>gspread</li>
+  <li>collections</li>
+  <li>random</li>
+  <li>time/li>
+  <li>pandas</li>
 </ul>
-<p>透過</p>
+<p>透過gspread與google雲端連結，抓取玩家的行動資訊(回應表單)，利用Python在本地端跑完數據在更新上去雲端</p>
