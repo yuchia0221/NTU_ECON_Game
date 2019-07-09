@@ -630,12 +630,12 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
 
     def special6():
         try:
-            countryDict[name].population -= 500
-            countryDict[name].food_speed += 0.5
-            countryDict[name].wood_speed += 0.5
-            countryDict[name].steel_speed += 0.5
-            countryDict[name].stone_speed += 0.5
-            messageDict[name].append(f"{name}已經成功使用富士康，效果為犧牲500人民，換取全部生產效率+0.5")
+            countryDict[name].population *= 0.5
+            countryDict[name].food_speed += 1
+            countryDict[name].wood_speed += 1
+            countryDict[name].steel_speed += 1
+            countryDict[name].stone_speed += 1
+            messageDict[name].append(f"{name}已經成功使用富士康，效果為犧牲一半人民，換取全部生產效率+1")
 
         except ValueError:
             messageDict[name].append(f"{name}無法使用富士康")
@@ -644,7 +644,7 @@ def card(countryDict, name, cardDict, useCard, soldCard, defeated, messageDict):
         try:
             countryDict[name].gold -= 1000
             countryDict[name].defense += 2000
-            messageDict[name].append(f"{name}已經成功使用墨西哥圍牆，效果為付出1000黃金換取1500防禦力")
+            messageDict[name].append(f"{name}已經成功使用墨西哥圍牆，效果為付出1000黃金換取2000防禦力")
 
         except ValueError:
             messageDict[name].append(f"{name}無法使用墨西哥圍牆")
