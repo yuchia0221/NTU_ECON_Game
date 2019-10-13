@@ -965,4 +965,4 @@ def consume(countryDict, messageDict):
 
 
 if __name__ == "__main__":
-    initialize()
+    print(123)
